@@ -44,36 +44,35 @@ L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny 
 
 
 #2024-10-22_oneBunch_baseline2.1.yml
-#2025-07-22-15-39-24 One bunch, CSR-on optimization of PENT size
+#2025-07-25-07-03-53 One bunch, CSR-on optimization of PENT size
 #Similar to 2024-10-22_oneBunch_baseline2 but with centering and energy asserts disabled
-# centerBC14 : False
-# centerBC20 : False
-# centerMFFF : False
-# assertBC14Energy : False
-# assertBC20Energy : False
-# symmetricSextupoleStrengths : True
-# L1PhaseSet : -22.9614250435
-# L2PhaseSet : -37.7280352157
-# L2EnergyOffset : 4.378626287576712e+6
-# L3EnergyOffset : 1.7422482364347808e+7
-# Q19851kG : -63.5400207281
-# Q19871kG : 44.5709673607
-# S1ELkG : 1390.6467926357
-# S2ELkG : -3835.3137076092
-# S3ELkG : -1499.2793181765
-# S1EL_xOffset : -0.0003016932
-# S1EL_yOffset : -0.0001618887
-# S2EL_xOffset : -0.0007816668
-# S2EL_yOffset : -0.0000323417
-# S2ER_xOffset : 0.0007385236
-# S2ER_yOffset : -0.0001116775
-# S1ER_xOffset : 0.0029610112
-# S1ER_yOffset : -0.0002052779
-# XC1FFkG : 0.0104706742
-# XC3FFkG : 0.0011510288
-# YC1FFkG : -0.0017169003
-# YC2FFkG : -0.0000839404
-# 28 x 11 x 11 um at PENT
+centerBC14 : False
+centerBC20 : False
+centerMFFF : False
+assertBC14Energy : False
+assertBC20Energy : False
+symmetricSextupoleStrengths : True
+L1PhaseSet : -24.543961819
+L2PhaseSet : -39.5058743926
+L1EnergyOffset : 1.0293384657891468e+6
+L2EnergyOffset : -3.9735276996560372e+7
+L3EnergyOffset : 4.1780469295013666e+7
+S1ELkG : 926.8741882503
+S2ELkG : -3633.6599473045
+S3ELkG : -971.5505857391
+S1EL_xOffset : 0.000274226
+S1EL_yOffset : -0.00001522
+S2EL_xOffset : 0.0001146343
+S2EL_yOffset : -0.0000425874
+S2ER_xOffset : 0.0000800987
+S2ER_yOffset : -0.000105889
+S1ER_xOffset : 0.0002066026
+S1ER_yOffset : -0.0000281741
+XC1FFkG : 0.0089351124
+XC3FFkG : -0.0029929868
+YC1FFkG : 0.0010126062
+YC2FFkG : 0.0047505417
+# 25 x 13 x 25 um at PENT. 50 x 14 um-rad. Sane LPS
 
 ####################
 ########################################
@@ -285,30 +284,88 @@ L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny 
 #Hrm, not sure I like changing the BC20 launch quads
 
 # 2025-07-23-07-05-33 Checkpoint
-centerBC14 : False
-centerBC20 : False
-centerMFFF : False
-assertBC14Energy : False
-assertBC20Energy : False
-symmetricSextupoleStrengths : True
-L1PhaseSet : -24.34044794
-L2PhaseSet : -38.429397828
-L1EnergyOffset : -381334.8928250682
-L2EnergyOffset : -1.5784434857955808e6
-L3EnergyOffset : 6.6028306228950545e7
-S1ELkG : 1395.1387036651
-S2ELkG : -3114.8645605482
-S3ELkG : -1500.9524399572
-S1EL_xOffset : -0.0003165131
-S1EL_yOffset : -0.0000799814
-S2EL_xOffset : -0.000736708
-S2EL_yOffset : -0.0000573645
-S2ER_xOffset : 0.0007185437
-S2ER_yOffset : -0.0001068388
-S1ER_xOffset : 0.0028395311
-S1ER_yOffset : -0.000137758
-XC1FFkG : 0.007257152
-XC3FFkG : -0.0010001494
-YC1FFkG : -0.0003479778
-YC2FFkG : 0.0008955185
+# centerBC14 : False
+# centerBC20 : False
+# centerMFFF : False
+# assertBC14Energy : False
+# assertBC20Energy : False
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -24.34044794
+# L2PhaseSet : -38.429397828
+# L1EnergyOffset : -381334.8928250682
+# L2EnergyOffset : -1.5784434857955808e+6
+# L3EnergyOffset : 6.6028306228950545e+7
+# S1ELkG : 1395.1387036651
+# S2ELkG : -3114.8645605482
+# S3ELkG : -1500.9524399572
+# S1EL_xOffset : -0.0003165131
+# S1EL_yOffset : -0.0000799814
+# S2EL_xOffset : -0.000736708
+# S2EL_yOffset : -0.0000573645
+# S2ER_xOffset : 0.0007185437
+# S2ER_yOffset : -0.0001068388
+# S1ER_xOffset : 0.0028395311
+# S1ER_yOffset : -0.000137758
+# XC1FFkG : 0.007257152
+# XC3FFkG : -0.0010001494
+# YC1FFkG : -0.0003479778
+# YC2FFkG : 0.0008955185
 # 31 x 12 x 23 um. Sane LPS and emittances
+
+#2025-07-23-21-12-30 checkpoint
+# centerBC14 : False
+# centerBC20 : False
+# centerMFFF : False
+# assertBC14Energy : False
+# assertBC20Energy : False
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -23.9836150547
+# L2PhaseSet : -38.83955975
+# L1EnergyOffset : -539627.1636092265
+# L2EnergyOffset : -4.224946479439451e+7
+# L3EnergyOffset : 5.6529892451860689e+7
+# S1ELkG : 1312.4772155481
+# S2ELkG : -3795.0045628963
+# S3ELkG : -1490.2319780576
+# S1EL_xOffset : -0.0000570663
+# S1EL_yOffset : -0.0001207324
+# S2EL_xOffset : -0.0006969973
+# S2EL_yOffset : -0.000216972
+# S2ER_xOffset : 0.000808018
+# S2ER_yOffset : -0.0000197336
+# S1ER_xOffset : 0.0026783688
+# S1ER_yOffset : -0.0003910535
+# XC1FFkG : -0.0414171159
+# XC3FFkG : 0.0301629095
+# YC1FFkG : -0.0085641314
+# YC2FFkG : 0.0791580339
+
+# Adding 50 um-rad SI90 emittance constraint
+# 2025-07-25-07-03-53
+# centerBC14 : False
+# centerBC20 : False
+# centerMFFF : False
+# assertBC14Energy : False
+# assertBC20Energy : False
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -24.543961819
+# L2PhaseSet : -39.5058743926
+# L1EnergyOffset : 1.0293384657891468e+6
+# L2EnergyOffset : -3.9735276996560372e+7
+# L3EnergyOffset : 4.1780469295013666e+7
+# S1ELkG : 926.8741882503
+# S2ELkG : -3633.6599473045
+# S3ELkG : -971.5505857391
+# S1EL_xOffset : 0.000274226
+# S1EL_yOffset : -0.00001522
+# S2EL_xOffset : 0.0001146343
+# S2EL_yOffset : -0.0000425874
+# S2ER_xOffset : 0.0000800987
+# S2ER_yOffset : -0.000105889
+# S1ER_xOffset : 0.0002066026
+# S1ER_yOffset : -0.0000281741
+# XC1FFkG : 0.0089351124
+# XC3FFkG : -0.0029929868
+# YC1FFkG : 0.0010126062
+# YC2FFkG : 0.0047505417
+# 25 x 13 x 25 um at PENT. 50 x 14 um-rad. Sane LPS

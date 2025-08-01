@@ -1314,27 +1314,53 @@ L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny 
 #2024-10-22_oneBunch_baseline3.yml
 #2025-06-04-13-06-30 One bunch, CSR on. Minimizing PENT size in quadrature
 # Starting from 2025-05-30-09-40-22
-centerBC14 : True
-centerBC20 : True
-centerMFFF : True
-assertBC14Energy : True
-assertBC20Energy : True
-symmetricSextupoleStrengths : True
-L1PhaseSet : -28.9100908383
-L2PhaseSet : -39.0717691285
-S1ELkG : 9.5354261372
-S2ELkG : -998.8857534325
-S3ELkG : -312.4574420756
-S1EL_xOffset : -0.0024831962
-S1EL_yOffset : 0.0024286168
-S2EL_xOffset : 0.0003279967
-S2EL_yOffset : -0.0001951917
-S2ER_xOffset : 0.0025878477
-S2ER_yOffset : -0.0000264729
-S1ER_xOffset : 0.0021476773
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -28.9100908383
+# L2PhaseSet : -39.0717691285
+# S1ELkG : 9.5354261372
+# S2ELkG : -998.8857534325
+# S3ELkG : -312.4574420756
+# S1EL_xOffset : -0.0024831962
+# S1EL_yOffset : 0.0024286168
+# S2EL_xOffset : 0.0003279967
+# S2EL_yOffset : -0.0001951917
+# S2ER_xOffset : 0.0025878477
+# S2ER_yOffset : -0.0000264729
+# S1ER_xOffset : 0.0021476773
 S1ER_yOffset : -0.0003583632
 # 19 x 8 x 14 um at PENT
 
 
 #PENDING One bunch, CSR off. Minimizing PENT size in quadrature; sizes are Gaussian fits not SI90!
-
+centerBC14 : False
+centerBC20 : False
+centerMFFF : False
+assertBC14Energy : False
+assertBC20Energy : False
+symmetricSextupoleStrengths : True
+L1PhaseSet : -25.4393607728
+L2PhaseSet : -38.7167888966
+L1EnergyOffset : 1.0954646457512702e+6
+L2EnergyOffset : -4.35692331166334e+7
+L3EnergyOffset : 4.2506806262124173e+7
+S1ELkG : 959.4476334417
+S2ELkG : -3472.4668287239
+S3ELkG : -964.7793337875
+S1EL_xOffset : 0.0002888504
+S1EL_yOffset : -0.0000220972
+S2EL_xOffset : 0.000086259
+S2EL_yOffset : -0.0000723185
+S2ER_xOffset : 0.0000920866
+S2ER_yOffset : -0.0000817839
+S1ER_xOffset : 0.0001767671
+S1ER_yOffset : -0.0000160852
+XC1FFkG : 0.0094963765
+XC3FFkG : -0.0036907044
+YC1FFkG : -0.0011630606
+YC2FFkG : 0.0019479112
+#

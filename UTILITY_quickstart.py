@@ -1136,8 +1136,38 @@ def loadConfig(file, loaded_files=None):
     merged_data.update(data)  # Later settings override earlier ones
     return merged_data
 
+from scipy.optimize import curve_fit
 
-def getBeamSpecs(P, targetTwiss = None):
+def gaussian_with_offset(x, A, mu, sigma, offset):
+    return A * np.exp(-(x - mu)**2 / (2 * sigma**2)) + offset
+
+def fit_gaussian_sigma( data, bin_size = 1e-6 ):
+    # Compute histogram
+    data = np.array(data)
+    bins = np.arange(min(data), max(data) + bin_size, bin_size)
+    hist, edges = np.histogram(data, bins=bins)
+    bin_centers = (edges[:-1] + edges[1:]) / 2
+
+    # Initial guess: amplitude, mean, sigma, offset
+    A_guess = max(hist)
+    mu_guess = np.mean(data)
+    sigma_guess = np.std(data)
+    offset_guess = min(hist)
+    p0 = [A_guess, mu_guess, sigma_guess, offset_guess]
+
+    # Fit Gaussian
+    try:
+        popt, _ = curve_fit(gaussian_with_offset, bin_centers, hist, p0=p0)
+        _, _, sigma_fit, _ = popt
+        return sigma_fit
+    except RuntimeError:
+        return None  # Fit did not converge
+
+def getBeamSpecs(
+    P, 
+    targetTwiss = None,
+    calculateGaussianFits = False               
+):
     """
     Returns a collection of convenient beam parameters as a dictionary
     Will automatically detect and add extra measurements for two-bunch beams
@@ -1145,6 +1175,8 @@ def getBeamSpecs(P, targetTwiss = None):
     targetTwiss can either be in the form [betaX, alphaX, betaY, alphaY] or
     for a very limited number of treaty point elements, can instead provide the element name. This will use the golden lattice targetTwiss
     Presently defined: "PR10571", "BEGBC20", "MFFF", "PENT"
+
+    Optionally bin and fit gaussians to the x, y, and z position data. A bit expensive so left off by default
     """
     
     savedData = {}
@@ -1227,6 +1259,11 @@ def getBeamSpecs(P, targetTwiss = None):
         savedData[f"{PActiveStr}_sigmaSI90_x"] = smallestIntervalImpliedSigma(PActive.x, percentage = 0.90)
         savedData[f"{PActiveStr}_sigmaSI90_y"] = smallestIntervalImpliedSigma(PActive.y, percentage = 0.90)
         savedData[f"{PActiveStr}_sigmaSI90_z"] = smallestIntervalImpliedSigma(PActive.t * 3e8, percentage=0.9)
+
+        if calculateGaussianFits:
+            savedData[f"{PActiveStr}_fitSigma_x"] = fit_gaussian_sigma( PActive.x,       bin_size = 1e-6 )
+            savedData[f"{PActiveStr}_fitSigma_y"] = fit_gaussian_sigma( PActive.y,       bin_size = 1e-6 )
+            savedData[f"{PActiveStr}_fitSigma_z"] = fit_gaussian_sigma( PActive.t * 3e8, bin_size = 1e-6 )
 
         savedData[f"{PActiveStr}_sigmaSI90_xp"] = smallestIntervalImpliedSigma(PActive.xp, percentage = 0.90)
         savedData[f"{PActiveStr}_sigmaSI90_yp"] = smallestIntervalImpliedSigma(PActive.yp, percentage = 0.90)

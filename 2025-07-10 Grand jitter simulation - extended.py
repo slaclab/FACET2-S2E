@@ -144,6 +144,8 @@ def worker(config):
     elif config["startingPoint"] == "OneBunchA":
         importedDefaultSettings = loadConfig("setLattice_configs/2024-10-22_oneBunch_baseline3.yml")
     elif config["startingPoint"] == "OneBunchB":
+        importedDefaultSettings = loadConfig("setLattice_configs/2024-10-22_oneBunch_baseline2.yml")
+    elif config["startingPoint"] == "OneBunchC":
         importedDefaultSettings = loadConfig("setLattice_configs/2024-10-22_oneBunch_baseline2.1.yml")
     else:
         print("Illegal starting point")
@@ -358,13 +360,13 @@ def worker(config):
     
 
 if __name__ == "__main__":
-    num_workers = 4 #8
+    num_workers = 6 #8
 
 
     tasks = [
         {"startingPoint": startingPoint, "alignment": alignment, "jitterParameters": jitterParameters}
         for ii in range(100)
-        for startingPoint in ["OneBunchB"] #["TwoBunch", "OneBunchA", "OneBunchB"]
+        for startingPoint in ["OneBunchC"] #["TwoBunch", "OneBunchA", "OneBunchB"]
         for alignment in {"Aligned"} #{"Aligned", "PinkCurveSteered", "BlueCurveSteered", "Winter2025BBASteered"}
         for jitterParameters in {"ChunkJitter", "KlystronJitter"}
     ]
