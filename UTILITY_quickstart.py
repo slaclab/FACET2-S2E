@@ -1141,27 +1141,65 @@ from scipy.optimize import curve_fit
 def gaussian_with_offset(x, A, mu, sigma, offset):
     return A * np.exp(-(x - mu)**2 / (2 * sigma**2)) + offset
 
-def fit_gaussian_sigma( data, bin_size = 1e-6 ):
-    # Compute histogram
-    data = np.array(data)
-    bins = np.arange(min(data), max(data) + bin_size, bin_size)
+def fit_gaussian_sigma(data, bin_size=1e-6, plot=False):
+    """
+    Estimate the Gaussian σ of `data` using a histogram fit.
+    
+    Parameters
+    ----------
+    data : array‑like
+        Input sample.
+    bin_size : float, optional
+        Histogram bin width. Default is 1 µs.
+    plot : bool, optional
+        If True, show a scatterplot of the histogram counts (blue) and the
+        Gaussian fit (red).
+    
+    Returns
+    -------
+    float or None
+        Fitted σ (standard deviation) of the Gaussian, or None if the fit fails.
+    """
+    data = np.asarray(data)
+    #bins = np.arange(data.min(), data.max() + bin_size, bin_size)
+    median = np.median(data)
+    iqr = scipy.stats.iqr(data) 
+    binSpanIQRMult = 4
+    bins = np.arange(median - binSpanIQRMult * iqr, median + binSpanIQRMult * iqr + bin_size, bin_size)
+    
     hist, edges = np.histogram(data, bins=bins)
     bin_centers = (edges[:-1] + edges[1:]) / 2
 
-    # Initial guess: amplitude, mean, sigma, offset
-    A_guess = max(hist)
-    mu_guess = np.mean(data)
-    sigma_guess = np.std(data)
-    offset_guess = min(hist)
-    p0 = [A_guess, mu_guess, sigma_guess, offset_guess]
-
-    # Fit Gaussian
+    # Initial parameter guesses: amplitude, mean, sigma, offset
+    p0 = [
+        hist.max(),            # amplitude
+        data.mean(),           # mean
+        data.std(ddof=0),      # sigma
+        hist.min()             # offset
+    ]
+    
     try:
         popt, _ = curve_fit(gaussian_with_offset, bin_centers, hist, p0=p0)
         _, _, sigma_fit, _ = popt
-        return sigma_fit
     except RuntimeError:
         return None  # Fit did not converge
+    
+    if plot:
+        # Plot histogram points
+        plt.figure()
+        plt.scatter(bin_centers, hist, s=10, color="blue", label="Histogram")
+        # Plot fitted Gaussian curve
+        x_fit = np.linspace(bin_centers.min(), bin_centers.max(), 500)
+        plt.plot(x_fit, gaussian_with_offset(x_fit, *popt), color="red",
+                 label="Gaussian fit")
+        plt.xlabel("Value")
+        plt.ylabel("Counts")
+        plt.title("Histogram and Gaussian Fit")
+        plt.legend()
+        plt.tight_layout()
+        plt.show()
+    
+    return abs(sigma_fit)
 
 def getBeamSpecs(
     P, 

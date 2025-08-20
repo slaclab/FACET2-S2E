@@ -1332,35 +1332,66 @@ L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny 
 # S2ER_xOffset : 0.0025878477
 # S2ER_yOffset : -0.0000264729
 # S1ER_xOffset : 0.0021476773
-S1ER_yOffset : -0.0003583632
+# S1ER_yOffset : -0.0003583632
 # 19 x 8 x 14 um at PENT
 
 
-#PENDING One bunch, CSR off. Minimizing PENT size in quadrature; sizes are Gaussian fits not SI90!
+#2025-08-03-09-09-35 One bunch, CSR off. Minimizing PENT size in quadrature; sizes are Gaussian fits (i.e. fitSigma) not SI90!
+# centerBC14 : False
+# centerBC20 : False
+# centerMFFF : False
+# assertBC14Energy : False
+# assertBC20Energy : False
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -25.113400186
+# L2PhaseSet : -38.576621138
+# L1EnergyOffset : 1.5513026315461877e+6
+# L2EnergyOffset : -7.7153018611511499e+7
+# L3EnergyOffset : 6.650247949646719e+7
+# S1ELkG : 1020.9736835174
+# S2ELkG : -3615.85037547
+# S3ELkG : -1049.7131628526
+# S1EL_xOffset : 0.0003260224
+# S1EL_yOffset : -0.0000181715
+# S2EL_xOffset : 0.0001450355
+# S2EL_yOffset : -0.0001930159
+# S2ER_xOffset : 0.0000299168
+# S2ER_yOffset : -0.0000402691
+# S1ER_xOffset : -0.0000395654
+# S1ER_yOffset : 0.0002525973
+# XC1FFkG : 0.006649697
+# XC3FFkG : -0.0025062535
+# YC1FFkG : -0.0014141236
+# YC2FFkG : 0.0085828116
+# fitSigmas at PENT: 7.9 x 4.9 x 2.7 um
+# https://docs.google.com/presentation/d/1FfaVf_9RHbaN0NZ-oewsK7TWsEsQt-l1gWrt-4Edlfc/edit?slide=id.g373fba9a7a5_0_3#slide=id.g373fba9a7a5_0_3
+
+
+#PENDING One bunch, CSR ON. Minimizing PENT size in quadrature; sizes are Gaussian fits (i.e. fitSigma) not SI90!
+#Starting from 2025-08-03-09-09-35
 centerBC14 : False
 centerBC20 : False
 centerMFFF : False
 assertBC14Energy : False
 assertBC20Energy : False
 symmetricSextupoleStrengths : True
-L1PhaseSet : -25.4393607728
-L2PhaseSet : -38.7167888966
-L1EnergyOffset : 1.0954646457512702e+6
-L2EnergyOffset : -4.35692331166334e+7
-L3EnergyOffset : 4.2506806262124173e+7
-S1ELkG : 959.4476334417
-S2ELkG : -3472.4668287239
-S3ELkG : -964.7793337875
-S1EL_xOffset : 0.0002888504
-S1EL_yOffset : -0.0000220972
-S2EL_xOffset : 0.000086259
-S2EL_yOffset : -0.0000723185
-S2ER_xOffset : 0.0000920866
-S2ER_yOffset : -0.0000817839
-S1ER_xOffset : 0.0001767671
-S1ER_yOffset : -0.0000160852
-XC1FFkG : 0.0094963765
-XC3FFkG : -0.0036907044
-YC1FFkG : -0.0011630606
-YC2FFkG : 0.0019479112
-#
+L1PhaseSet : -19.7576962458
+L2PhaseSet : -37.2863812552
+L1EnergyOffset : 140726.527142769
+L2EnergyOffset : 579322.755693826
+L3EnergyOffset : 1.46767090794855773e+8
+S1ELkG : 773.3623502732
+S2ELkG : -2164.5055645385
+S3ELkG : -1116.6508888652
+S1EL_xOffset : 0.000142492
+S1EL_yOffset : -8.8762e-6
+S2EL_xOffset : 0.0002620513
+S2EL_yOffset : 1.1634e-6
+S2ER_xOffset : -0.0000969425
+S2ER_yOffset : 0.000015112
+S1ER_xOffset : 0.0000149544
+S1ER_yOffset : 0.0000170405
+XC1FFkG : -0.0065346085
+XC3FFkG : 0.0004291352
+YC1FFkG : -0.0004258136
+YC2FFkG : 0.0012508743
