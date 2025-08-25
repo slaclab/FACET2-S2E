@@ -1369,29 +1369,76 @@ L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny 
 
 #PENDING One bunch, CSR ON. Minimizing PENT size in quadrature; sizes are Gaussian fits (i.e. fitSigma) not SI90!
 #Starting from 2025-08-03-09-09-35
+# centerBC14 : False
+# centerBC20 : False
+# centerMFFF : False
+# assertBC14Energy : False
+# assertBC20Energy : False
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -19.7576962458
+# L2PhaseSet : -37.2863812552
+# L1EnergyOffset : 140726.527142769
+# L2EnergyOffset : 579322.755693826
+# L3EnergyOffset : 1.46767090794855773e+8
+# S1ELkG : 773.3623502732
+# S2ELkG : -2164.5055645385
+# S3ELkG : -1116.6508888652
+# S1EL_xOffset : 0.000142492
+# S1EL_yOffset : -8.8762e-6
+# S2EL_xOffset : 0.0002620513
+# S2EL_yOffset : 1.1634e-6
+# S2ER_xOffset : -0.0000969425
+# S2ER_yOffset : 0.000015112
+# S1ER_xOffset : 0.0000149544
+# S1ER_yOffset : 0.0000170405
+# XC1FFkG : -0.0065346085
+# XC3FFkG : 0.0004291352
+# YC1FFkG : -0.0004258136
+# YC2FFkG : 0.0012508743
+
+
+# 2025-08-24-08-02-02 rms100 x and y minimization. Only sextupole strengths and movers, otherwise golden
+# centerBC14 : True
+# centerBC20 : True
+# centerMFFF : True
+# assertBC14Energy : True
+# assertBC20Energy : True
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -15
+# L2PhaseSet : -38
+# S1ELkG : 994.9812895426
+# S2ELkG : -2260.3143589599
+# S3ELkG : -258.1730522707
+# S1EL_xOffset : 0.0002747161
+# S1EL_yOffset : 0.0037957515
+# S2EL_xOffset : -0.001450857
+# S2EL_yOffset : 0.0038850328
+# S2ER_xOffset : -0.0012250047
+# S2ER_yOffset : 0.0008467572
+# S1ER_xOffset : 0.0003002746
+# S1ER_yOffset : 0.001542664
+# Pretty extensive optimization (5000x smartStart, 100x DE population), so plausibly global optimum. Looks shitty though 
+# rms100 x, y = 16.5 x 10.5 um
+
+
+#PENDING One bunch, CSR ON. Minimizing PENT size in quadrature; sizes are Gaussian fits (i.e. fitSigma) not SI90!
+#Starting point was minimizing rms100 x and y using sextupole strengths and movers (trying to optimize fitSigma initially gave pathological results)
 centerBC14 : False
 centerBC20 : False
-centerMFFF : False
+centerMFFF : True
 assertBC14Energy : False
 assertBC20Energy : False
 symmetricSextupoleStrengths : True
-L1PhaseSet : -19.7576962458
-L2PhaseSet : -37.2863812552
-L1EnergyOffset : 140726.527142769
-L2EnergyOffset : 579322.755693826
-L3EnergyOffset : 1.46767090794855773e+8
-S1ELkG : 773.3623502732
-S2ELkG : -2164.5055645385
-S3ELkG : -1116.6508888652
-S1EL_xOffset : 0.000142492
-S1EL_yOffset : -8.8762e-6
-S2EL_xOffset : 0.0002620513
-S2EL_yOffset : 1.1634e-6
-S2ER_xOffset : -0.0000969425
-S2ER_yOffset : 0.000015112
-S1ER_xOffset : 0.0000149544
-S1ER_yOffset : 0.0000170405
-XC1FFkG : -0.0065346085
-XC3FFkG : 0.0004291352
-YC1FFkG : -0.0004258136
-YC2FFkG : 0.0012508743
+L1PhaseSet : -15
+L2PhaseSet : -38
+S1ELkG : 692.4263829689
+S2ELkG : -2398.4428978396
+S3ELkG : -1398.1729098282
+S1EL_xOffset : 0.0013735531
+S1EL_yOffset : -0.0002239088
+S2EL_xOffset : -0.0005715223
+S2EL_yOffset : -0.0001205334
+S2ER_xOffset : -0.000308982
+S2ER_yOffset : -0.0006678931
+S1ER_xOffset : 0.002434125
+S1ER_yOffset : -0.0009273895
