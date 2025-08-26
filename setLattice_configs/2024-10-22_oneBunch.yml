@@ -1421,8 +1421,39 @@ L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny 
 # rms100 x, y = 16.5 x 10.5 um
 
 
-#PENDING One bunch, CSR ON. Minimizing PENT size in quadrature; sizes are Gaussian fits (i.e. fitSigma) not SI90!
+#2025-08-26 One bunch, CSR ON. Minimizing PENT size in quadrature; sizes are Gaussian fits (i.e. fitSigma) not SI90!
 #Starting point was minimizing rms100 x and y using sextupole strengths and movers (trying to optimize fitSigma initially gave pathological results)
+# centerBC14 : False
+# centerBC20 : False
+# centerMFFF : False
+# assertBC14Energy : False
+# assertBC20Energy : False
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -15.9758293312
+# L2PhaseSet : -35.9686358856
+# L1EnergyOffset : 1.3633032544719682e+6
+# L2EnergyOffset : 1.5328829267200694e+7
+# L3EnergyOffset : 2.192622590987625e+6
+# S1ELkG : 804.8752660198
+# S2ELkG : -2432.945935462
+# S3ELkG : -1397.3399679914
+# S1EL_xOffset : 0.0014060493
+# S1EL_yOffset : -0.0002246442
+# S2EL_xOffset : -0.0005688128
+# S2EL_yOffset : -0.0001252762
+# S2ER_xOffset : -0.0003204218
+# S2ER_yOffset : -0.0006964853
+# S1ER_xOffset : 0.0024101819
+# S1ER_yOffset : -0.0009235768
+# XC1FFkG : 0.0276198748
+# XC3FFkG : -0.0131962072
+# YC1FFkG : -0.0049836574
+# YC2FFkG : 0.0189634449
+# fitSigmas at PENT: 9.7 x 5.4 x 5.6 um
+
+
+
+# PENDING SI90 x,y,z minimization. CSR OFF, no magic. Require full energy spread (i.e. sigmaSI90_energy > 70 MeV)
 centerBC14 : False
 centerBC20 : False
 centerMFFF : True
@@ -1431,14 +1462,4 @@ assertBC20Energy : False
 symmetricSextupoleStrengths : True
 L1PhaseSet : -15
 L2PhaseSet : -38
-S1ELkG : 692.4263829689
-S2ELkG : -2398.4428978396
-S3ELkG : -1398.1729098282
-S1EL_xOffset : 0.0013735531
-S1EL_yOffset : -0.0002239088
-S2EL_xOffset : -0.0005715223
-S2EL_yOffset : -0.0001205334
-S2ER_xOffset : -0.000308982
-S2ER_yOffset : -0.0006678931
-S1ER_xOffset : 0.002434125
-S1ER_yOffset : -0.0009273895
+

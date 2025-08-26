@@ -1,0 +1,86 @@
+include: 
+- "setLattice_configs/defaults.yml"
+- "setLattice_configs/bounds.yml"
+
+
+####################
+########################################
+############################################################
+################################################################################
+####################################################################################################
+########################################################################################################################
+
+#2024-10-22: New IMPACT one-bunch
+
+########################################################################################################################
+####################################################################################################
+################################################################################
+############################################################
+########################################
+####################
+
+#2024-10-22-15-20-50 2024-10-22_oneBunch optimization on PR10571.
+    # twissCalculationFraction : 0.7
+    # PSystem_emitSI_x : 2.7609e-6
+    # PSystem_emitSI_y : 2.1442e-6
+    # PSystem_norm_emit_x : 1.2512e-6
+    # PSystem_norm_emit_y : 1.0193e-6
+    # PSystem_BMAG_x : 1.0001451679
+    # PSystem_BMAG_y : 1.0001521435
+    # PSystem_BMAG_emit_x : 1.2514e-6
+    # PSystem_BMAG_emit_y : 1.0195e-6
+    # PSystem_BMAG_emitSI_x : 2.7613e-6
+    # PSystem_BMAG_emitSI_y : 2.1446e-6
+inputBeamFilePathSuffix : '/beams/2024-10-22_Impact_OneBunch/2024-10-22_oneBunch.h5'
+bunchCount : 1
+QA10361kG : -3.1976079537
+QA10371kG : 3.1129092742
+QE10425kG : -6.8469996218
+QE10441kG : 1.5057761462
+QE10511kG : 7.0138622173
+QE10525kG : -5.3942250594
+L0BPhaseSet : -15.0
+L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny bit higher energy. Compensate in L0B to get to the design 125 MeV
+
+
+#2024-10-22_oneBunch_baseline3.yml
+#2025-06-04-13-06-30 One bunch, CSR on. Minimizing PENT size in quadrature
+# Starting from 2025-05-30-09-40-22
+centerBC14 : True
+centerBC20 : True
+centerMFFF : True
+assertBC14Energy : True
+assertBC20Energy : True
+symmetricSextupoleStrengths : True
+L1PhaseSet : -28.9100908383
+L2PhaseSet : -39.0717691285
+S1ELkG : 9.5354261372
+S2ELkG : -998.8857534325
+S3ELkG : -312.4574420756
+S1EL_xOffset : -0.0024831962
+S1EL_yOffset : 0.0024286168
+S2EL_xOffset : 0.0003279967
+S2EL_yOffset : -0.0001951917
+S2ER_xOffset : 0.0025878477
+S2ER_yOffset : -0.0000264729
+S1ER_xOffset : 0.0021476773
+S1ER_yOffset : -0.0003583632
+# 19 x 8 x 14 um at PENT
+
+
+# 2025-08-26-14-49-38 modification from baseline for 10:1 ratio
+# Q5FFkG : -123.5464266273
+# Q4FFkG : -17.9577379321
+# Q3FFkG : 67.4786408737
+# Q2FFkG : 139.7637220022
+# Q1FFkG : -229.5953491411
+# Q0FFkG : 107.9821812268
+
+
+# 2025-08-26-15-05-54 modification from baseline for 1:10 ratio
+Q5FFkG : -101.7030025428
+Q4FFkG : -67.8308857528
+Q3FFkG : 0.001130111
+Q2FFkG : 149.0207724292
+Q1FFkG : -236.3167811889
+Q0FFkG : 157.5659858301
