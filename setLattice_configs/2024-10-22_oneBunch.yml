@@ -1453,13 +1453,53 @@ L0BEnergyOffset : -2759313 #2024-10-22_oneBunch comes out of L0A just at a tiny 
 
 
 
-# PENDING SI90 x,y,z minimization. CSR OFF, no magic. Require full energy spread (i.e. sigmaSI90_energy > 70 MeV)
+#2025-09-02-10-36-20 SI90 x,y,z minimization. CSR OFF, no magic
+# centerBC14 : False
+# centerBC20 : False
+# centerMFFF : False
+# assertBC14Energy : False
+# assertBC20Energy : False
+# symmetricSextupoleStrengths : True
+# L1PhaseSet : -27.250680769
+# L2PhaseSet : -40.4403121604
+# L1EnergyOffset : -8.973488282591604e+6
+# L2EnergyOffset : -4.18695879405240536e+8
+# L3EnergyOffset : 3.3869714890143299e+8
+# S1ELkG : 1786.5959840636
+# S2ELkG : -4713.3866018983
+# S3ELkG : -67.0354367569
+# S1EL_xOffset : -0.0002354972
+# S1EL_yOffset : -0.000072777
+# S2EL_xOffset : 6.2857e-6
+# S2EL_yOffset : -0.0000257893
+# S2ER_xOffset : 0.0000417889
+# S2ER_yOffset : 0.0000292179
+# S1ER_xOffset : -0.0000580894
+# S1ER_yOffset : -0.0000174678
+# XC1FFkG : -0.0082735887
+# XC3FFkG : -0.0026077345
+# YC1FFkG : -0.0019813811
+# YC2FFkG : 0.0058665124
+#SI90 at PENT: 8.7 x 6.6 x 2.6 um
+
+
+#PENDING SI90 x,y,z minimization. CSR ON, no magic
+#Starting from golden
 centerBC14 : False
 centerBC20 : False
-centerMFFF : True
+centerMFFF : False
 assertBC14Energy : False
 assertBC20Energy : False
 symmetricSextupoleStrengths : True
-L1PhaseSet : -15
-L2PhaseSet : -38
-
+L1PhaseSet : -24.43936983
+L2PhaseSet : -39.2079642507
+L1EnergyOffset : -198953.8968283844
+L2EnergyOffset : -3.2632331712132644e+7
+L3EnergyOffset : 660877.996787601
+S1ELkG : 807.7715081388
+S2ELkG : -4003.2148502136
+S3ELkG : -1012.5345374577
+XC1FFkG : 0.017525444
+XC3FFkG : -0.0083890731
+YC1FFkG : 0.0003133685
+YC2FFkG : -0.000439151
