@@ -514,14 +514,15 @@ class QPAD_sim:
             env['PATH' ] = os.path.dirname(sys.executable) + ":" + env['PATH']
 
         procs = np.prod(nodes)
-        cmd = ["mpirun", "-np", str(procs), "qpad-pmd.e"]
+        cmd = ["mpirun", "--oversubscribe", "-np", str(procs), "qpad-pmd.e"]
+        # cmd = ["mpirun", "-np", str(procs), "qpad-pmd.e"]
 
-        using_slurm = bool(os.environ.get("SLURM_JOB_ID"))
-        if using_slurm:
-            slurm_ntasks = int(os.environ.get("SLURM_NTASKS",str(1)))
-            if(slurm_ntasks < procs):
-                print(f"Warning: QPAD MPI processes={procs} are oversubcribed above SLURM_NTASKS={slurm_ntasks} set by environment...")
-                cmd = ["mpirun", "--oversubscribe", "-np", str(procs), "qpad-pmd.e"]
+        # using_slurm = bool(os.environ.get("SLURM_JOB_ID"))
+        # if using_slurm:
+        #     slurm_ntasks = int(os.environ.get("SLURM_NTASKS",str(1)))
+        #     if(slurm_ntasks < procs):
+        #         print(f"Warning: QPAD MPI processes={procs} are oversubcribed above SLURM_NTASKS={slurm_ntasks} set by environment...")
+        #         cmd = ["mpirun", "--oversubscribe", "-np", str(procs), "qpad-pmd.e"]
 
         proc = subprocess.Popen(
             cmd,
