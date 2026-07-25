@@ -10,13 +10,11 @@ authors:
     orcid: 0000-0001-9977-0248
     affiliation: 1
   - name: Frederick Cropp
-    orcid: 0000-0000-0000-0000
+    orcid: 0000-0003-4473-0374
     affiliation: 1
   - name: Claudio Emma
-    orcid: 0000-0000-0000-0000
     affiliation: 1
   - name: Thamine Dalichaouch
-    orcid: 0000-0000-0000-0000
     affiliation: 2             
 affiliations:
  - name: SLAC National Accelerator Laboratory, USA
