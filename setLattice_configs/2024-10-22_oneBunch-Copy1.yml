@@ -1,0 +1,21 @@
+include: 
+- "setLattice_configs/defaults.yml"
+- "setLattice_configs/bounds.yml"
+
+bunchCount : 1
+
+QA10361kG : -3.1976079537
+QA10371kG : 3.1129092742
+QE10425kG : -6.8469996218
+QE10441kG : 1.5057761462
+QE10511kG : 7.0138622173
+QE10525kG : -5.3942250594
+
+L0BPhaseSet : -15.0
+L1PhaseSet : -14.8497817049
+L2PhaseSet : -33.2649586063
+
+symmetricSextupoleStrengths : True
+S1ELkG : 1198.3974976341
+S2ELkG : -3135.3072427404
+S3ELkG : -1614.159195231
