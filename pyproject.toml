@@ -11,12 +11,6 @@ package-dir = {"" = "src"}
 [tool.setuptools.packages.find]
 where = ["src"]
 
-# Experimental_functions is third-party BSD-3-Clause code; clause 1 requires the
-# copyright notice to travel with any redistribution of the source, so its
-# LICENSE must be shipped inside the package, not just in the git tree.
-[tool.setuptools.package-data]
-Experimental_functions = ["LICENSE", "PROVENANCE.md"]
-
 [tool.pytest.ini_options]
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",

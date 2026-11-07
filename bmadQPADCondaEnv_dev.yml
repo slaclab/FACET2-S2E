@@ -31,4 +31,5 @@ dependencies:
   - pytest
   - pip:
     - git+https://github.com/ericcropp/OpenPMD_to_Bmad.git
+    - git+https://github.com/slaclab/facet2-daq.git@v0.1.0
 prefix: /sdf/group/ad/beamphysics/cropp/conda/bmadCondaEnv

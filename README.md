@@ -28,7 +28,6 @@ The editable install (`-e`) lets the package find the lattice, configs and scrat
 | [docs/daq_settings.md](docs/daq_settings.md) | (Optional) loading magnet and RF settings from a FACET-II DAQ scan, and what is loaded |
 | [docs/api_reference.md](docs/api_reference.md) | Main functions with examples, and where each function lives in the package |
 | [tests/README.md](tests/README.md) | Test suite: categories, markers, how to run |
-| [src/Experimental_functions/PROVENANCE.md](src/Experimental_functions/PROVENANCE.md) | Origin and local changes of the third-party DAQ reader |
 
 The notebooks in the `ARCHIVE` folder are previous investigations and may serve as additional examples.
 
@@ -100,7 +99,6 @@ src/FACET2_S2E/          Main package source code, sorted by purpose:
   │   └── qpad.py        QPAD plasma stage (and qpad_picmi.py)
   ├── beam/              Bunch generation, manipulation, statistics, microbunching
   └── plotting/          Phase-space, bunch summary and floorplan plots; styling
-src/Experimental_functions/  FACET-II DAQ data analysis (third-party, see Acknowledgements)
 tests/                   Automated test suite (unit, integration, system tests)
   ├── unit/              Unit tests for core functions
   ├── integration/       Integration tests calling real functions
@@ -113,13 +111,9 @@ pyproject.toml           Package configuration and dependencies
 
 ## Acknowledgements
 
-`src/Experimental_functions/` is a partial, locally-modified copy of
-[standaloneFACETScripts](https://github.com/rariniello/standaloneFACETScripts) by
-Robert Ariniello, used here to read FACET-II DAQ datasets. It is redistributed
-under its BSD-3-Clause license, reproduced in
-`src/Experimental_functions/LICENSE`. The local modifications are itemized in
-`src/Experimental_functions/PROVENANCE.md`; bugs in those files should be
-reported here rather than upstream.
+FACET-II DAQ datasets are read with [facet2-daq](https://github.com/slaclab/facet2-daq),
+which is based on Robert Ariniello's
+[standaloneFACETScripts](https://github.com/rariniello/standaloneFACETScripts).
 
 ## Support
 

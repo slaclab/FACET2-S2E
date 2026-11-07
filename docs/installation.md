@@ -31,6 +31,12 @@
    conda env create -f bmadQPADCondaEnv.yml -p /path/to/envs/bmad-qpad
    conda activate /path/to/envs/bmad-qpad
    ```
+   An environment created before the DAQ reader became a separate package lacks
+   [facet2-daq](https://github.com/slaclab/facet2-daq), and `import FACET2_S2E` then fails
+   with `ModuleNotFoundError: No module named 'facet2_daq'`. Add it to that environment with:
+   ```bash
+   pip install git+https://github.com/slaclab/facet2-daq.git@v0.1.0
+   ```
 
 3. **Install the package in editable mode.**
    ```bash

@@ -70,7 +70,7 @@ def mean_pz_after_tracking(tao, beam_file, start, finish):
 
 
 class FakeDataset:
-    """Stands in for Experimental_functions.DATASET: dataset._data["scalars"][list][pv] -> array of shots."""
+    """Stands in for facet2_daq.DATASET: dataset._data["scalars"][list][pv] -> array of shots."""
 
     def __init__(self):
         self._data = {"scalars": defaultdict(lambda: defaultdict(lambda: np.array([0.0, 0.0])))}

@@ -39,7 +39,7 @@ The DAQ values can also be applied on top of the standard `initializeTao()` / `t
 ```python
 import os
 import FACET2_S2E as qs
-from Experimental_functions import DATASET
+from facet2_daq import DATASET
 
 REPO = "/path/to/FACET2-S2E"
 DAQ_ROOT = os.environ["FACET2_DAQ_ROOT"]   # see "Where the DAQ data is" above
@@ -94,4 +94,4 @@ Each value is the mean over all shots in the scan. If a magnet or phase was the 
 
 These keep their values from `defaults.yml` and the `lattice` file.
 
-The DAQ files are read with `Experimental_functions.DATASET`, a modified copy of Robert Ariniello's [standaloneFACETScripts](https://github.com/rariniello/standaloneFACETScripts) (see [`src/Experimental_functions/PROVENANCE.md`](../src/Experimental_functions/PROVENANCE.md)).
+The DAQ files are read with `DATASET` from [facet2-daq](https://github.com/slaclab/facet2-daq), which is installed with the conda environment. It is based on Robert Ariniello's [standaloneFACETScripts](https://github.com/rariniello/standaloneFACETScripts).
