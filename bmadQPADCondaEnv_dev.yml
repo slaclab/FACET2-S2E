@@ -22,7 +22,7 @@ dependencies:
   - xopt
   - certifi
   - git-lfs
-  - picmistandard
+  - picmistandard<0.35
   - periodictable
   - openpmd-viewer=1.10
   - openmpi
