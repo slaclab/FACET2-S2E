@@ -21,7 +21,7 @@ from .lattice.linac import setLinacPhase, setLinacGradientAuto, matchStringWrapp
 from .lattice.set_lattice import setQuadkG, setSextkG, fixMagnetFields
 from .core import initializeTao, trackBeam
 from .energy import save_dipoles, treat_dipoles
-from .runs import set_beam, tune_bc20_sextupole_offsets, twiss_match_beam, golden_twiss_targets, GOLDEN_TWISS_PR10571, l2_virtual_match, edit_energy_based_on_beam_all, run_initialized_sim_edit_bunch_energy, run_initialized_sim_edit_lattice_energy_for_dipoles, run_initialized_sim
+from .runs import set_beam, tune_bc20_sextupole_offsets, twiss_match_beam, set_lattice_twiss, golden_twiss_targets, GOLDEN_TWISS_PR10571, l2_virtual_match, edit_energy_based_on_beam_all, run_initialized_sim_edit_bunch_energy, run_initialized_sim_edit_lattice_energy_for_dipoles, run_initialized_sim
 
 
 ## Initialize and run a simulation
@@ -47,7 +47,7 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
                             lattice='setLattice_configs/2024-12-09_oneBunch_CSR-on_optimized.yml', moments=[None,None,None,None,None,None], means=[0,0,0,0,None], charge=1.6e-9, sr_wakes_on=False, lr_wakes_on=False,
                             desired_beam_energies_for_the_feedback=None, desired_P0Cs_MeV=[None,None,None,None], grid_size=[32,32,32], lsc_method="slice", csr_method="1_dim", n_bin=32,
                             edited_bunch_energy_at_checkpoints_MeV=[None, None, None, None], beam_edits=True, twiss_match="auto", l0a_energy_MeV="quads", l2_match="auto",
-                            daq_sextupole_offsets=True, keep_magnet_fields=True, bc20_sextupole_tune="auto"):
+                            daq_sextupole_offsets=True, keep_magnet_fields=True, bc20_sextupole_tune="auto", twiss_match_lattice=True):
     '''
     experiment: "BEAMPHYS" is an example.
     scan_number: DAQ scan number. "14438" is an example.
@@ -113,6 +113,10 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
     (golden_twiss_targets). This is the operational match point: the DAQ magnets are kept, and only the input beam
     is changed. External beams are not matched to the machine: the 2024-12-11 IMPACT bunch has beta ~63 m,
     alpha ~-16 at L0AFEND (BMAG ~10 vs the golden targets), and without matching its emittance grows ~100x along the linac.
+    twiss_match_lattice: if True (default), a beam match also sets the lattice's Twiss to the same targets at "start"
+    (set_lattice_twiss, through the BEGINNING element), so that tao.ele_twiss and the Twiss plots follow the matched
+    beam. Otherwise they start from the f2_elec design values at BEGINNING, which the DAQ optics map far from the beam
+    (E320_17418: beta_y 317 m at ENDL1F against the beam's 24 m). Tracking does not use the lattice Twiss.
 
     l0a_energy_MeV: energy at the end of L0A (L0AFEND), used only with the DAQ settings. L0B is then set to keep
     125 MeV at the dogleg (before the DAQ quads are set).
@@ -211,7 +215,9 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
             targets = golden_twiss_targets(tao, start)
         else:
             targets = twiss_match if isinstance(twiss_match, dict) else None
-        twiss_match_beam(tao, file, start, targets=targets, verbose=verbose)
+        targets = twiss_match_beam(tao, file, start, targets=targets, verbose=verbose)
+        if twiss_match_lattice:
+            set_lattice_twiss(tao, start, targets, verbose=verbose)
     set_beam(tao, file, numMacroParticles=None if (gaussFromExternal or file_ext=='') else N_to_use_from_file)
 
     # energy feedback on beam

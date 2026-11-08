@@ -35,6 +35,7 @@ from .simulators.bmad.config import (
 from .simulators.bmad.runs import (
     set_beam,
     twiss_match_beam,
+    set_lattice_twiss,
     l2_virtual_match,
     tune_bc20_sextupole_offsets,
     BC20_TUNE_SEXTUPOLES,
@@ -278,6 +279,7 @@ __all__ = [
     'get_tao_from_experiment',
     'set_beam',
     'twiss_match_beam',
+    'set_lattice_twiss',
     'l2_virtual_match',
     'tune_bc20_sextupole_offsets',
     'BC20_TUNE_SEXTUPOLES',

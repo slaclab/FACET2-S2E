@@ -4,8 +4,10 @@ Tests for twiss_match_beam (simulators/bmad/runs.py): linear Twiss matching of a
 
 import os
 import sys
+import warnings
 
 import numpy as np
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..', 'src'))
 
@@ -82,3 +84,50 @@ def test_golden_targets_propagate_onto_golden():
         B1 = M @ B0 @ M.T / abs(np.linalg.det(M))
         np.testing.assert_allclose(B1[0, 0], golden[f"beta_{plane}"], rtol=1e-10)
         np.testing.assert_allclose(-B1[0, 1], golden[f"alpha_{plane}"], rtol=1e-8, atol=1e-10)
+
+
+class _FakeTaoLattice:
+    """matrix(), cmd("set element beginning ...") and ele_twiss() for one linear map from BEGINNING to any location,
+    with the lattice Twiss propagated from the BEGINNING values as M B M^T / |det M| (Bmad, with acceleration)."""
+    def __init__(self, mat6):
+        self.mat6 = mat6
+        self.begin = {"beta_a": 0.139, "alpha_a": 0.95, "beta_b": 0.365, "alpha_b": 2.0}
+
+    def matrix(self, start, end):
+        return {"mat6": self.mat6}
+
+    def cmd(self, command):
+        if command.startswith("set element beginning"):
+            self.begin[command.split()[3]] = float(command.split("=")[1])
+        return []
+
+    def ele_twiss(self, location):
+        out = {}
+        for mode, i in (("a", 0), ("b", 2)):
+            b, a = self.begin[f"beta_{mode}"], self.begin[f"alpha_{mode}"]
+            M = self.mat6[i:i+2, i:i+2]
+            B = M @ np.array([[b, -a], [-a, (1 + a**2)/b]]) @ M.T / abs(np.linalg.det(M))
+            out[f"beta_{mode}"], out[f"alpha_{mode}"] = B[0, 0], -B[0, 1]
+        return out
+
+
+def test_set_lattice_twiss_puts_the_targets_at_the_location():
+    m = np.eye(6)
+    m[0:2, 0:2] = np.array([[2.1, 1.4], [-0.3, 0.14]])        # det 0.714: accelerating
+    m[2:4, 2:4] = np.array([[1.7, 2.2], [0.1, 0.55]])
+    tao = _FakeTaoLattice(m)
+    targets = {"beta_x": 4.3051, "alpha_x": -0.4473, "beta_y": 4.1179, "alpha_y": -0.8119}
+    with warnings.catch_warnings():
+        warnings.simplefilter("error")
+        qs.set_lattice_twiss(tao, "L0AFEND", targets)
+    tw = tao.ele_twiss("L0AFEND")
+    for plane, mode in (("x", "a"), ("y", "b")):
+        np.testing.assert_allclose(tw[f"beta_{mode}"], targets[f"beta_{plane}"], rtol=1e-10)
+        np.testing.assert_allclose(tw[f"alpha_{mode}"], targets[f"alpha_{plane}"], rtol=1e-9, atol=1e-12)
+
+
+def test_set_lattice_twiss_refuses_coupled_optics():
+    m = np.eye(6)
+    m[0, 2] = 0.1
+    with pytest.raises(ValueError):
+        qs.set_lattice_twiss(_FakeTaoLattice(m), "L0AFEND", {"beta_x": 4, "alpha_x": 0, "beta_y": 4, "alpha_y": 0})

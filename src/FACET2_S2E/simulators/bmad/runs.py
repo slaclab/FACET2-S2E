@@ -7,6 +7,7 @@ Moved from simulationFunctions.py.
 """
 
 import os
+import warnings
 
 import numpy as np
 from pmd_beamphysics import ParticleGroup
@@ -55,6 +56,35 @@ def golden_twiss_targets(tao, location, golden=GOLDEN_TWISS_PR10571):
         B0 /= np.sqrt(np.linalg.det(B0))    # the transport is not symplectic with acceleration: renormalize
         targets[f"beta_{plane}"], targets[f"alpha_{plane}"] = float(B0[0, 0]), float(-B0[0, 1])
     return targets
+
+
+def set_lattice_twiss(tao, location, targets, verbose=False):
+    '''
+    Set the Twiss of the lattice's BEGINNING element so that the model Twiss at `location` (tao.ele_twiss, normal
+    modes a and b) equal `targets` ({"beta_x", "alpha_x", "beta_y", "alpha_y"}, as for twiss_match_beam): the linear
+    optics from BEGINNING to `location` (Tao mat6) are run backwards, as in golden_twiss_targets.
+    Only the lattice's Twiss functions change (ele_twiss, lat_list ele.a.beta, Twiss plots, BMAG against the lattice);
+    they then describe a beam matched to `targets` at `location` instead of the f2_elec design start. Tracking a beam
+    from a file does not use them. Needs uncoupled optics from BEGINNING to `location`.
+    Returns the Twiss set at BEGINNING.
+    '''
+    m = np.array(tao.matrix("BEGINNING", location)["mat6"])
+    if max(np.abs(m[0:2, 2:4]).max(), np.abs(m[2:4, 0:2]).max()) > 1e-9:
+        raise ValueError(f"set_lattice_twiss: the optics from BEGINNING to {location} couple x and y")
+    begin = golden_twiss_targets(tao, "BEGINNING", golden={"location": location, **targets})
+    tao.cmd("set global lattice_calc_on = F")
+    for mode, plane in (("a", "x"), ("b", "y")):
+        tao.cmd(f"set element beginning beta_{mode} = {begin[f'beta_{plane}']!r}")
+        tao.cmd(f"set element beginning alpha_{mode} = {begin[f'alpha_{plane}']!r}")
+    tao.cmd("set global lattice_calc_on = T")
+    tw = tao.ele_twiss(location)
+    got = {"beta_x": tw["beta_a"], "alpha_x": tw["alpha_a"], "beta_y": tw["beta_b"], "alpha_y": tw["alpha_b"]}
+    if verbose:
+        print(f"Lattice Twiss at {location}: beta {got['beta_x']:.3f}, {got['beta_y']:.3f} m, alpha {got['alpha_x']:.3f}, "
+              f"{got['alpha_y']:.3f} (BEGINNING: beta {begin['beta_x']:.4g}, {begin['beta_y']:.4g} m)")
+    if any(abs(got[k] - targets[k]) > 1e-6*max(1.0, abs(targets[k])) for k in targets):
+        warnings.warn(f"set_lattice_twiss: lattice Twiss at {location} {got} differ from the targets {targets}")
+    return begin
 
 
 def _propagate_twiss(tao, start, end, twiss):
