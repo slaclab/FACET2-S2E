@@ -1,5 +1,5 @@
 
-! *** OPTICS=FACET2-16FEB24 ***
+! *** OPTICS=FACET2-28JAN2026 ***
 
 ! ==============================================================================
 ! Modification History
@@ -58,249 +58,425 @@ g14_4 = gradfb2
 g14_5 = gradfb2
 g14_6 = 0
 
-k11_4a1: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.3268, voltage = p25*g11_4*0.3268 * 1e6, phi0 = phil2
-k11_4a2: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.2500, voltage = p25*g11_4*0.2500 * 1e6, phi0 = phil2
-k11_4a3: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 1.5926, voltage = p25*g11_4*1.5926 * 1e6, phi0 = phil2
-k11_4b: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_4*dlwl7 * 1e6, phi0 = phil2
-k11_4c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_4*dlwl10 * 1e6, phi0 = phil2
-k11_4d: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_4*dlwl7 * 1e6, phi0 = phil2
+k11_4a1: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.3268, voltage = p25*g11_4*0.3268 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_4a2: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.2500, voltage = p25*g11_4*0.2500 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_4a3: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 1.5926, voltage = p25*g11_4*1.5926 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_4b: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_4*dlwl7 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_4c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_4*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_4d: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_4*dlwl7 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k11_5a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.6689, voltage = p25*g11_5*0.6689 * 1e6, phi0 = phil2
-k11_5a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3752, voltage = p25*g11_5*2.3752 * 1e6, phi0 = phil2
-k11_5b: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_5*dlwl7 * 1e6, phi0 = phil2
-k11_5c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_5*dlwl10 * 1e6, phi0 = phil2
-k11_5d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_5*dlwl10 * 1e6, phi0 = phil2
+k11_5a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.6689, voltage = p25*g11_5*0.6689 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k11_5a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3752, voltage = p25*g11_5*2.3752 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k11_5b: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_5*dlwl7 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_5c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_5*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_5d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_5*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k11_6a1: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.3280, voltage = p25*g11_6*0.3280 * 1e6, phi0 = phil2
-k11_6a2: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.2500, voltage = p25*g11_6*0.2500 * 1e6, phi0 = phil2
-k11_6a3: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 1.5914, voltage = p25*g11_6*1.5914 * 1e6, phi0 = phil2
-k11_6b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_6*dlwl10 * 1e6, phi0 = phil2
-k11_6c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_6*dlwl10 * 1e6, phi0 = phil2
-k11_6d: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_6*dlwl7 * 1e6, phi0 = phil2
+k11_6a1: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.3280, voltage = p25*g11_6*0.3280 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_6a2: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.2500, voltage = p25*g11_6*0.2500 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_6a3: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 1.5914, voltage = p25*g11_6*1.5914 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_6b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_6c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_6d: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_6*dlwl7 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k11_7a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_7*dlwl10 * 1e6, phi0 = phil2
-k11_7b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_7*dlwl10 * 1e6, phi0 = phil2
-k11_7c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_7*dlwl10 * 1e6, phi0 = phil2
-k11_7d: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_7*dlwl7 * 1e6, phi0 = phil2
+k11_7a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_7*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_7b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_7*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_7c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_7*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_7d: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_7*dlwl7 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
 k11_8a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.38633, voltage = p25*g11_8*0.38633 * 1e6,
-          phi0 = phil2
+          phi0 = phil2, cavity_type = traveling_wave
 k11_8a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.65777, voltage = p25*g11_8*2.65777 * 1e6,
-          phi0 = phil2
-k11_8b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_8*dlwl10 * 1e6, phi0 = phil2
-k11_8c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_8*dlwl10 * 1e6, phi0 = phil2
-k11_8d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_8*dlwl10 * 1e6, phi0 = phil2
+          phi0 = phil2, cavity_type = traveling_wave
+k11_8b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_8c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k11_8d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_1a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_1*dlwl10 * 1e6, phi0 = phil2
-k12_1b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_1*dlwl10 * 1e6, phi0 = phil2
-k12_1c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_1*dlwl10 * 1e6, phi0 = phil2
-k12_1d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_1*dlwl10 * 1e6, phi0 = phil2
+k12_1a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_1b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_1c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_1d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_2a1: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.3280, voltage = p25*g12_2*0.3280 * 1e6, phi0 = phil2
-k12_2a2: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.2500, voltage = p25*g12_2*0.2500 * 1e6, phi0 = phil2
-k12_2a3: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 1.5914, voltage = p25*g12_2*1.5914 * 1e6, phi0 = phil2
-k12_2b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_2*dlwl10 * 1e6, phi0 = phil2
-k12_2c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_2*dlwl10 * 1e6, phi0 = phil2
-k12_2d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_2*dlwl10 * 1e6, phi0 = phil2
+k12_2a1: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.3280, voltage = p25*g12_2*0.3280 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_2a2: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 0.2500, voltage = p25*g12_2*0.2500 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_2a3: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = 1.5914, voltage = p25*g12_2*1.5914 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_2b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_2*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_2c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_2*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_2d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_2*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_3a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3312, voltage = p25*g12_3*0.3312 * 1e6, phi0 = phil2
-k12_3a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g12_3*0.2500 * 1e6, phi0 = phil2
-k12_3a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4629, voltage = p25*g12_3*2.4629 * 1e6, phi0 = phil2
-k12_3b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_3*dlwl10 * 1e6, phi0 = phil2
-k12_3c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_3*dlwl10 * 1e6, phi0 = phil2
-k12_3d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_3*dlwl10 * 1e6, phi0 = phil2
+k12_3a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3312, voltage = p25*g12_3*0.3312 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_3a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g12_3*0.2500 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_3a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4629, voltage = p25*g12_3*2.4629 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_3b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_3c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_3d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_4a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3268, voltage = p25*g12_4*0.3268 * 1e6, phi0 = phil2
-k12_4a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g12_4*0.2500 * 1e6, phi0 = phil2
-k12_4a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4673, voltage = p25*g12_4*2.4673 * 1e6, phi0 = phil2
-k12_4b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_4*dlwl10 * 1e6, phi0 = phil2
-k12_4c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_4*dlwl10 * 1e6, phi0 = phil2
-k12_4d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_4*dlwl10 * 1e6, phi0 = phil2
+k12_4a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3268, voltage = p25*g12_4*0.3268 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_4a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g12_4*0.2500 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_4a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4673, voltage = p25*g12_4*2.4673 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_4b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_4*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_4c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_4*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_4d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_4*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_5a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3324, voltage = p25*g12_5*0.3324 * 1e6, phi0 = phil2
-k12_5a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g12_5*0.2500 * 1e6, phi0 = phil2
-k12_5a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4617, voltage = p25*g12_5*2.4617 * 1e6, phi0 = phil2
-k12_5b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_5*dlwl10 * 1e6, phi0 = phil2
-k12_5c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_5*dlwl10 * 1e6, phi0 = phil2
-k12_5d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_5*dlwl10 * 1e6, phi0 = phil2
+k12_5a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3324, voltage = p25*g12_5*0.3324 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_5a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g12_5*0.2500 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_5a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4617, voltage = p25*g12_5*2.4617 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_5b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_5*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_5c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_5*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_5d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_5*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_6a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3280, voltage = p25*g12_6*0.3280 * 1e6, phi0 = phil2
-k12_6a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4330, voltage = p25*g12_6*0.4330 * 1e6, phi0 = phil2
-k12_6a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.2831, voltage = p25*g12_6*2.2831 * 1e6, phi0 = phil2
-k12_6b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_6*dlwl10 * 1e6, phi0 = phil2
-k12_6c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_6*dlwl10 * 1e6, phi0 = phil2
-k12_6d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_6*dlwl10 * 1e6, phi0 = phil2
+k12_6a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3280, voltage = p25*g12_6*0.3280 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_6a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4330, voltage = p25*g12_6*0.4330 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_6a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.2831, voltage = p25*g12_6*2.2831 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_6b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_6c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_6d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_7a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3336, voltage = p25*g12_7*0.3336 * 1e6, phi0 = phil2
-k12_7a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3575, voltage = p25*g12_7*0.3575 * 1e6, phi0 = phil2
-k12_7a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3530, voltage = p25*g12_7*2.3530 * 1e6, phi0 = phil2
-k12_7b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_7*dlwl10 * 1e6, phi0 = phil2
-k12_7c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_7*dlwl10 * 1e6, phi0 = phil2
-k12_7d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_7*dlwl10 * 1e6, phi0 = phil2
+k12_7a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3336, voltage = p25*g12_7*0.3336 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_7a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3575, voltage = p25*g12_7*0.3575 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_7a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3530, voltage = p25*g12_7*2.3530 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_7b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_7*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_7c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_7*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_7d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_7*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_8a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3292, voltage = p25*g12_8*0.3292 * 1e6, phi0 = phil2
-k12_8a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4032, voltage = p25*g12_8*0.4032 * 1e6, phi0 = phil2
-k12_8a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3117, voltage = p25*g12_8*2.3117 * 1e6, phi0 = phil2
-k12_8b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_8*dlwl10 * 1e6, phi0 = phil2
-k12_8c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_8*dlwl10 * 1e6, phi0 = phil2
-k12_8d1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3869, voltage = p25*g12_8*2.3869 * 1e6, phi0 = phil2
-k12_8d2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g12_8*0.2500 * 1e6, phi0 = phil2
-k12_8d3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4072, voltage = p25*g12_8*0.4072 * 1e6, phi0 = phil2
+k12_8a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3292, voltage = p25*g12_8*0.3292 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_8a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4032, voltage = p25*g12_8*0.4032 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_8a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3117, voltage = p25*g12_8*2.3117 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_8b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_8c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_8d1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3869, voltage = p25*g12_8*2.3869 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_8d2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g12_8*0.2500 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k12_8d3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4072, voltage = p25*g12_8*0.4072 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
 
-k13_1a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_1*dlwl10 * 1e6, phi0 = phil2
-k13_1b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_1*dlwl10 * 1e6, phi0 = phil2
-k13_1c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_1*dlwl10 * 1e6, phi0 = phil2
-k13_1d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_1*dlwl10 * 1e6, phi0 = phil2
+k13_1a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_1b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_1c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_1d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_2a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3256, voltage = p25*g13_2*0.3256 * 1e6, phi0 = phil2
-k13_2a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3846, voltage = p25*g13_2*0.3846 * 1e6, phi0 = phil2
-k13_2a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3339, voltage = p25*g13_2*2.3339 * 1e6, phi0 = phil2
-k13_2b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_2*dlwl10 * 1e6, phi0 = phil2
-k13_2c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_2*dlwl10 * 1e6, phi0 = phil2
-k13_2d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_2*dlwl10 * 1e6, phi0 = phil2
+k13_2a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3256, voltage = p25*g13_2*0.3256 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_2a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3846, voltage = p25*g13_2*0.3846 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_2a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3339, voltage = p25*g13_2*2.3339 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_2b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_2*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_2c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_2*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_2d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_2*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_3a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3312, voltage = p25*g13_3*0.3312 * 1e6, phi0 = phil2
-k13_3a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3822, voltage = p25*g13_3*0.3822 * 1e6, phi0 = phil2
-k13_3a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3307, voltage = p25*g13_3*2.3307 * 1e6, phi0 = phil2
-k13_3b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_3*dlwl10 * 1e6, phi0 = phil2
-k13_3c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_3*dlwl10 * 1e6, phi0 = phil2
-k13_3d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_3*dlwl10 * 1e6, phi0 = phil2
+k13_3a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3312, voltage = p25*g13_3*0.3312 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_3a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3822, voltage = p25*g13_3*0.3822 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_3a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3307, voltage = p25*g13_3*2.3307 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_3b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_3c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_3d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_4a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3268, voltage = p25*g13_4*0.3268 * 1e6, phi0 = phil2
-k13_4a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4501, voltage = p25*g13_4*0.4501 * 1e6, phi0 = phil2
-k13_4a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.2672, voltage = p25*g13_4*2.2672 * 1e6, phi0 = phil2
-k13_4b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_4*dlwl10 * 1e6, phi0 = phil2
-k13_4c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_4*dlwl10 * 1e6, phi0 = phil2
-k13_4d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_4*dlwl10 * 1e6, phi0 = phil2
+k13_4a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3268, voltage = p25*g13_4*0.3268 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_4a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4501, voltage = p25*g13_4*0.4501 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_4a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.2672, voltage = p25*g13_4*2.2672 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_4b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_4*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_4c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_4*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_4d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_4*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_5a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3324, voltage = p25*g13_5*0.3324 * 1e6, phi0 = phil2
-k13_5a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g13_5*0.2500 * 1e6, phi0 = phil2
-k13_5a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4617, voltage = p25*g13_5*2.4617 * 1e6, phi0 = phil2
-k13_5b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_5*dlwl10 * 1e6, phi0 = phil2
-k13_5c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_5*dlwl10 * 1e6, phi0 = phil2
-k13_5d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_5*dlwl10 * 1e6, phi0 = phil2
+k13_5a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3324, voltage = p25*g13_5*0.3324 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_5a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g13_5*0.2500 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_5a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4617, voltage = p25*g13_5*2.4617 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_5b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_5*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_5c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_5*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_5d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_5*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_6a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3280, voltage = p25*g13_6*0.3280 * 1e6, phi0 = phil2
-k13_6a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g13_6*0.2500 * 1e6, phi0 = phil2
-k13_6a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4661, voltage = p25*g13_6*2.4661 * 1e6, phi0 = phil2
-k13_6b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_6*dlwl10 * 1e6, phi0 = phil2
-k13_6c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_6*dlwl10 * 1e6, phi0 = phil2
-k13_6d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_6*dlwl10 * 1e6, phi0 = phil2
+k13_6a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3280, voltage = p25*g13_6*0.3280 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_6a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g13_6*0.2500 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_6a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4661, voltage = p25*g13_6*2.4661 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_6b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_6c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_6d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_7a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3336, voltage = p25*g13_7*0.3336 * 1e6, phi0 = phil2
-k13_7a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g13_7*0.2500 * 1e6, phi0 = phil2
-k13_7a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4605, voltage = p25*g13_7*2.4605 * 1e6, phi0 = phil2
-k13_7b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_7*dlwl10 * 1e6, phi0 = phil2
-k13_7c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_7*dlwl10 * 1e6, phi0 = phil2
-k13_7d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_7*dlwl10 * 1e6, phi0 = phil2
+k13_7a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3336, voltage = p25*g13_7*0.3336 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_7a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g13_7*0.2500 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_7a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4605, voltage = p25*g13_7*2.4605 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_7b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_7*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_7c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_7*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_7d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_7*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_8a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3292, voltage = p25*g13_8*0.3292 * 1e6, phi0 = phil2
-k13_8a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4064, voltage = p25*g13_8*0.4064 * 1e6, phi0 = phil2
-k13_8a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3085, voltage = p25*g13_8*2.3085 * 1e6, phi0 = phil2
-k13_8b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_8*dlwl10 * 1e6, phi0 = phil2
-k13_8c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_8*dlwl10 * 1e6, phi0 = phil2
-k13_8d1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3869, voltage = p25*g13_8*2.3869 * 1e6, phi0 = phil2
-k13_8d2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g13_8*0.2500 * 1e6, phi0 = phil2
-k13_8d3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4072, voltage = p25*g13_8*0.4072 * 1e6, phi0 = phil2
+k13_8a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3292, voltage = p25*g13_8*0.3292 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_8a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4064, voltage = p25*g13_8*0.4064 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_8a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3085, voltage = p25*g13_8*2.3085 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_8b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_8c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_8d1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3869, voltage = p25*g13_8*2.3869 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_8d2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g13_8*0.2500 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k13_8d3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4072, voltage = p25*g13_8*0.4072 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
 
-k14_1a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_1*dlwl10 * 1e6, phi0 = phil2
-k14_1b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_1*dlwl10 * 1e6, phi0 = phil2
-k14_1c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_1*dlwl10 * 1e6, phi0 = phil2
-k14_1d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_1*dlwl10 * 1e6, phi0 = phil2
+k14_1a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k14_1b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k14_1c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k14_1d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_1*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k14_2a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3256, voltage = p25*g14_2*0.3256 * 1e6, phi0 = phil2
-k14_2a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g14_2*0.2500 * 1e6, phi0 = phil2
-k14_2a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4685, voltage = p25*g14_2*2.4685 * 1e6, phi0 = phil2
-k14_2b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_2*dlwl10 * 1e6, phi0 = phil2
-k14_2c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_2*dlwl10 * 1e6, phi0 = phil2
-k14_2d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_2*dlwl10 * 1e6, phi0 = phil2
+k14_2a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3256, voltage = p25*g14_2*0.3256 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k14_2a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g14_2*0.2500 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k14_2a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4685, voltage = p25*g14_2*2.4685 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k14_2b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_2*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k14_2c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_2*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k14_2d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_2*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k14_3a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3312, voltage = p25*g14_3*0.3312 * 1e6, phi0 = phil2
-k14_3a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4012, voltage = p25*g14_3*0.4012 * 1e6, phi0 = phil2
-k14_3a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3117, voltage = p25*g14_3*2.3117 * 1e6, phi0 = phil2
-k14_3b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_3*dlwl10 * 1e6, phi0 = phil2
-k14_3c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_3*dlwl10 * 1e6, phi0 = phil2
-k14_3d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_3*dlwl10 * 1e6, phi0 = phil2
+k14_3a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3312, voltage = p25*g14_3*0.3312 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k14_3a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4012, voltage = p25*g14_3*0.4012 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k14_3a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3117, voltage = p25*g14_3*2.3117 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k14_3b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k14_3c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k14_3d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
 k14_4a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3268, voltage = p25*g14_4*0.3268 * 1e6,
-          phi0 = -phifb2
+          phi0 = -phifb2, cavity_type = traveling_wave
 k14_4a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g14_4*0.2500 * 1e6,
-          phi0 = -phifb2
+          phi0 = -phifb2, cavity_type = traveling_wave
 k14_4a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4673, voltage = p25*g14_4*2.4673 * 1e6,
-          phi0 = -phifb2
-k14_4b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_4*dlwl10 * 1e6, phi0 = -phifb2
-k14_4c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_4*dlwl10 * 1e6, phi0 = -phifb2
-k14_4d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_4*dlwl10 * 1e6, phi0 = -phifb2
+          phi0 = -phifb2, cavity_type = traveling_wave
+k14_4b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_4*dlwl10 * 1e6,
+          phi0 = -phifb2, cavity_type = traveling_wave
+k14_4c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_4*dlwl10 * 1e6,
+          phi0 = -phifb2, cavity_type = traveling_wave
+k14_4d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_4*dlwl10 * 1e6,
+          phi0 = -phifb2, cavity_type = traveling_wave
 
 k14_5a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3324, voltage = p25*g14_5*0.3324 * 1e6,
-          phi0 = +phifb2
+          phi0 = +phifb2, cavity_type = traveling_wave
 k14_5a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2500, voltage = p25*g14_5*0.2500 * 1e6,
-          phi0 = +phifb2
+          phi0 = +phifb2, cavity_type = traveling_wave
 k14_5a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4617, voltage = p25*g14_5*2.4617 * 1e6,
-          phi0 = +phifb2
-k14_5b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_5*dlwl10 * 1e6, phi0 = +phifb2
-k14_5c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_5*dlwl10 * 1e6, phi0 = +phifb2
-k14_5d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_5*dlwl10 * 1e6, phi0 = +phifb2
+          phi0 = +phifb2, cavity_type = traveling_wave
+k14_5b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_5*dlwl10 * 1e6,
+          phi0 = +phifb2, cavity_type = traveling_wave
+k14_5c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_5*dlwl10 * 1e6,
+          phi0 = +phifb2, cavity_type = traveling_wave
+k14_5d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_5*dlwl10 * 1e6,
+          phi0 = +phifb2, cavity_type = traveling_wave
 
-k14_6a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3280, voltage = p25*g14_6*0.3280 * 1e6, phi0 = phil2
-k14_6a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4044, voltage = p25*g14_6*0.4044 * 1e6, phi0 = phil2
-k14_6a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3117, voltage = p25*g14_6*2.3117 * 1e6, phi0 = phil2
-k14_6b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_6*dlwl10 * 1e6, phi0 = phil2
-k14_6c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_6*dlwl10 * 1e6, phi0 = phil2
-k14_6d1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.1969, voltage = p25*g14_6*2.1969 * 1e6, phi0 = phil2
-k14_6d2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4242, voltage = p25*g14_6*0.4242 * 1e6, phi0 = phil2
-k14_6d3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.423, voltage = p25*g14_6*0.423 * 1e6, phi0 = phil2
+k14_6a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3280, voltage = p25*g14_6*0.3280 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k14_6a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4044, voltage = p25*g14_6*0.4044 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k14_6a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3117, voltage = p25*g14_6*2.3117 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k14_6b: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k14_6c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k14_6d1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.1969, voltage = p25*g14_6*2.1969 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k14_6d2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.4242, voltage = p25*g14_6*0.4242 * 1e6,
+          phi0 = phil2, cavity_type = traveling_wave
+k14_6d3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.423, voltage = p25*g14_6*0.423 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
 ! define unsplit lcavitys for BMAD ... not used by MAD
 
-k11_4a: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_4*dlwl7 * 1e6, phi0 = phil2
+k11_4a: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_4*dlwl7 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k11_5a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_5*dlwl10 * 1e6, phi0 = phil2
+k11_5a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_5*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k11_6a: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_6*dlwl7 * 1e6, phi0 = phil2
+k11_6a: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g11_6*dlwl7 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k11_8a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_8*dlwl10 * 1e6, phi0 = phil2
+k11_8a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g11_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_2a: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g12_2*dlwl7 * 1e6, phi0 = phil2
+k12_2a: lcavity, rf_frequency = sbandf * 1e6, type = "7ft", l = dlwl7, voltage = p25*g12_2*dlwl7 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_3a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_3*dlwl10 * 1e6, phi0 = phil2
+k12_3a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_4a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_4*dlwl10 * 1e6, phi0 = phil2
+k12_4a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_4*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_5a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_5*dlwl10 * 1e6, phi0 = phil2
+k12_5a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_5*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_6a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_6*dlwl10 * 1e6, phi0 = phil2
+k12_6a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_7a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_7*dlwl10 * 1e6, phi0 = phil2
+k12_7a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_7*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k12_8a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_8*dlwl10 * 1e6, phi0 = phil2
-k12_8d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_8*dlwl10 * 1e6, phi0 = phil2
+k12_8a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k12_8d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g12_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_2a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_2*dlwl10 * 1e6, phi0 = phil2
+k13_2a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_2*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_3a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_3*dlwl10 * 1e6, phi0 = phil2
+k13_3a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_4a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_4*dlwl10 * 1e6, phi0 = phil2
+k13_4a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_4*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_5a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_5*dlwl10 * 1e6, phi0 = phil2
+k13_5a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_5*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_6a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_6*dlwl10 * 1e6, phi0 = phil2
+k13_6a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_7a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_7*dlwl10 * 1e6, phi0 = phil2
+k13_7a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_7*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k13_8a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_8*dlwl10 * 1e6, phi0 = phil2
-k13_8d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_8*dlwl10 * 1e6, phi0 = phil2
+k13_8a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k13_8d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g13_8*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k14_2a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_2*dlwl10 * 1e6, phi0 = phil2
+k14_2a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_2*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k14_3a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_3*dlwl10 * 1e6, phi0 = phil2
+k14_3a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_3*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
-k14_4a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_4*dlwl10 * 1e6, phi0 = -phifb2
+k14_4a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_4*dlwl10 * 1e6,
+          phi0 = -phifb2, cavity_type = traveling_wave
 
-k14_5a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_5*dlwl10 * 1e6, phi0 = +phifb2
+k14_5a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_5*dlwl10 * 1e6,
+          phi0 = +phifb2, cavity_type = traveling_wave
 
-k14_6a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_6*dlwl10 * 1e6, phi0 = phil2
-k14_6d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_6*dlwl10 * 1e6, phi0 = phil2
+k14_6a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
+k14_6d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*g14_6*dlwl10 * 1e6, phi0 = phil2,
+          cavity_type = traveling_wave
 
 ! ==============================================================================
 ! QUADs

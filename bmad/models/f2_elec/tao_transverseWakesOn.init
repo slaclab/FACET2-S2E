@@ -54,7 +54,7 @@ beam_init%center(6) = 0.0
 
 !&tao_d2_data
         d2_data%name = 'floor'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 
@@ -74,7 +74,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'L0AF'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 
@@ -94,7 +94,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'MRK0F'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 
@@ -113,7 +113,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'BC11C'
-        universe = 1
+        universe = '1'
         n_d1_data = 4
 /
 &tao_d1_data
@@ -151,7 +151,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'BC14E'
-        universe = 1
+        universe = '1'
         n_d1_data = 3
 /
 &tao_d1_data
@@ -185,7 +185,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'L3'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 &tao_d1_data
@@ -202,7 +202,7 @@ beam_init%center(6) = 0.0
 
 !&tao_d2_data
         d2_data%name = 'r56'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /    
 !&tao_d1_data
@@ -222,7 +222,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
     d2_data%name = "orbit"
-    universe = 1
+    universe = '1'
     n_d1_data = 5
 /
 
@@ -277,17 +277,17 @@ beam_init%center(6) = 0.0
 !----------------------------------------
 !----------------------------------------
 
-&tao_var
-	v1_var%name = 'begtwiss'
-	default_step = 1e-4
-	default_universe = '1'
-	ix_min_var = 1
-	ix_max_var = 6
-	var(1:6)%ele_name  = 'beginning', 'beginning', 'beginning', 'beginning', 'beginning', 'beginning'
-    var(1:6)%attribute = 'beta_a', 'alpha_a', 'beta_b', 'alpha_b', 'eta_x', 'etap_x'
-    var(1)%low_lim = 0.01
-    var(3)%low_lim = 0.01
-/
+! &tao_var
+! 	v1_var%name = 'begtwiss'
+! 	default_step = 1e-4
+! 	default_universe = '1'
+! 	ix_min_var = 1
+! 	ix_max_var = 6
+! 	var(1:6)%ele_name  = 'beginning', 'beginning', 'beginning', 'beginning', 'beginning', 'beginning'
+!     var(1:6)%attribute = 'beta_a', 'alpha_a', 'beta_b', 'alpha_b', 'eta_x', 'etap_x'
+!     var(1)%low_lim = 0.01
+!     var(3)%low_lim = 0.01
+! /
 
 
 &tao_var
@@ -323,27 +323,91 @@ beam_init%center(6) = 0.0
 /
 
 
+!----------------------------------------
+! FF & spectrometer matching quads
+!----------------------------------------
+
 &tao_var
-    v1_var%name = 'linac_fudge'
-	default_step = 1e-4
-	default_attribute = 'f'
-	var(1:)%ele_name =  'O_L1_fudge', 'O_L2_fudge', 'O_L3_fudge'
+    v1_var%name = 'qm_ff'
+    default_step = 1e-4
+    default_attribute = 'b1_gradient'
+    var(1:)%ele_name = 'q5ff','q4ff', 'q3ff', 'q2ff', 'q1ff', 'q0ff',
+    var(1)%low_lim =  1.0
+    var(1)%high_lim = 55.5435
+    var(2)%low_lim =  1.0
+    var(2)%high_lim = 62.4475
+    var(3)%low_lim =  -63.9877
+    var(3)%high_lim = -1.0000
+    var(4)%low_lim =  -23.3828
+    var(4)%high_lim = -1.0000
+    var(5)%low_lim =  1.0000
+    var(5)%high_lim = 35.9843
+    var(6)%low_lim =  -23.3828
+    var(6)%high_lim = -1.0000
 /
 
-
 &tao_var
-    v1_var%name = 'linac'
-  default_step = 0.1
-  default_attribute = 'phase_deg'
-  var(1:)%ele_name = 'O_L1', 'O_K21_2', 'O_L2', 'O_L3'
+    v1_var%name = 'qm_spec'
+    default_step = 1e-4
+    default_attribute = 'b1_gradient'
+    var(1:)%ele_name = 'q0d', 'q1d', 'q2d'
+    var(1)%low_lim =  0.0000
+    var(1)%high_lim = 23.9000
+    var(2)%low_lim =  -38.6000
+    var(2)%high_lim = 0.0000
+    var(3)%low_lim =  0.0000
+    var(3)%high_lim = 22.3000
 /
 
+! FACET2-S2E: the FF waist and spectrometer target data below are commented out. They are for the FF matching
+! tools, and their Twiss/matrix data at IPWS1 raise Tao errors (pytao exceptions) whenever the reference orbit
+! is lost upstream of the IP, e.g. during the energy feedback with energies away from the bend settings.
+!----------------------------------------
+! FF waist target data
+!----------------------------------------
+! betas/alphas for the target waist location (ele_name, default = IPWS1)
 
-&tao_var
-    v1_var%name = 'qm_LTUH'
-        default_step = 1e-4
-        default_attribute = 'K1'
-        var(1:)%ele_name =  'Q50Q3','Q4','Q5', 'Q6', 'QA0', 'QEM1', 'QEM2', 'QEM3', 'QEM4'
+! &tao_d2_data
+!     d2_data%name = 'waist'
+!     universe = '1'
+!     n_d1_data = 2
+! /
+! &tao_d1_data
+!     ix_d1_data = 1
+!     default_weight = 1
+!     d1_data%name = 'tw_x'
+!     datum(1:)%eval_point = 'center'
+!     datum(1:)%s_offset = 0
+!     datum( 1) =  'beta.a'     '' '' 'IPWS1'   'target'  0.500  1e1
+!     datum( 2) =  'alpha.a'    '' '' 'IPWS1'   'target'  0.000  2e1
+! /
+! &tao_d1_data
+!     ix_d1_data = 2
+!     default_weight = 1
+!     d1_data%name = 'tw_y'
+!     datum(1:)%eval_point = 'center'
+!     datum(1:)%s_offset = 0
+!     datum( 1) =  'beta.b'     '' '' 'IPWS1'   'target'  0.500  1e1
+!     datum( 2) =  'alpha.b'    '' '' 'IPWS1'   'target'  0.000  2e1
+! /
 
+!----------------------------------------
+! spectrometer target data
+!----------------------------------------
+! nominal target is point-to-point imaging (r12=r34=0) for Rmat
+! from the waist location (ele_start_name, default = IPWS1)
+! to the image point (ele_name, default is DTOTR)
 
+! &tao_d2_data
+!     d2_data%name = 'spectrometer'
+!     universe = '1'
+!     n_d1_data = 1
+! /
+! &tao_d1_data
+!     ix_d1_data = 1
+!     default_weight = 1
+!     d1_data%name = 'optics'
+!     datum( 1) =  'r.12'    ''  'ipws1' 'dtotr' 'target'  0.000  1e1
+!     datum( 2) =  'r.34'    ''  'ipws1' 'dtotr' 'target'  0.000  1e1
+! /
 

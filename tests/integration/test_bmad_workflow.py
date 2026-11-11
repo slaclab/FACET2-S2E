@@ -32,6 +32,9 @@ pytestmark = pytest.mark.requires_tao
 
 REPO = Path(__file__).resolve().parents[2]
 CONFIG = "setLattice_configs/2024-12-09_oneBunch_CSR-on_optimized.yml"
+# RF steps per structure for these tests, instead of the default 100 (the lattice's 1000/5000 made the suite take
+# ~55 min instead of ~5); the functions under test do not depend on the step count.
+N_RF_STEPS = 10
 IMPACT_BEAM = "beams/2024-12-11_Impact_OneBunch/2024-12-11_oneBunch"
 
 
@@ -49,7 +52,8 @@ def s2e_root(tmp_path_factory):
 @pytest.fixture
 def tao(s2e_root):
     return qs.initializeTao(filePath=s2e_root, loadCustomLatticeTF=True, latticeFile=CONFIG, verbose=False,
-                            autoLoadActiveFile=False, csrTF=False, lscTF=False, sr_wakes_on=False, lr_wakes_on=False)
+                            autoLoadActiveFile=False, csrTF=False, lscTF=False, sr_wakes_on=False, lr_wakes_on=False,
+                            n_rf_steps=N_RF_STEPS)
 
 
 def P0C(tao, ele):
@@ -380,11 +384,44 @@ class TestL2VirtualMatch:
         before = {q: tao.ele_gen_attribs(q)["K1"] for q in qs.L2_MATCH_QUADS}
         result = qs.l2_virtual_match(tao)
         assert max(result["bmag_before"]) > 1.5
-        assert max(result["bmag_after"]) < 1.05
+        assert max(result["bmag_after"]) < 1.1     # the regularization leaves ~1.07 with the 2026 design targets
         assert tao.ele_gen_attribs("QM11393")["K1"] == pytest.approx(1.2*k_daq)   # only the listed quads change
         for q, f in result["factors"].items():
             assert tao.ele_gen_attribs(q)["K1"] == pytest.approx(f*before[q], rel=1e-9)
             assert 0.5 <= f <= 2.0
+
+
+class TestRFSteps:
+    def test_override_default_and_lattice_values(self, tao, s2e_root):
+        cavities = ("L0BF", "K11_4A", "K15_1A")
+        assert {tao.ele_gen_attribs(e)["N_RF_STEPS"] for e in cavities} == {N_RF_STEPS}
+        tao = qs.initializeTao(filePath=s2e_root, verbose=False, autoLoadActiveFile=False)
+        assert {tao.ele_gen_attribs(e)["N_RF_STEPS"] for e in cavities} == {100}
+        tao = qs.initializeTao(filePath=s2e_root, verbose=False, autoLoadActiveFile=False, n_rf_steps=None)
+        assert tao.ele_gen_attribs("L0BF")["N_RF_STEPS"] == 5000       # facet2-lattice: 5000 in L0 and LI11
+        assert tao.ele_gen_attribs("K15_1A")["N_RF_STEPS"] == 1000      # 1000 elsewhere
+
+
+class TestLatticeTwiss:
+    def test_design_twiss_at_PR10571_is_golden(self, tao):
+        # facet2-lattice (2026 optics) pins the design Twiss at MRK0F (fixer_mrk0f): PR10571 is then the golden match
+        tw = tao.ele_twiss("PR10571", which="design")
+        g = qs.GOLDEN_TWISS_PR10571
+        for plane, mode in (("x", "a"), ("y", "b")):
+            assert tw[f"beta_{mode}"] == pytest.approx(g[f"beta_{plane}"], rel=1e-3)
+            assert tw[f"alpha_{mode}"] == pytest.approx(g[f"alpha_{plane}"], abs=2e-3)
+
+    def test_set_lattice_twiss_overrides_the_fixer(self, tao):
+        # targets that are not the golden match: the fixer at MRK0F would otherwise keep the golden Twiss everywhere
+        targets = qs.golden_twiss_targets(tao, "L0AFEND")
+        targets = {**targets, "beta_x": 2*targets["beta_x"], "alpha_y": targets["alpha_y"] + 1.0}
+        qs.set_lattice_twiss(tao, "L0AFEND", targets)
+        from FACET2_S2E.simulators.bmad.runs import _propagate_twiss
+        for loc in ("PR10571", "BEGL1F"):
+            want = _propagate_twiss(tao, "L0AFEND", loc, targets)
+            tw = tao.ele_twiss(loc)
+            assert [tw["beta_a"], tw["alpha_a"], tw["beta_b"], tw["alpha_b"]] == pytest.approx(want, rel=1e-6, abs=1e-6)
+        assert tao.ele_twiss("PR10571", which="design")["beta_a"] == pytest.approx(qs.GOLDEN_TWISS_PR10571["beta_x"], rel=1e-3)
 
 
 class TestBC20SextupoleTune:
@@ -411,7 +448,7 @@ class TestGetTaoFromExperiment:
     def test_generated_beam(self, s2e_root):
         np.random.seed(2)
         tao = qs.get_tao_from_experiment(start="L0AFEND", finish="BX0FBEG", filepath=s2e_root, N_in_simple_bunch=300,
-                                         moments=[1e-4, 1e-5, 1e-4, None, 3e-4, None])
+                                         moments=[1e-4, 1e-5, 1e-4, None, 3e-4, None], n_rf_steps=N_RF_STEPS)
         start = ParticleGroup(f"{s2e_root}/temp_beam/L0AFENDtemp.h5")
         assert np.std(start.x) == pytest.approx(1e-4, rel=0.15)
         assert np.std(start.yp) == 0
@@ -421,7 +458,7 @@ class TestGetTaoFromExperiment:
     @pytest.mark.slow
     def test_beam_from_file(self, s2e_root):
         tao = qs.get_tao_from_experiment(start="L0AFEND", finish="BX0FBEG", filepath=s2e_root,
-                                         file_ext=f"{s2e_root}/{IMPACT_BEAM}", N_to_use_from_file=300)
+                                         file_ext=f"{s2e_root}/{IMPACT_BEAM}", N_to_use_from_file=300, n_rf_steps=N_RF_STEPS)
         out = ParticleGroup(f"{s2e_root}/temp_beam/BX0FBEGtemp.h5")
         assert len(out) == 300
         assert np.mean(out.pz) == pytest.approx(P0C(tao, "BX0FBEG"), rel=5e-3)
@@ -433,13 +470,14 @@ class TestGetTaoFromExperiment:
         k1_before = tao.ele_gen_attribs("QA10361")["K1"]
         with patch.object(exp, "DATASET", lambda *args, **kwargs: ds):
             tao = qs.get_tao_from_experiment(experiment="TEST", scan_number="1", filepath=s2e_root, run=False, daq_root="/daq",
-                                             N_in_simple_bunch=100, moments=[1e-4]*6)
+                                             N_in_simple_bunch=100, moments=[1e-4]*6, n_rf_steps=N_RF_STEPS)
             assert qs.getQuadkG(tao, "QA10361") == pytest.approx(q_before + 0.1, abs=1e-6)
             assert 360*tao.ele_gen_attribs("L0BF")["PHI0"] == pytest.approx(-15.0)
             assert hasattr(tao, "l2_match_result")          # l2_match="auto": DAQ magnets loaded
             assert not hasattr(tao, "bc20_tune_result")     # bc20_sextupole_tune="auto": no feedback, no tracked beam
             tao = qs.get_tao_from_experiment(experiment="TEST", scan_number="1", filepath=s2e_root, run=False, daq_root="/daq",
-                                             N_in_simple_bunch=100, moments=[1e-4]*6, edit_only_energy_from_exp=True)
+                                             N_in_simple_bunch=100, moments=[1e-4]*6, edit_only_energy_from_exp=True,
+                                             n_rf_steps=N_RF_STEPS)
             # quads not loaded: K1 is kept (the kG readback follows the edited energy)
             assert tao.ele_gen_attribs("QA10361")["K1"] == pytest.approx(k1_before, rel=1e-9)
             assert 360*tao.ele_gen_attribs("L0BF")["PHI0"] == pytest.approx(-15.0)
@@ -451,7 +489,8 @@ class TestGetTaoFromExperiment:
         (scaling L0A and rescaling the beam to the new L0AFEND energy mismatched IMPACT beams to the injector quads)."""
         path = f"{s2e_root}/temp_beam/off_energy"
         qs.make_simple_bunch_standalone(N=200, meanPzMeV=66.0, moments=[1e-4, 1e-5, 1e-4, 1e-5, 3e-4, 0], charge=1e-9, save_path=path)
-        kw = dict(start="L0AFEND", filepath=s2e_root, file_ext=path, energy=-1, run=False, sr_wakes_on=False, lr_wakes_on=False)
+        kw = dict(start="L0AFEND", filepath=s2e_root, file_ext=path, energy=-1, run=False, sr_wakes_on=False, lr_wakes_on=False,
+                  n_rf_steps=N_RF_STEPS)
         tao = qs.get_tao_from_experiment(**kw)
         p0c_l0a = P0C(tao, "L0AFEND")
         fields = {q: qs.getQuadkG(tao, q) for q in ("QM11358", "Q14701", "Q1FF")}

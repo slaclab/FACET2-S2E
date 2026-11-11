@@ -1,5 +1,5 @@
 
-! *** OPTICS=FACET2-16FEB24 ***
+! *** OPTICS=FACET2-28JAN2026 ***
 
 ! ------------------------------------------------------------------------------
 ! constants and global parameters (from FACET2e_baseline.mat)
@@ -158,23 +158,24 @@ call, file = L3.bmad
  !CALL, FILENAME="FF20H.xsif"  !FACET2 "hybrid"
 call, file = LI20.bmad   !mix-n-match BC20/FF20 (BC20W+FF20H)
 call, file = SCAV.bmad
+!=!  CALL, FILENAME="F2e_FDN.xsif"
 
-  BC14     : LINE=(BC14_1,BC14E,BC14_2) !electron side
-  FACET2e  : LINE=(DL10,L1F,BC11,L2F,BC14,L3F,SECTOR20)
-  FACET2s  : LINE=(DL10,L1F,BC11,L2F,BC14,L3F_1,SCAV)
+  BC14        : LINE=(BC14_1,BC14E,BC14_2) !electron side
+  FACET2e     : LINE=(DL10,L1F,BC11,L2F,BC14,L3F,SECTOR20)
+  FACET2e_PAX : LINE=(DL10,L1F,BC11,L2F,BC14,L3F,SECTOR20_PAX)
+  FACET2s     : LINE=(DL10,L1F,BC11,L2F,BC14,L3F_1,SCAV)
 
 ! beam path definitions
 
- !F2_ELEC   : e- gun to LI20 dump
- !F2_SCAV   : e- gun to e+ production target
- !F2_PRTN   : e+ target to PDR injection
- !F2_PDR    : e+ PDR
- !F2_POSI   : e+ PDR extraction to LI20 dump
- !F2_S10AIP : e- gun line for AIP injector tests/comissioning
+ !F2_ELEC     : e- gun to LI20 dump (PAX chicane bypassed)
+ !F2_ELEC_PAX : e- gun to LI20 dump
+ !F2_SCAV     : e- gun to e+ production target
+ !F2_S10AIP   : e- gun line for AIP injector tests/comissioning
 
-  F2_ELEC   : LINE=(INJ,FACET2e)
-  F2_SCAV   : LINE=(INJ,FACET2s)
-  F2_S10AIP : LINE=(INJS10AIP)
+  F2_ELEC     : LINE=(INJ,FACET2e)
+  F2_ELEC_PAX : LINE=(INJ,FACET2e_PAX)
+  F2_SCAV     : LINE=(INJ,FACET2s)
+  F2_S10AIP   : LINE=(INJS10AIP)
 
 ! ------------------------------------------------------------------------------
 ! SURVEY coordinates

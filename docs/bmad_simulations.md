@@ -54,6 +54,7 @@ The function does the following, in order:
 | `moments`, `means`, `charge` | — | Rescale or re-center the beam (see the docstring). |
 | `csrTF`, `lscTF` | `False` | CSR and space charge. When on, they are applied to **all** elements. |
 | `csr_method`, `lsc_method`, `n_bin`, `grid_size` | `1_dim`, `slice`, 32, `[32,32,32]` | Collective-effect calculation settings. |
+| `n_rf_steps` | `100` | RF steps per accelerating structure. `None` keeps the lattice's 1000 (5000 in L0 and LI11): the same beam, but ~8x slower. |
 | `sr_wakes_on`, `lr_wakes_on` | **`False`** | Short- and long-range wakes. **Off by default.** |
 | `edit_only_energy_from_exp` | `False` | Load only the RF settings from the DAQ, not the magnets. |
 | `correctors_coef` | **`0`** | Scale factor for the DAQ corrector values. `0` turns them off; `-1/10` uses the experimental values. |

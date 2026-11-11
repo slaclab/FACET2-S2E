@@ -83,7 +83,11 @@ More details in [tests/README.md](tests/README.md).
 ```
 ARCHIVE/                 Historical studies, optimizations, and experimental notebooks
 beams/                   Reference beams and scripts to generate them
-bmad/                    Bmad 'golden lattice' (https://github.com/slaclab/facet2-lattice)
+bmad/                    Bmad 'golden lattice': https://github.com/slaclab/facet2-lattice bd628b7 (2026-09-11,
+                         OPTICS=FACET2-28JAN2026, the version the FACET-II live model uses), plus the FACET2-S2E
+                         transverse-wake variants (f2_elec_transverseWakesOn.lat.bmad, tao_transverseWakesOn.init,
+                         wakefields/combined_wakes_sband.bmad); models/f2_elec/tao.init has the FF waist and
+                         spectrometer target data commented out (see the note there)
 docs/                    Documentation (see below)
 examples/                Example Jupyter notebooks and Python scripts
 impact/                  IMPACT‑T configuration files

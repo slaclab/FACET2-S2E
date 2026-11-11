@@ -61,8 +61,6 @@ lcavity::L1X*[sr_wake]  = call::$LCLS_LATTICE/bmad/wakefields/longitudinal_wakes
 lcavity::*[cavity_type] = traveling_wave
 sbend::*[fringe_type] = full
 
-
-
 ! 
 beginning[e_tot] = 6e6
 

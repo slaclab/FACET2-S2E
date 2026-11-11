@@ -1,15 +1,15 @@
 ! ---------
-! Device mapping derived from $FACET2_LATTICE/bmad/conversion/from_oracle/lcls_elements.csv
+! Device mapping derived from /home/mpe/DATA/repo_releases/lcls-lattice/bmad/conversion/from_oracle/lcls_elements.csv
 ! No device listed for: AS1EL
 ! No device listed for: AS1ER
 ! No device listed for: AS2EL
 ! No device listed for: AS2ER
-! No device listed for: B1LE
-! No device listed for: B1RE
-! No device listed for: B2LE
-! No device listed for: B2RE
-! No device listed for: B3LE
-! No device listed for: B3RE
+B1LE[alias]=LI20:LGPS:1990
+B1RE[alias]=LI20:LGPS:1990
+B2LE[alias]=LI20:LGPS:2110
+B2RE[alias]=LI20:LGPS:2110
+B3LE[alias]=LI20:LGPS:2240
+B3RE[alias]=LI20:LGPS:2240
 B5D36[alias]=LI20:BEND:3330
 ! No device listed for: BC11CBEG
 ! No device listed for: BC11CEND
@@ -25,6 +25,10 @@ BCX14720[alias]=BEND:LI14:720
 BCX14796[alias]=BEND:LI14:796
 BCX14808[alias]=BEND:LI14:808
 BCX14883[alias]=BEND:LI14:883
+BCX203280[alias]=BEND:LI20:3280
+BCX203282[alias]=BEND:LI20:3282
+BCX203284[alias]=BEND:LI20:3284
+BCX203286[alias]=BEND:LI20:3286
 ! No device listed for: BEGBC11_1
 ! No device listed for: BEGBC11_2
 ! No device listed for: BEGBC14E
@@ -32,7 +36,6 @@ BCX14883[alias]=BEND:LI14:883
 ! No device listed for: BEGBC14_2
 ! No device listed for: BEGBC20
 ! No device listed for: BEGDL10
-! No device listed for: BEGEDC
 ! No device listed for: BEGEXPT20
 ! No device listed for: BEGFF20
 ! No device listed for: BEGINJ
@@ -41,8 +44,9 @@ BCX14883[alias]=BEND:LI14:883
 ! No device listed for: BEGL2F
 ! No device listed for: BEGL3F_1
 ! No device listed for: BEGL3F_2
-! No device listed for: BEGPDC
-! No device listed for: BEGSPECT20
+! No device listed for: BEGPAX
+! No device listed for: BEGSPECT20_1
+! No device listed for: BEGSPECT20_2
 ! No device listed for: BEWIN1
 ! No device listed for: BEWIN2
 ! No device listed for: BFLYMID
@@ -85,7 +89,7 @@ BPM12701[alias]=LI12:BPMS:701
 BPM12801[alias]=LI12:BPMS:801
 BPM12901[alias]=LI12:BPMS:901
 BPM13201[alias]=LI13:BPMS:201
-BPM13301[alias]=LI13:BPMS:303
+BPM13301[alias]=LI13:BPMS:301
 BPM13401[alias]=LI13:BPMS:401
 BPM13501[alias]=LI13:BPMS:501
 BPM13601[alias]=LI13:BPMS:601
@@ -137,9 +141,12 @@ BPM18901[alias]=LI18:BPMS:901
 BPM19201[alias]=LI19:BPMS:201
 BPM19301[alias]=LI19:BPMS:301
 BPM19401[alias]=LI19:BPMS:401
+BPM19501[alias]=LI19:BEND:7172
+BPM19601[alias]=LI19:BPMS:601
+BPM19701[alias]=LI19:BPMS:701
 BPM19801[alias]=LI19:BPMS:801
 BPM19851[alias]=LI19:BPMS:851
-BPM19871[alias]=LI19:BPMS:871
+BPM19871[alias]=LI19:BPMS:901
 ! No device listed for: BX0FBEG
 ! No device listed for: BX0FEND
 BX10661[alias]=BEND:IN10:661
@@ -201,7 +208,8 @@ CY18960[alias]=COLL:LI18:960:Y
 ! No device listed for: D1ET1B
 ! No device listed for: D1ET2A
 ! No device listed for: D1ET2B
-! No device listed for: D1FF
+! No device listed for: D1FFA
+! No device listed for: D1FFB
 ! No device listed for: D210A1
 ! No device listed for: D210A2
 ! No device listed for: D210B1
@@ -209,12 +217,13 @@ CY18960[alias]=COLL:LI18:960:Y
 ! No device listed for: D2AFF
 ! No device listed for: D2D
 ! No device listed for: D2EA
-! No device listed for: D2FF
+! No device listed for: D2FFA
+! No device listed for: D2FFB
 ! No device listed for: D3AFF
-! No device listed for: D3D
+! No device listed for: D3DP
 ! No device listed for: D3E
 ! No device listed for: D3FF
-! No device listed for: D4D
+! No device listed for: D4DP
 ! No device listed for: D4EA1
 ! No device listed for: D4EA2
 ! No device listed for: D4EB1
@@ -289,6 +298,8 @@ CY18960[alias]=COLL:LI18:960:Y
 ! No device listed for: DBKY170
 ! No device listed for: DBMARK30
 ! No device listed for: DBMARK67
+! No device listed for: DBPI
+! No device listed for: DBPO
 ! No device listed for: DBQ2A
 ! No device listed for: DBQ2B
 ! No device listed for: DCNHC
@@ -322,8 +333,10 @@ CY18960[alias]=COLL:LI18:960:Y
 ! No device listed for: DEX20_10
 ! No device listed for: DEX20_10A
 ! No device listed for: DEX20_11
-! No device listed for: DEX20_12
 ! No device listed for: DEX20_12A
+! No device listed for: DEX20_12B
+! No device listed for: DEX20_12C
+! No device listed for: DEX20_12D
 ! No device listed for: DEX20_13
 ! No device listed for: DEX20_14
 ! No device listed for: DEX20_15
@@ -440,6 +453,8 @@ CY18960[alias]=COLL:LI18:960:Y
 ! No device listed for: DYC1XC1
 ! No device listed for: DYC2E
 ! No device listed for: DYC3E
+! No device listed for: EDCBEG
+! No device listed for: EDCEND
 ! No device listed for: END
 ! No device listed for: ENDBC11_1
 ! No device listed for: ENDBC11_2
@@ -448,7 +463,6 @@ CY18960[alias]=COLL:LI18:960:Y
 ! No device listed for: ENDBC14_2
 ! No device listed for: ENDBC20
 ! No device listed for: ENDDL10
-! No device listed for: ENDEDC
 ! No device listed for: ENDEXPT20
 ! No device listed for: ENDFF20
 ! No device listed for: ENDINJ
@@ -456,12 +470,23 @@ CY18960[alias]=COLL:LI18:960:Y
 ! No device listed for: ENDL2F
 ! No device listed for: ENDL3F_1
 ! No device listed for: ENDL3F_2
-! No device listed for: ENDPDC
-! No device listed for: ENDSPECT20
+! No device listed for: ENDPAX
+! No device listed for: ENDSPECT20_1
+! No device listed for: ENDSPECT20_2
 ! No device listed for: EXTHOLE1
 ! No device listed for: EXTWIN
 ! No device listed for: FILG
 ! No device listed for: FILS
+! No device listed for: FIXER_BEGFF20
+! No device listed for: FIXER_INJ
+! No device listed for: FIXER_IPOTR1
+! No device listed for: FIXER_IPWS1
+! No device listed for: FIXER_MRK0F
+! No device listed for: FIXER_PR10571
+! No device listed for: FIXER_WS11444
+! No device listed for: FIXER_WS11614
+! No device listed for: FIXER_WS12214
+! No device listed for: FIXER_WS19144
 ! No device listed for: FLNGAF2
 ! No device listed for: FLNGBF2
 ! No device listed for: HLAM
@@ -516,7 +541,7 @@ K12_2A[alias]=LI12:KLYS:21
 K12_2B[alias]=LI12:KLYS:21
 K12_2C[alias]=LI12:KLYS:21
 K12_2D[alias]=LI12:KLYS:21
-K12_3A[alias]=LI12:KLYS:3
+K12_3A[alias]=LI12:KLYS:31
 K12_3B[alias]=LI12:KLYS:31
 K12_3C[alias]=LI12:KLYS:31
 K12_3D[alias]=LI12:KLYS:31
@@ -544,10 +569,10 @@ K13_1A[alias]=LI13:KLYS:11
 K13_1B[alias]=LI13:KLYS:11
 K13_1C[alias]=LI13:KLYS:11
 K13_1D[alias]=LI13:KLYS:11
-K13_2A[alias]=LI13:KLYS:303
-K13_2B[alias]=LI13:KLYS:303
-K13_2C[alias]=LI13:KLYS:303
-K13_2D[alias]=LI13:KLYS:303
+K13_2A[alias]=LI13:KLYS:21
+K13_2B[alias]=LI13:KLYS:21
+K13_2C[alias]=LI13:KLYS:21
+K13_2D[alias]=LI13:KLYS:21
 K13_3A[alias]=LI13:KLYS:31
 K13_3B[alias]=LI13:KLYS:31
 K13_3C[alias]=LI13:KLYS:31
@@ -689,7 +714,7 @@ K17_7C[alias]=LI17:KLYS:71
 K17_7D[alias]=LI17:KLYS:71
 K17_8A[alias]=LI17:KLYS:81
 K17_8B[alias]=LI17:KLYS:81
-K17_8C[alias]=LI17:KLYS:18
+K17_8C[alias]=LI17:KLYS:81
 K17_8D[alias]=LI17:KLYS:81
 K18_1A[alias]=LI18:KLYS:11
 K18_1B[alias]=LI18:KLYS:11
@@ -785,36 +810,41 @@ L1XF[alias]=ACCL:LI11:180
 ! No device listed for: LI19TERM
 ! No device listed for: LOADLOCKF
 M0EX[alias]=BPMS:LI20:3218
-! No device listed for: M11E
-! No device listed for: M1E
-! No device listed for: M1EX
-! No device listed for: M1FF
-! No device listed for: M2EX
-! No device listed for: M2FF
-! No device listed for: M3E
-! No device listed for: M3EX
-! No device listed for: M3FF
-! No device listed for: M4E
-! No device listed for: M4FF
-! No device listed for: M5E
-! No device listed for: M5FF
-! No device listed for: M6E
-! No device listed for: M7E
-! No device listed for: M8E
-! No device listed for: M9E
+M11E[alias]=BPMS:LI20:2445
+M1E[alias]=LI20:BPMS:2050
+M1EX[alias]=BPMS:LI20:3265
+M1FF[alias]=LI20:BPMS:3013
+M2EX[alias]=BPMS:LI20:3315
+M2FF[alias]=LI20:BPMS:3026
+M3E[alias]=LI20:BPMS:2147
+M3EX[alias]=BPMS:LI20:3340
+M3FF[alias]=LI20:BPMS:3101
+M4E[alias]=LI20:BPMS:2223
+M4FF[alias]=LI20:BPMS:3120
+M5E[alias]=LI20:BPMS:2235
+M5FF[alias]=BPMS:LI20:3156
+M6E[alias]=LI20:BPMS:2245
+M7E[alias]=LI20:BPMS:2261
+M8E[alias]=LI20:BPMS:2278
+M9E[alias]=LI20:BPMS:2360
 ! No device listed for: MAINDUMP
 ! No device listed for: MCE
 ! No device listed for: MFFF
 ! No device listed for: MIP
 MIR10181[alias]=MIRR:IN10:181
 ! No device listed for: MRK0F
-! No device listed for: MS2EL
-! No device listed for: MS2ER
+MS2EL[alias]=LI20:BPMS:2160
+MS2ER[alias]=LI20:BPMS:2340
 ! No device listed for: MSCAVEXT
 ! No device listed for: MSEP1E
 ! No device listed for: MSEP2E
 ! No device listed for: OUTCPAF
 ! No device listed for: OUTCPBF
+! No device listed for: PATCH_BC20
+! No device listed for: PATCH_SECTOR20
+! No device listed for: PAXMID
+! No device listed for: PDCBEG
+! No device listed for: PDCEND
 ! No device listed for: PDUMP
 ! No device listed for: PENT
 ! No device listed for: PEXT
@@ -822,11 +852,11 @@ MIR10181[alias]=MIRR:IN10:181
 PH10365[alias]=PCAV:IN10:365
 ! No device listed for: PIC_CENT
 ! No device listed for: PMON
-PR10241[alias]=YAGS:IN10:241
-PR10465[alias]=OTRS:IN10:465
-PR10471[alias]=OTRS:IN10:471
-PR10571[alias]=OTRS:IN10:571
-PR10711[alias]=OTRS:IN10:711
+PR10241[alias]=PROF:IN10:241
+PR10465[alias]=PROF:IN10:465
+PR10471[alias]=PROF:IN10:471
+PR10571[alias]=PROF:IN10:571
+PR10711[alias]=PROF:IN10:711
 PR11316[alias]=PROF:LI11:316
 PR11334[alias]=PROF:LI11:334
 PR11335[alias]=OTRS:LI11:335
@@ -836,8 +866,8 @@ PR11375[alias]=OTRS:LI11:375
 PR14803[alias]=OTRS:LI14:803
 PR14892[alias]=PROF:LI14:892
 PR15944[alias]=BPMS:LI15:944
-Q0D[alias]=LI20:LGPS:3204
-Q0FF[alias]=LI20:LGPS:3151
+Q0D[alias]=LI20:LGPS:3141
+Q0FF[alias]=LI20:LGPS:3031
 Q11201[alias]=QUAD:LI11:201
 Q11301[alias]=QUAD:LI11:301
 Q11401[alias]=LI11:QUAD:401
@@ -913,26 +943,26 @@ Q19871[alias]=QUAD:LI19:871
 Q1D[alias]=LI20:LGPS:3261
 ! No device listed for: Q1EL
 ! No device listed for: Q1ER
-Q1FF[alias]=LI20:LGPS:3141
-Q2D[alias]=LI20:LGPS:3311
+Q1FF[alias]=LI20:LGPS:3204
+Q2D[alias]=LI20:LGPS:3091
 ! No device listed for: Q2EL
 ! No device listed for: Q2ER
-Q2FF[alias]=LI20:LGPS:3091
+Q2FF[alias]=LI20:LGPS:1910
 ! No device listed for: Q3EL_1
 ! No device listed for: Q3EL_2
 ! No device listed for: Q3ER_1
 ! No device listed for: Q3ER_2
-! No device listed for: Q3FF
+Q3FF[alias]=LI20:LGPS:3151
 ! No device listed for: Q4EL_1
 ! No device listed for: Q4EL_2
 ! No device listed for: Q4EL_3
 ! No device listed for: Q4ER_1
 ! No device listed for: Q4ER_2
 ! No device listed for: Q4ER_3
-! No device listed for: Q4FF
+Q4FF[alias]=LI20:LGPS:3311
 ! No device listed for: Q5EL
 ! No device listed for: Q5ER
-! No device listed for: Q5FF
+Q5FF[alias]=LI20:LGPS:3011
 Q6E[alias]=LI20:LGPS:2251
 QA10361[alias]=QUAD:IN10:361
 QA10371[alias]=QUAD:IN10:371
@@ -954,14 +984,14 @@ QM11393[alias]=QUAD:LI11:393
 QM14715[alias]=QUAD:LI14:715
 QM14891[alias]=QUAD:LI14:891
 RST10551[alias]=STPR:IN10:551
-! No device listed for: S1EL
-! No device listed for: S1ER
-! No device listed for: S2EL
-! No device listed for: S2ER
-! No device listed for: S3EL_1
-! No device listed for: S3EL_2
-! No device listed for: S3ER_1
-! No device listed for: S3ER_2
+S1EL[alias]=LI20:LGPS:2145
+S1ER[alias]=LI20:LGPS:2365
+S2EL[alias]=LI20:LGPS:2165
+S2ER[alias]=LI20:LGPS:2335
+S3EL_1[alias]=LI20:LGPS:2195
+S3EL_2[alias]=LI20:LGPS:2195
+S3ER_1[alias]=LI20:LGPS:2275
+S3ER_2[alias]=LI20:LGPS:2275
 SOL10111[alias]=SOLN:IN10:111
 SOL10121[alias]=SOLN:IN10:121
 SQ1[alias]=LI20:QUAD:2086
@@ -972,7 +1002,6 @@ TCY10490[alias]=TCAV:IN10:490
 TCY15280[alias]=LI15:ACCL:280
 TD11390[alias]=PROF:LI12:390
 UM10466[alias]=USEG:IN10:466
-! No device listed for: USOTR
 ! No device listed for: USTHZ
 VV10155[alias]=VVPG:IN10:155
 VV10215[alias]=VVPG:IN10:215
@@ -987,9 +1016,9 @@ VV14887[alias]=VVPG:LI14:887
 ! No device listed for: WALLBEG
 ! No device listed for: WALLEND
 WDSOTR[alias]=CAMR:LI20:3230
-! No device listed for: WIGE1
-! No device listed for: WIGE2
-! No device listed for: WIGE3
+WIGE1[alias]=LI20:LGPS:2420
+WIGE2[alias]=LI20:BTRM:2420
+WIGE3[alias]=LI20:LGPS:2420
 WS10561[alias]=WIRE:IN10:561
 WS11444[alias]=WIRE:LI11:444
 WS11614[alias]=WIRE:LI11:614
@@ -1085,14 +1114,14 @@ XC19700[alias]=LI19:XCOR:700
 XC19802[alias]=LI19:XCOR:802
 XC19900[alias]=LI19:XCOR:900
 XC1996[alias]=LI20:XCOR:1996
-! No device listed for: XC1E
-! No device listed for: XC1EX
-! No device listed for: XC1FF
-! No device listed for: XC2460
-! No device listed for: XC2E
-! No device listed for: XC3E
-! No device listed for: XC3FF
-! No device listed for: XC4E
+XC1E[alias]=LI20:XCOR:2096
+XC1FF[alias]=LI20:XCOR:3026
+XC2460[alias]=LI20:XCOR:2460
+XC2E[alias]=LI20:XCOR:2176
+XC3E[alias]=LI20:XCOR:2326
+XC3FF[alias]=LI20:XCOR:3086
+XC4E[alias]=LI20:XCOR:2396
+XC4FF[alias]=XCOR:LI20:3132
 ! No device listed for: XCB2LE
 ! No device listed for: XCB2RE
 ! No device listed for: XCB3LE
@@ -1186,13 +1215,14 @@ YC19603[alias]=LI19:YCOR:603
 YC19700[alias]=LI19:YCOR:700
 YC19803[alias]=LI19:YCOR:803
 YC19900[alias]=LI19:YCOR:900
-! No device listed for: YC1E
-! No device listed for: YC1FF
-! No device listed for: YC2181
-! No device listed for: YC2321
-! No device listed for: YC2E
-! No device listed for: YC2FF
-! No device listed for: YC3E
+YC1E[alias]=LI20:YCOR:2087
+YC1FF[alias]=LI20:YCOR:3017
+YC2181[alias]=LI20:YCOR:2181
+YC2321[alias]=LI20:YCOR:2321
+YC2E[alias]=LI20:YCOR:2227
+YC2FF[alias]=LI20:YCOR:3057
+YC3E[alias]=LI20:YCOR:2267
+YC4FF[alias]=YCOR:LI20:3113
 YC57145[alias]=LI19:YCOR:7145
 YC57146[alias]=LI19:YCOR:7146
-! No device listed for: YCWIGE
+YCWIGE[alias]=LI20:BTRM:2420

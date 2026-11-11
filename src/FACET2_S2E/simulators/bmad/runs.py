@@ -36,6 +36,9 @@ def set_beam(tao, file, numMacroParticles = None, timeCenterTF=True):
 
 
 # Golden injector match (FACET-II operations): Twiss at PR10571, after L0B (see launchTwissCorrection).
+# The same Twiss as the design lattice at PR10571: facet2-lattice (2026 optics) pins the design Twiss at MRK0F with
+# fixer_mrk0f, which propagates to these values. The 2026-06 emittance scans on PROF:IN10:571 measure BMAG 1.02-1.12
+# against them.
 GOLDEN_TWISS_PR10571 = {"location": "PR10571", "beta_x": 5.73666431, "alpha_x": -2.14411559,
                         "beta_y": 2.57530302, "alpha_y": 0.01016211}
 
@@ -66,6 +69,10 @@ def set_lattice_twiss(tao, location, targets, verbose=False):
     Only the lattice's Twiss functions change (ele_twiss, lat_list ele.a.beta, Twiss plots, BMAG against the lattice);
     they then describe a beam matched to `targets` at `location` instead of the f2_elec design start. Tracking a beam
     from a file does not use them. Needs uncoupled optics from BEGINNING to `location`.
+    Fixer elements that are on (facet2-lattice pins the design Twiss at MRK0F with fixer_mrk0f) override BEGINNING:
+    Bmad propagates the Twiss from the fixer both ways, back to BEGINNING too, and ignores the BEGINNING values. They
+    are switched off in the model lattice; the design lattice keeps them. fixer_mrk0f is the golden match, so for the
+    golden targets this gives the same Twiss as the fixer. Fixers do not act on tracked particles.
     Returns the Twiss set at BEGINNING.
     '''
     m = np.array(tao.matrix("BEGINNING", location)["mat6"])
@@ -73,6 +80,8 @@ def set_lattice_twiss(tao, location, targets, verbose=False):
         raise ValueError(f"set_lattice_twiss: the optics from BEGINNING to {location} couple x and y")
     begin = golden_twiss_targets(tao, "BEGINNING", golden={"location": location, **targets})
     tao.cmd("set global lattice_calc_on = F")
+    for fixer in tao.lat_list("fixer::*", "ele.name", flags="-no_slaves"):
+        tao.cmd(f"set element {fixer} is_on = F")
     for mode, plane in (("a", "x"), ("b", "y")):
         tao.cmd(f"set element beginning beta_{mode} = {begin[f'beta_{plane}']!r}")
         tao.cmd(f"set element beginning alpha_{mode} = {begin[f'alpha_{plane}']!r}")
@@ -115,7 +124,8 @@ def l2_virtual_match(tao, quads=L2_MATCH_QUADS, target="LI13BEG", golden=GOLDEN_
     Only quads that the DAQ does not record are changed (by default), so the DAQ magnets are kept.
 
     regularization: weight of the relative K1 changes in the least-squares fit (residuals: log(beta/beta_design),
-    alpha - alpha_design per plane), to keep the quads close to their lattice values.
+    alpha - alpha_design per plane), to keep the quads close to their lattice values. With the 2026 facet2-lattice
+    targets, 1.0 leaves BMAG ~1.04-1.07 in y (E320_17418, E300_16612); 0.3 reaches 1.001 with larger K1 changes.
     bounds: allowed range of K1/K1_before.
     Returns a dict with the K1 factors and the BMAG (x, y) at `target` before and after.
     '''

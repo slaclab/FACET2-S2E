@@ -51,7 +51,7 @@ beam_init%center(6) = 0.0
 
 !&tao_d2_data
         d2_data%name = 'floor'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 
@@ -70,7 +70,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'L0AF'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 
@@ -90,7 +90,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'MRK0F'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 
@@ -115,7 +115,7 @@ beam_init%center(6) = 0.0
         
 &tao_d2_data
     d2_data%name = 'orbit'
-    universe = 1
+    universe = '1'
     n_d1_data = 3
 /    
     

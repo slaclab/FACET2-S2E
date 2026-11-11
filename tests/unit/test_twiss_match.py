@@ -96,6 +96,9 @@ class _FakeTaoLattice:
     def matrix(self, start, end):
         return {"mat6": self.mat6}
 
+    def lat_list(self, elements, who, flags=""):
+        return []                                               # no fixer elements
+
     def cmd(self, command):
         if command.startswith("set element beginning"):
             self.begin[command.split()[3]] = float(command.split("=")[1])

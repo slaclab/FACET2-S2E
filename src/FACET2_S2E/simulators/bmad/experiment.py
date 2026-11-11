@@ -47,7 +47,8 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
                             lattice='setLattice_configs/2024-12-09_oneBunch_CSR-on_optimized.yml', moments=[None,None,None,None,None,None], means=[0,0,0,0,None], charge=1.6e-9, sr_wakes_on=False, lr_wakes_on=False,
                             desired_beam_energies_for_the_feedback=None, desired_P0Cs_MeV=[None,None,None,None], grid_size=[32,32,32], lsc_method="slice", csr_method="1_dim", n_bin=32,
                             edited_bunch_energy_at_checkpoints_MeV=[None, None, None, None], beam_edits=True, twiss_match="auto", l0a_energy_MeV="quads", l2_match="auto",
-                            daq_sextupole_offsets=True, keep_magnet_fields=True, bc20_sextupole_tune="auto", twiss_match_lattice=True):
+                            daq_sextupole_offsets=True, keep_magnet_fields=True, bc20_sextupole_tune="auto", twiss_match_lattice=True,
+                            n_rf_steps=100):
     '''
     experiment: "BEAMPHYS" is an example.
     scan_number: DAQ scan number. "14438" is an example.
@@ -115,8 +116,13 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
     alpha ~-16 at L0AFEND (BMAG ~10 vs the golden targets), and without matching its emittance grows ~100x along the linac.
     twiss_match_lattice: if True (default), a beam match also sets the lattice's Twiss to the same targets at "start"
     (set_lattice_twiss, through the BEGINNING element), so that tao.ele_twiss and the Twiss plots follow the matched
-    beam. Otherwise they start from the f2_elec design values at BEGINNING, which the DAQ optics map far from the beam
-    (E320_17418: beta_y 317 m at ENDL1F against the beam's 24 m). Tracking does not use the lattice Twiss.
+    beam. Otherwise they are the lattice's own: facet2-lattice pins the Twiss at MRK0F (fixer_mrk0f, the golden
+    match) and Bmad propagates them from there both downstream and back to BEGINNING through the loaded optics, so they
+    equal those of a golden-matched beam everywhere; only other targets (a dict, True) need twiss_match_lattice.
+    (The 2024 lattice had no fixer and started from the cathode Twiss: E320_17418 beta_y 317 m at ENDL1F against the
+    beam's 24 m.) Tracking does not use the lattice Twiss.
+    n_rf_steps: RF steps per structure for all cavities (see initializeTao), 100 by default (converged for E320_17418
+    up to BEGBC20); None keeps the lattice's 1000/5000, which makes a DAQ load with the feedback ~8x slower.
 
     l0a_energy_MeV: energy at the end of L0A (L0AFEND), used only with the DAQ settings. L0B is then set to keep
     125 MeV at the dogleg (before the DAQ quads are set).
@@ -156,7 +162,8 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
         raise FileNotFoundError(f'No FACET2-S2E lattice found in "{filepath}". Pass filepath="/path/to/FACET2-S2E", '
                                 'or install the package with "pip install -e ." so that the repository can be found automatically.')
 
-    tao = initializeTao(filePath = filepath, loadCustomLatticeTF=True, csrTF=csrTF, lscTF=lscTF, latticeFile=lattice, bmad_grid_size=grid_size, verbose=verbose, sr_wakes_on=sr_wakes_on, lr_wakes_on=lr_wakes_on, lsc_method=lsc_method, csr_method=csr_method, n_bin=n_bin, autoLoadActiveFile=False)
+    tao = initializeTao(filePath = filepath, loadCustomLatticeTF=True, csrTF=csrTF, lscTF=lscTF, latticeFile=lattice, bmad_grid_size=grid_size, verbose=verbose, sr_wakes_on=sr_wakes_on, lr_wakes_on=lr_wakes_on, lsc_method=lsc_method, csr_method=csr_method, n_bin=n_bin, autoLoadActiveFile=False,
+                        n_rf_steps=n_rf_steps)
     
     if isinstance(l0a_energy_MeV, str) and l0a_energy_MeV == "beam":
         if file_ext == "":
@@ -604,7 +611,8 @@ bmad_corrector_to_pv_map = {
     'YC1FF':  ["nonBSA_List_S20Magnets", 'LI20_YCOR_3017_BACT'],
     'YC2FF':  ["nonBSA_List_S20Magnets", 'LI20_YCOR_3057_BACT'],
     'XC3FF':  ["nonBSA_List_S20Magnets", 'LI20_XCOR_3086_BACT'],
-    'XC1EX':  ["nonBSA_List_S20Magnets", 'LI20_XCOR_3276_BACT'],  # by elimination
+    # XC1EX (LI20:XCOR:3276, LI20_XCOR_3276_BACT) is only in the PAX bypass line of facet2-lattice since the
+    # 2026 optics, and f2_elec uses the PAX line (f2_elec_pax), so it is not in the model.
 }
 
 
