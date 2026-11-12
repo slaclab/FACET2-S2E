@@ -255,6 +255,22 @@ def setQuadkG(tao, quadName, integratedFieldkG):
     return
 
 
+MAGNET_FIELD_KINDS = ("quadrupole", "sextupole", "octupole", "hkicker", "vkicker", "kicker")
+
+
+def fixMagnetFields(tao, kinds=MAGNET_FIELD_KINDS):
+    """Make the magnetic fields (B1_GRADIENT, B2_GRADIENT, BL_KICK, ...) of all elements of `kinds` the independent
+    attributes (Bmad field_master = T), so that they stay fixed when the reference energy P0C changes, e.g. in the
+    cavity energy feedback, and the normalized strengths (K1, K2, KICK) follow P0C instead.
+    By default (field_master = F) Bmad keeps K1 and K2 and scales the fields with P0C: a quad set to its EPICS field
+    with setQuadkG is then wrong by P0C_new/P0C_old after any later energy change (1.2% at BC20 after the feedback).
+    Setting K1/K2 afterwards still works (the field is recomputed). Bends are not changed (see treat_dipoles)."""
+    for kind in kinds:
+        if len(tao.lat_list(f"{kind}::*", "ele.name", flags="-no_slaves")):
+            tao.cmd(f"set ele {kind}::* field_master = T")
+    return tao
+
+
 def getQuadkG(tao, quadName):
     """Get quad's present EPICS-style integrated field. This involves a sign flip!"""
     quadLength = tao.ele_gen_attribs(quadName)["L"]

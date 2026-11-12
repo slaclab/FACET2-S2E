@@ -34,6 +34,14 @@ from .simulators.bmad.config import (
 )
 from .simulators.bmad.runs import (
     set_beam,
+    twiss_match_beam,
+    set_lattice_twiss,
+    l2_virtual_match,
+    tune_bc20_sextupole_offsets,
+    BC20_TUNE_SEXTUPOLES,
+    L2_MATCH_QUADS,
+    golden_twiss_targets,
+    GOLDEN_TWISS_PR10571,
     run_initialized_sim,
     run_initialized_sim_edit_lattice_energy_for_dipoles,
     run_initialized_sim_edit_bunch_energy,
@@ -53,6 +61,7 @@ from .simulators.bmad.experiment import (
     get_l0a_ampl,
     get_l0b_phase,
     get_l0b_ampl,
+    get_l0a_energy_from_quads,
     ### Lattice edit functions
     edit_tao_based_on_experiment_database,
     edit_energy_tao_based_on_experiment_database,
@@ -66,7 +75,7 @@ from .simulators.bmad.scans import (
 
 from .simulators.bmad.lattice.set_lattice import (
     setLattice,
-    getBendkG, getQuadkG, getSextkG,
+    getBendkG, getQuadkG, getSextkG, fixMagnetFields,
     setBendkG, setQuadkG, setSextkG,
     setXOffset, setYOffset,
     getKickerkG, setKickerkG,
@@ -75,7 +84,7 @@ from .simulators.bmad.lattice.set_lattice import (
     setAllWChicaneSextupolesXOffsets,
     setAllWChicaneSextupolesYOffsets,
 )
-from .simulators.bmad.lattice.linac import getLinacMatchStrings, setLinacPhase, setLinacGradientAuto
+from .simulators.bmad.lattice.linac import getLinacMatchStrings, setLinacPhase, setLinacGradientAuto, scaleLinacGradientAuto
 from .simulators.bmad.lattice.optics import (
     displayMatrix,
     getMatrix,
@@ -230,10 +239,11 @@ __all__ = [
     'getLinacMatchStrings',
     'setLinacPhase',
     'setLinacGradientAuto',
+    'scaleLinacGradientAuto',
     
     # Lattice element control
     'setLattice',
-    'getBendkG', 'getQuadkG', 'getSextkG',
+    'getBendkG', 'getQuadkG', 'getSextkG', 'fixMagnetFields',
     'setBendkG', 'setQuadkG', 'setSextkG',
     'setXOffset', 'setYOffset',
     'getKickerkG', 'setKickerkG',
@@ -268,6 +278,14 @@ __all__ = [
     ### High end
     'get_tao_from_experiment',
     'set_beam',
+    'twiss_match_beam',
+    'set_lattice_twiss',
+    'l2_virtual_match',
+    'tune_bc20_sextupole_offsets',
+    'BC20_TUNE_SEXTUPOLES',
+    'L2_MATCH_QUADS',
+    'golden_twiss_targets',
+    'GOLDEN_TWISS_PR10571',
     'run_initialized_sim',
     'run_initialized_sim_edit_bunch_energy',
     'run_initialized_sim_edit_lattice_energy_for_dipoles',
@@ -286,6 +304,7 @@ __all__ = [
     'get_l0a_ampl',
     'get_l0b_phase',
     'get_l0b_ampl',
+    'get_l0a_energy_from_quads',
     ### Lattice edit functions
     'edit_tao_based_on_experiment_database',
     'edit_energy_tao_based_on_experiment_database',

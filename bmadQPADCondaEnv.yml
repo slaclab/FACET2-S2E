@@ -10,7 +10,10 @@ dependencies:
   - numpy
   - matplotlib
   - pandas
-  - bmad=20250811.0
+  - bmad=20260828.0=nompi_*      # >= 20260828 for csr_method = steady_state_3d
+  - libgfortran=15.3              # keep 15.x: libgfortran 16, which conda would pick, did not work with this build
+  - libgfortran5=15.3
+  - libgfortran-ng=15.3
   - pytao=0.5.3
   - openpmd-beamphysics=0.10.1
   - distgen=2.1.7

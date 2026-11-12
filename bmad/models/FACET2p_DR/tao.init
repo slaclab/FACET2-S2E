@@ -33,7 +33,7 @@
 
 &tao_d2_data
         d2_data%name = 'floor'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 

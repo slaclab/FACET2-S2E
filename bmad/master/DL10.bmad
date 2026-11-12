@@ -1,5 +1,5 @@
 
-! *** OPTICS=FACET2-16FEB24 ***
+! *** OPTICS=FACET2-28JAN2026 ***
 
 ! ==============================================================================
 ! Modification History
@@ -41,9 +41,7 @@
 
 ! vertically deflecting transverse cavity
 
-!tcy10490: lcavity, rf_frequency = sbandf * 1e6, type = "short TCAV", l = 0.6680236/2
-!2024-10-17 NMM edit
-tcy10490: crab_cavity, rf_frequency = sbandf * 1e6, type = "short TCAV", l = 0.6680236/2, TILT = 1.571
+tcy10490: crab_cavity, rf_frequency = sbandf * 1e6, type = "short TCAV", l = 0.6680236/2, tilt = pi/2
 
 ! ==============================================================================
 ! SBEN
@@ -149,18 +147,31 @@ r34u = lhun*sincargu
 
 !------- Laser Heater Undulator for Copper Linac -------
 my_lh_und_k = 0
-um10466: wiggler, 
-        type = "laser_heater_undulator",
-        L_period = 0.054, 
-        n_period = 10, 
-        b_max = my_lh_und_k * 2*pi*m_electron / (c_light * 0.054), 
-        L = 10*0.054 ! Was: 0.506263, 
-        ds_step = 0.054
-        
-um10466[L] = um10466[L]/2 ! Will be doubled in desplitting process. 
+
+!------- Laser Heater Undulator for Copper Linac -------
+!my_lh_und_k = 0
+!um10466: wiggler, 
+!        type = "laser_heater_undulator",
+!        L_period = 0.054, 
+!        n_period = 10, 
+!        b_max = my_lh_und_k * 2*pi*m_electron / (c_light * 0.054), 
+!        L = 10*0.054 ! Was: 0.506263, 
+!        ds_step = 0.054
+!
+!um10466[L] = um10466[L]/2 ! Will be doubled in desplitting process. 
+!---------------------------------
+!old: um10466: wiggler,
+!old         type = "laser_heater_undulator",
+!old         L_period = 0.054,
+!old         n_period = 10,
+!old         b_max = my_lh_und_k * 2*pi*m_electron / (c_light * 0.054),
+!old         L = 10*0.054 ! Was: 0.506263,
+!old         ds_step = 0.054
+
+!um10466[L] = um10466[L]/2 ! Will be doubled in desplitting process.
 !--------------------------------- !,                            &
-!old: um10466: taylor, type = "LHund", l = lhun, tt11 = 1.0, tt12 = lhun, tt21 = 0, tt22 = 1.0, tt33 = cos(lhun*sqrt(kqlh)),
-!old           tt34 = r34u, tt43 = -sin(lhun*sqrt(kqlh))*sqrt(kqlh), tt44 = cos(lhun*sqrt(kqlh)), tt55 = 1.0, tt66 = 1.0
+um10466: taylor, type = "LHund", l = lhun, tt11 = 1.0, tt12 = lhun, tt21 = 0, tt22 = 1.0, tt33 = cos(lhun*sqrt(kqlh)),
+         tt34 = r34u, tt43 = -sin(lhun*sqrt(kqlh))*sqrt(kqlh), tt44 = cos(lhun*sqrt(kqlh)), tt55 = 1.0, tt66 = 1.0
    !R56=Lhun/(gami^2)*(1+(K_und^2)/2)
  !endcomment
 
@@ -227,11 +238,17 @@ de01c: drift, l = 0.094781
 dh02a: drift, l = 0.0809678529
 
 ! Shorten so that lh_und has an integer number of poles
+
+! Shorten so that lh_und has an integer number of poles
 dh02b: drift, l = 0.0846296264 - ( 10*0.054 - 0.506263 ) /2
+!old: dh02b: drift, l = 0.0846296264 - ( 10*0.054 - 0.506263 ) /2
 !old: dh02b: drift, l = 0.0846296264
 
 ! Shorten so that lh_und has an integer number of poles
+
+! Shorten so that lh_und has an integer number of poles
 dh03a: drift, l = 0.0845477112 - ( 10*0.054 - 0.506263 ) /2
+!old: dh03a: drift, l = 0.0845477112 - ( 10*0.054 - 0.506263 ) /2
 !old: dh03a: drift, l = 0.0845477112
 dh03b: drift, l = 0.0745817596
 dh05a: drift, l = 0.1229007
@@ -345,12 +362,12 @@ bcx10451_full: line = (bcx10451)
 bcx10461_full: line = (bcx10461)
 
 
-!Old split line:  UM10466_full  : LINE=(UM10466,HTRUNDF,UM10466)
+UM10466_full  : LINE=(UM10466,HTRUNDF,UM10466)
 
-um10466_full: line = (um10466)
-um10466[L] = 2*um10466[L]
-htrundf[superimpose] = T
-htrundf[ref] = um10466
+!um10466_full: line = (um10466)
+!um10466[L] = 2*um10466[L]
+!htrundf[superimpose] = T
+!htrundf[ref] = um10466
 
 
 !Old split line:  BCX10475_full : LINE=(BCX10475a,BCX10475b)

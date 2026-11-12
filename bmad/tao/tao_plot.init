@@ -226,7 +226,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'beta.a'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = '\gb\dx\u'
@@ -235,7 +235,7 @@ plot_page%size = 800, 400
   curve(2)%data_type   = 'beta.b'
   curve(2)%y_axis_scale_factor = 1
   curve(2)%draw_symbols=.false.
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width= 2
   curve(2)%legend_text = '\gb\dy\u'
 /
@@ -265,7 +265,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'rel_floor.x'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%smooth_line_calc = .false.
@@ -305,13 +305,13 @@ plot_page%size = 800, 400
   curve(1)%hist%density_normalized = T
   curve(1)%hist%weight_by_charge = T
   curve(1)%hist%number = 100
-  curve(1)%line%color = 4
-  curve(1)%line%pattern = 2
+  curve(1)%line%color = '4'
+  curve(1)%line%pattern = '2'
   curve(1)%y_axis_scale_factor = 299792.458  !Q/m * c_light * 1e-3 kA/A
   curve(1)%data_type = 'z' 
   curve(1)%data_source = 'beam_tracking'
   curve(1)%ele_ref_name = "BEGINNING"
-  curve(1)%symbol%type = 1
+  curve(1)%symbol%type = '1'
 /  
 
 
@@ -343,13 +343,13 @@ plot_page%size = 800, 400
   curve(1)%hist%density_normalized = T
   curve(1)%hist%weight_by_charge = T
   curve(1)%hist%number = 100
-  curve(1)%line%color = 4
-  curve(1)%line%pattern = 2
+  curve(1)%line%color = '4'
+  curve(1)%line%pattern = '2'
   curve(1)%y_axis_scale_factor = 299792.458  !Q/m * c_light * 1e-3 kA/A
   curve(1)%data_type = 'z' 
   curve(1)%data_source = 'beam_tracking'
   curve(1)%ele_ref_name = "BEGINNING"
-  curve(1)%symbol%type = 1
+  curve(1)%symbol%type = '1'
 /  
 
 !------------  bends ------------
@@ -377,7 +377,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type = 'element_attrib.b_field'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color = 2 
+  curve(1)%line%color = '2' 
   curve(1)%line%width = 2
   curve(1)%draw_symbols = .false.
   curve(1)%legend_text  = '\gb\dx\u'
@@ -598,14 +598,14 @@ plot_page%size = 800, 400
   curve(1)%y_axis_scale_factor = 1
   curve(1)%draw_symbols=.false.
   curve(1)%line%width=2
-  !curve(1)%line%color=2
+  !curve(1)%line%color='2'
 
   curve(2)%data_source = 'lattice'
   curve(2)%data_type   = 'eta.y'
   curve(2)%legend_text = '\gy\dy\u'
   curve(2)%y_axis_scale_factor = 1
   curve(2)%draw_symbols=.false.
-  curve(2)%line%color=3
+  curve(2)%line%color='3'
   curve(2)%line%width=2
 /
 
@@ -635,7 +635,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'phase.a'
   curve(1)%y_axis_scale_factor = 0.1591549430 !this is 1/(2pi)
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = '\gf\da\u'
@@ -644,7 +644,7 @@ plot_page%size = 800, 400
   curve(2)%data_type   = 'phase.b'
   curve(2)%y_axis_scale_factor = 0.1591549430 !this is 1/(2pi)
   curve(2)%draw_symbols=.false.
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width= 2
   curve(2)%legend_text = '\gf\db\u'
 /
@@ -675,7 +675,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'orbit.x'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color = 1
+  curve(1)%line%color = '1'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = 'orbit.x'
@@ -686,7 +686,7 @@ plot_page%size = 800, 400
   curve(2)%data_type   = 'orbit.y'
   curve(2)%y_axis_scale_factor = 1
   curve(2)%draw_symbols=.false.
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width= 2
   curve(2)%legend_text = 'orbit.y'
   curve(2)%y_axis_scale_factor = 1000
@@ -875,7 +875,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'orbit.x'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color = 1
+  curve(1)%line%color = '1'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = 'orbit.x'
@@ -887,7 +887,7 @@ plot_page%size = 800, 400
   curve(2)%data_type   = 'orbit.y'
   curve(2)%y_axis_scale_factor = 1
   curve(2)%draw_symbols=.false.
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width= 2
   curve(2)%legend_text = 'orbit.y'
   curve(2)%y_axis_scale_factor = 1000
@@ -921,7 +921,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'expression: beam::orbit.x|model - lat::orbit.x|design'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color = 1
+  curve(1)%line%color = '1'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = 'orbit.x'
@@ -933,7 +933,7 @@ plot_page%size = 800, 400
   curve(2)%data_type   = 'expression: beam::orbit.y|model - lat::orbit.y|design'
   curve(2)%y_axis_scale_factor = 1
   curve(2)%draw_symbols=.false.
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width= 2
   curve(2)%legend_text = 'orbit.y'
   curve(2)%y_axis_scale_factor = 1000
@@ -973,7 +973,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'orbit.x'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color = 2
+  curve(1)%line%color = '2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = '1@orbit.x'
@@ -983,7 +983,7 @@ plot_page%size = 800, 400
   curve(2)%data_source = 'lattice'
   curve(2)%data_type   = 'orbit.x'
   curve(2)%y_axis_scale_factor = 1
-  curve(2)%line%color = 8
+  curve(2)%line%color = '8'
   curve(2)%line%width=2
   curve(2)%draw_symbols=.false.
   curve(2)%legend_text = '2@orbit.x'
@@ -993,7 +993,7 @@ plot_page%size = 800, 400
   curve(3)%data_source = 'lattice'
   curve(3)%data_type   = 'orbit.x'
   curve(3)%y_axis_scale_factor = 1
-  curve(3)%line%color = 11
+  curve(3)%line%color = '11'
   curve(3)%line%width=2
   curve(3)%draw_symbols=.false.
   curve(3)%legend_text = '3@orbit.x'
@@ -1003,7 +1003,7 @@ plot_page%size = 800, 400
   curve(4)%data_source = 'lattice'
   curve(4)%data_type   = 'orbit.x'
   curve(4)%y_axis_scale_factor = 1
-  curve(4)%line%color = 12
+  curve(4)%line%color = '12'
   curve(4)%line%width=2
   curve(4)%draw_symbols=.false.
   curve(4)%legend_text = '4@orbit.x'
@@ -1043,7 +1043,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'beta.a'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color = 2
+  curve(1)%line%color = '2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = '1@beta.a'
@@ -1053,18 +1053,18 @@ plot_page%size = 800, 400
   curve(2)%data_source = 'lattice'
   curve(2)%data_type   = 'beta.b'
   curve(2)%y_axis_scale_factor = 1
-  curve(2)%line%color = 2
+  curve(2)%line%color = '2'
   curve(2)%line%width=2
   curve(2)%draw_symbols=.false.
   curve(2)%legend_text = '1@beta.b'
   curve(2)%y_axis_scale_factor = 1
-  curve(2)%line%pattern = 2
+  curve(2)%line%pattern = '2'
   
   curve(3)%ix_universe = -1
   curve(3)%data_source = 'lattice'
   curve(3)%data_type   = 'beta.a'
   curve(3)%y_axis_scale_factor = 1
-  curve(3)%line%color = 8
+  curve(3)%line%color = '8'
   curve(3)%line%width=2
   curve(3)%draw_symbols=.false.
   curve(3)%legend_text = '2@beta.a'
@@ -1074,18 +1074,18 @@ plot_page%size = 800, 400
   curve(4)%data_source = 'lattice'
   curve(4)%data_type   = 'beta.b'
   curve(4)%y_axis_scale_factor = 1
-  curve(4)%line%color = 8
+  curve(4)%line%color = '8'
   curve(4)%line%width=2
   curve(4)%draw_symbols=.false.
   curve(4)%legend_text = '2@beta.b'
   curve(4)%y_axis_scale_factor = 1
-  curve(4)%line%pattern = 2
+  curve(4)%line%pattern = '2'
 
   curve(5)%ix_universe = -1
   curve(5)%data_source = 'lattice'
   curve(5)%data_type   = 'beta.a'
   curve(5)%y_axis_scale_factor = 1
-  curve(5)%line%color = 11
+  curve(5)%line%color = '11'
   curve(5)%line%width=2
   curve(5)%draw_symbols=.false.
   curve(5)%legend_text = '3@beta.a'
@@ -1095,18 +1095,18 @@ plot_page%size = 800, 400
   curve(6)%data_source = 'lattice'
   curve(6)%data_type   = 'beta.b'
   curve(6)%y_axis_scale_factor = 1
-  curve(6)%line%color = 11
+  curve(6)%line%color = '11'
   curve(6)%line%width=2
   curve(6)%draw_symbols=.false.
   curve(6)%legend_text = '3@beta.b'
   curve(6)%y_axis_scale_factor = 1
-  curve(6)%line%pattern = 2
+  curve(6)%line%pattern = '2'
   
   curve(7)%ix_universe = -1
   curve(7)%data_source = 'lattice'
   curve(7)%data_type   = 'beta.a'
   curve(7)%y_axis_scale_factor = 1
-  curve(7)%line%color = 12
+  curve(7)%line%color = '12'
   curve(7)%line%width=2
   curve(7)%draw_symbols=.false.
   curve(7)%legend_text = '4@beta.a'
@@ -1116,12 +1116,12 @@ plot_page%size = 800, 400
   curve(8)%data_source = 'lattice'
   curve(8)%data_type   = 'beta.b'
   curve(8)%y_axis_scale_factor = 1
-  curve(8)%line%color = 12
+  curve(8)%line%color = '12'
   curve(8)%line%width=2
   curve(8)%draw_symbols=.false.
   curve(8)%legend_text = '4@beta.b'
   curve(8)%y_axis_scale_factor = 1
-  curve(8)%line%pattern = 2
+  curve(8)%line%pattern = '2'
 
 /
 
@@ -1156,7 +1156,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'phase.a'
   curve(1)%y_axis_scale_factor =  0.1591549430 !this is 1/(2pi)
-  curve(1)%line%color = 2
+  curve(1)%line%color = '2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = '1@phase.a'
@@ -1166,18 +1166,18 @@ plot_page%size = 800, 400
   curve(2)%data_source = 'lattice'
   curve(2)%data_type   = 'phase.b'
   curve(2)%y_axis_scale_factor =  0.1591549430 !this is 1/(2pi)
-  curve(2)%line%color = 2
+  curve(2)%line%color = '2'
   curve(2)%line%width=2
   curve(2)%draw_symbols=.false.
   curve(2)%legend_text = '1@phase.b'
   curve(2)%y_axis_scale_factor =  0.1591549430 !this is 1/(2pi)
-  curve(2)%line%pattern = 2
+  curve(2)%line%pattern = '2'
   
   curve(3)%ix_universe = -1
   curve(3)%data_source = 'lattice'
   curve(3)%data_type   = 'phase.a'
   curve(3)%y_axis_scale_factor =  0.1591549430 !this is 1/(2pi)
-  curve(3)%line%color = 8
+  curve(3)%line%color = '8'
   curve(3)%line%width=2
   curve(3)%draw_symbols=.false.
   curve(3)%legend_text = '2@phase.a'
@@ -1187,18 +1187,18 @@ plot_page%size = 800, 400
   curve(4)%data_source = 'lattice'
   curve(4)%data_type   = 'phase.b'
   curve(4)%y_axis_scale_factor =  0.1591549430 !this is 1/(2pi)
-  curve(4)%line%color = 8
+  curve(4)%line%color = '8'
   curve(4)%line%width=2
   curve(4)%draw_symbols=.false.
   curve(4)%legend_text = '2@phase.b'
   curve(4)%y_axis_scale_factor =  0.1591549430 !this is 1/(2pi)
-  curve(4)%line%pattern = 2
+  curve(4)%line%pattern = '2'
 
   curve(5)%ix_universe = -1
   curve(5)%data_source = 'lattice'
   curve(5)%data_type   = 'phase.a'
   curve(5)%y_axis_scale_factor = 0.1591549430 !this is 1/(2pi)
-  curve(5)%line%color = 11
+  curve(5)%line%color = '11'
   curve(5)%line%width=2
   curve(5)%draw_symbols=.false.
   curve(5)%legend_text = '3@phase.a'
@@ -1208,18 +1208,18 @@ plot_page%size = 800, 400
   curve(6)%data_source = 'lattice'
   curve(6)%data_type   = 'phase.b'
   curve(6)%y_axis_scale_factor =  0.1591549430 !this is 1/(2pi)
-  curve(6)%line%color = 11
+  curve(6)%line%color = '11'
   curve(6)%line%width=2
   curve(6)%draw_symbols=.false.
   curve(6)%legend_text = '3@phase.b'
   curve(6)%y_axis_scale_factor =  0.1591549430 !this is 1/(2pi)
-  curve(6)%line%pattern = 2
+  curve(6)%line%pattern = '2'
   
   curve(7)%ix_universe = -1
   curve(7)%data_source = 'lattice'
   curve(7)%data_type   = 'phase.a'
   curve(7)%y_axis_scale_factor =  0.1591549430 !this is 1/(2pi)
-  curve(7)%line%color = 12
+  curve(7)%line%color = '12'
   curve(7)%line%width=2
   curve(7)%draw_symbols=.false.
   curve(7)%legend_text = '4@phase.a'
@@ -1229,12 +1229,12 @@ plot_page%size = 800, 400
   curve(8)%data_source = 'lattice'
   curve(8)%data_type   = 'phase.b'
   curve(8)%y_axis_scale_factor =  0.1591549430 !this is 1/(2pi)
-  curve(8)%line%color = 12
+  curve(8)%line%color = '12'
   curve(8)%line%width=2
   curve(8)%draw_symbols=.false.
   curve(8)%legend_text = '4@phase.b'
   curve(8)%y_axis_scale_factor =  0.1591549430 !this is 1/(2pi)
-  curve(8)%line%pattern = 2
+  curve(8)%line%pattern = '2'
 
 /
 
@@ -1269,7 +1269,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'eta.x'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color = 2
+  curve(1)%line%color = '2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = '1@eta.x'
@@ -1279,7 +1279,7 @@ plot_page%size = 800, 400
   curve(2)%data_source = 'lattice'
   curve(2)%data_type   = 'eta.x'
   curve(2)%y_axis_scale_factor = 1
-  curve(2)%line%color = 8
+  curve(2)%line%color = '8'
   curve(2)%line%width=2
   curve(2)%draw_symbols=.false.
   curve(2)%legend_text = '2@eta.x'
@@ -1289,7 +1289,7 @@ plot_page%size = 800, 400
   curve(3)%data_source = 'lattice'
   curve(3)%data_type   = 'eta.x'
   curve(3)%y_axis_scale_factor = 1
-  curve(3)%line%color = 11
+  curve(3)%line%color = '11'
   curve(3)%line%width=2
   curve(3)%draw_symbols=.false.
   curve(3)%legend_text = '3@eta.x'
@@ -1299,7 +1299,7 @@ plot_page%size = 800, 400
   curve(4)%data_source = 'lattice'
   curve(4)%data_type   = 'eta.x'
   curve(4)%y_axis_scale_factor = 1
-  curve(4)%line%color = 12
+  curve(4)%line%color = '12'
   curve(4)%line%width=2
   curve(4)%draw_symbols=.false.
   curve(4)%legend_text = '4@eta.x'
@@ -1339,7 +1339,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'b_field.y'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color = 2
+  curve(1)%line%color = '2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = '1'
@@ -1349,7 +1349,7 @@ plot_page%size = 800, 400
   curve(2)%data_source = 'lattice'
   curve(2)%data_type   = 'b_field.y'
   curve(2)%y_axis_scale_factor = 1
-  curve(2)%line%color = 8
+  curve(2)%line%color = '8'
   curve(2)%line%width=2
   curve(2)%draw_symbols=.false.
   !curve(2)%legend_text = '2'
@@ -1359,7 +1359,7 @@ plot_page%size = 800, 400
   curve(3)%data_source = 'lattice'
   curve(3)%data_type   = 'b_field.y'
   curve(3)%y_axis_scale_factor = 1
-  curve(3)%line%color = 11
+  curve(3)%line%color = '11'
   curve(3)%line%width=2
   curve(3)%draw_symbols=.false.
   !curve(3)%legend_text = '3'
@@ -1369,7 +1369,7 @@ plot_page%size = 800, 400
   curve(4)%data_source = 'lattice'
   curve(4)%data_type   = 'b_field.y'
   curve(4)%y_axis_scale_factor = 1
-  curve(4)%line%color = 12
+  curve(4)%line%color = '12'
   curve(4)%line%width=2
   curve(4)%draw_symbols=.false.
   !curve(4)%legend_text = '4'
@@ -1406,7 +1406,7 @@ plot_page%size = 800, 400
   curve(1)%data_type   = 'r56_compaction'
   curve(1)%smooth_line_calc = .false.
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
 /
@@ -1445,7 +1445,7 @@ plot_page%size = 800, 400
   curve(1)%ele_ref_name = 'BEGINNING'
   curve(1)%draw_symbols=.false.
   curve(1)%line%width=2
-  curve(1)%line%color=4
+  curve(1)%line%color='4'
 
 /
 
@@ -1479,7 +1479,7 @@ plot_page%size = 800, 400
   curve(1)%smooth_line_calc = .false.
   curve(1)%ele_ref_name = 'BEGINNING'
   curve(1)%line%width=2
-  curve(1)%line%color=4
+  curve(1)%line%color='4'
   curve(1)%draw_symbols=.false.
 
 /
@@ -1512,7 +1512,7 @@ plot_page%size = 800, 400
   curve(1)%smooth_line_calc = .false.
   curve(1)%ele_ref_name = 'BEGINNING' 
   curve(1)%line%width=2
-  curve(1)%line%color=4
+  curve(1)%line%color='4'
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = '\gb\dx\u'
 
@@ -1545,7 +1545,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type = 'orbit.e_tot'
   curve(1)%y_axis_scale_factor = 1e-6
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = '\gb\dx\u' 
@@ -1576,7 +1576,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'beam_tracking'
   curve(1)%data_type = 'x-px' 
   curve(1)%y_axis_scale_factor = 1e6
-  curve(1)%symbol%type = 1
+  curve(1)%symbol%type = '1'
   curve(1)%ele_ref_name = "BEGINNING"
   curve(1)%legend_text = '\gb\dx\u'
 
@@ -1623,7 +1623,7 @@ plot_page%size = 800, 400
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'beta.a'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = '\gb\dx\u'
@@ -1631,7 +1631,7 @@ plot_page%size = 800, 400
   curve(2)%data_type   = 'beta.b'
   curve(2)%y_axis_scale_factor = 1
   curve(2)%draw_symbols=.false.
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width=2
   curve(2)%legend_text = '\gb\dy\u'
 /
@@ -1840,7 +1840,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   !curve(1)%ix_universe = 1
   !curve(1)%ele_ref_name = 'END'
-  curve(1)%symbol%type = 1
+  curve(1)%symbol%type = '1'
   curve(1)%data_type_z = 'pz'
   curve(1)%use_z_color = T
   ! Color by pz
@@ -1878,7 +1878,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%ix_universe = 1
   curve(1)%ele_ref_name = "BEGINNING"
-  curve(1)%symbol%type = 1
+  curve(1)%symbol%type = '1'
   curve(1)%data_type_z = 'pz'
   curve(1)%use_z_color = T
 /
@@ -1918,8 +1918,8 @@ curve(2)%legend_text = 'Y'
   curve(1)%y_axis_scale_factor = 1000.0 !1->10^-3 relative
   curve(1)%data_source = 'beam_tracking'
   curve(1)%ele_ref_name = "BEGINNING"
-  curve(1)%symbol%type = 1
-  curve(1)%symbol%color =4
+  curve(1)%symbol%type = '1'
+  curve(1)%symbol%color ='4'
   
   ! Color by pz
   curve(1)%data_type_z = 'pz'
@@ -1958,8 +1958,8 @@ curve(2)%legend_text = 'Y'
   curve(1)%y_axis_scale_factor = 1000.0 !1->10^-3 relative
   curve(1)%data_source = 'beam_tracking'
   curve(1)%ele_ref_name = "BEGINNING"
-  curve(1)%symbol%type = 1
-  curve(1)%symbol%color =4
+  curve(1)%symbol%type = '1'
+  curve(1)%symbol%color ='4'
   
   ! Color by pz
   curve(1)%data_type_z = 'pz'
@@ -2002,7 +2002,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%ix_universe = 1
   curve(1)%ele_ref_name = "BEGINNING"
-  curve(1)%symbol%type = 1
+  curve(1)%symbol%type = '1'
 /
 
 
@@ -2035,7 +2035,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%ix_universe = 1
   curve(1)%ele_ref_name = "BEGINNING"
-  curve(1)%symbol%type = 1
+  curve(1)%symbol%type = '1'
 /
 
 
@@ -2074,7 +2074,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'alpha.a'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = '\ga\dx\u'
@@ -2083,7 +2083,7 @@ curve(2)%legend_text = 'Y'
   curve(2)%data_type   = 'alpha.b'
   curve(2)%y_axis_scale_factor = 1
   curve(2)%draw_symbols= F
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width=2
   curve(2)%legend_text = '\ga\dy\u'
 /
@@ -2122,20 +2122,20 @@ curve(2)%legend_text = 'Y'
   graph%y2%max =  20
   graph%y2%min = -20
   graph%y2%major_div = 4  	  
-  graph%y2%label_color=2
+  graph%y2%label_color='2'
   
   !!not needed: graph%n_curve = 2
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'beta.a'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(2)%data_source = 'lattice'
   curve(2)%data_type   = 'eta.a'
   curve(2)%y_axis_scale_factor = 1
   curve(2)%draw_symbols=.false.
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width=2
 /
 
@@ -2166,29 +2166,29 @@ curve(2)%legend_text = 'Y'
   curve(1)%smooth_line_calc = F
   curve(1)%data_type   = 'beta.a'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(2)%data_source = 'beam_tracking'
   curve(2)%smooth_line_calc = F
   curve(2)%data_type   = 'beta.b'
   curve(2)%y_axis_scale_factor = 1
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width=2
   
   curve(3)%data_source = 'lattice'
   curve(3)%data_type   = 'beta.a'
   curve(3)%legend_text = 'Lattice \gb\da\u'	
   curve(3)%y_axis_scale_factor = 1
-  curve(3)%line%color=2
+  curve(3)%line%color='2'
   curve(3)%line%width=2
-  curve(3)%line%pattern= 2 !Dashed
+  curve(3)%line%pattern= '2' !Dashed
   curve(4)%data_source = 'lattice'
   curve(4)%data_type   = 'beta.b'
   curve(4)%legend_text = 'Lattice \gb\db\u'	
   curve(4)%y_axis_scale_factor = 1
-  curve(4)%line%color=3
+  curve(4)%line%color='3'
   curve(4)%line%width=2
-  curve(4)%line%pattern= 2 !Dashed
+  curve(4)%line%pattern= '2' !Dashed
  /
   
   
@@ -2217,29 +2217,29 @@ curve(2)%legend_text = 'Y'
   curve(1)%smooth_line_calc = F
   curve(1)%data_type   = 'beta.x'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(2)%data_source = 'beam_tracking'
   curve(2)%smooth_line_calc = F
   curve(2)%data_type   = 'beta.y'
   curve(2)%y_axis_scale_factor = 1
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width=2
   
   curve(3)%data_source = 'lattice'
   curve(3)%data_type   = 'beta.a'
   curve(3)%legend_text = 'Lattice \gb\da\u'	
   curve(3)%y_axis_scale_factor = 1
-  curve(3)%line%color=2
+  curve(3)%line%color='2'
   curve(3)%line%width=2
-  curve(3)%line%pattern= 2 !Dashed
+  curve(3)%line%pattern= '2' !Dashed
   curve(4)%data_source = 'lattice'
   curve(4)%data_type   = 'beta.b'
   curve(4)%legend_text = 'Lattice \gb\db\u'	
   curve(4)%y_axis_scale_factor = 1
-  curve(4)%line%color=3
+  curve(4)%line%color='3'
   curve(4)%line%width=2
-  curve(4)%line%pattern= 2 !Dashed
+  curve(4)%line%pattern= '2' !Dashed
  /
     
   
@@ -2271,13 +2271,13 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%data_type   = 'eta.x'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(1)%legend_text = 'beam \gy\dx\u'
   curve(2)%data_source = 'beam_tracking'
   curve(2)%data_type   = 'etap.x'
   curve(2)%y_axis_scale_factor = 1
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width=2
   curve(2)%legend_text = 'beam \gy\dy\u'
 /
@@ -2316,7 +2316,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%y_axis_scale_factor = 1
   curve(1)%draw_symbols=.false.
   curve(1)%line%width=2
-  !curve(1)%line%color=2
+  !curve(1)%line%color='2'
 /
 
 
@@ -2350,12 +2350,12 @@ curve(2)%legend_text = 'Y'
   curve(1)%y_axis_scale_factor = 1
   curve(1)%draw_symbols=.false.
   curve(1)%line%width=2
-  !curve(1)%line%color=2
+  !curve(1)%line%color='2'
   curve(2)%data_source = 'lattice'
   curve(2)%data_type   = 'etap.y'
   curve(2)%y_axis_scale_factor = 1
   curve(2)%draw_symbols=.false.
-  curve(2)%line%color=3
+  curve(2)%line%color='3'
   curve(2)%line%width=2
 /
 
@@ -2388,12 +2388,12 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'orbit.amp_a'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(2)%data_source = 'lattice'
   curve(2)%data_type   = 'orbit.amp_b'
   curve(2)%y_axis_scale_factor = 1
-  curve(2)%line%color = 3
+  curve(2)%line%color = '3'
   curve(2)%line%width=2
 /
 
@@ -2462,7 +2462,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%ele_ref_name = 'BEGINNING'
   curve(1)%draw_symbols=.false.
   curve(1)%line%width=2
-  !curve(1)%line%color=2
+  !curve(1)%line%color='2'
 /
 
 !-------------- t166 -----------------------------------
@@ -2495,7 +2495,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%ele_ref_name = 'BEGINNING'
   curve(1)%draw_symbols=.false.
   curve(1)%line%width=2
-  !curve(1)%line%color=2
+  !curve(1)%line%color='2'
   
   curve(2)%smooth_line_calc = .false.
   curve(2)%data_source = 'lattice'
@@ -2504,7 +2504,7 @@ curve(2)%legend_text = 'Y'
   curve(2)%ele_ref_name = 'BEGINNING'
   curve(2)%draw_symbols=.false.
   curve(2)%line%width=2
-  curve(2)%line%color=4
+  curve(2)%line%color='4'
 /
 
 !-------------- t216 -----------------------------------
@@ -2537,7 +2537,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%ele_ref_name = 'BEGINNING'
   curve(1)%draw_symbols=.false.
   curve(1)%line%width=2
-  !curve(1)%line%color=2
+  !curve(1)%line%color='2'
   
   curve(2)%smooth_line_calc = .false.
   curve(2)%data_source = 'lattice'
@@ -2546,7 +2546,7 @@ curve(2)%legend_text = 'Y'
   curve(2)%ele_ref_name = 'BEGINNING'
   curve(2)%draw_symbols=.false.
   curve(2)%line%width=2
-  curve(2)%line%color=4
+  curve(2)%line%color='4'
 /
 
 
@@ -2579,7 +2579,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%y_axis_scale_factor = 1
   curve(1)%ele_ref_name = 'BEGINNING'
   curve(1)%line%width=2
-  !curve(1)%line%color=2
+  !curve(1)%line%color='2'
 /
 !-------------- t566 -----------------------------------
 
@@ -2609,7 +2609,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%y_axis_scale_factor = 1
   curve(1)%ele_ref_name = 'BEGINNING'
   curve(1)%draw_symbols=.false.
-  !curve(1)%line%color=2
+  !curve(1)%line%color='2'
   curve(1)%line%width=2
 /
 !-------------- pt566 -----------------------------------
@@ -2641,7 +2641,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%smooth_line_calc = .false.
   !curve(1)%ele_ref_name = 'BEGINNING'
   curve(1)%draw_symbols=.false.
-  !curve(1)%line%color=2
+  !curve(1)%line%color='2'
   curve(1)%line%width=2
 /
 
@@ -2675,7 +2675,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%ele_ref_name = 'BEGINNING'
   curve(1)%draw_symbols=.false.
   curve(1)%line%width=2
-  !curve(1)%line%color=2
+  !curve(1)%line%color='2'
 /
 
 
@@ -2712,28 +2712,28 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_type   = 'eta.x'
   curve(1)%legend_text = 'D\dx\u'	
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(2)%data_source = 'beam_tracking'
   curve(2)%data_type   = 'eta.y'
   curve(2)%legend_text = 'D\dy\u'	
   curve(2)%y_axis_scale_factor = 1
-  curve(2)%line%color=3
+  curve(2)%line%color='3'
   curve(2)%line%width=2
   curve(3)%data_source = 'lattice'
   curve(3)%data_type   = 'eta.x'
   curve(3)%legend_text = 'Lattice D\dx\u'	
   curve(3)%y_axis_scale_factor = 1
-  curve(3)%line%color=2
+  curve(3)%line%color='2'
   curve(3)%line%width=2
-  curve(3)%line%pattern= 2 !Dashed
+  curve(3)%line%pattern= '2' !Dashed
   curve(4)%data_source = 'lattice'
   curve(4)%data_type   = 'eta.y'
   curve(4)%legend_text = 'Lattice D\dy\u'	
   curve(4)%y_axis_scale_factor = 1
-  curve(4)%line%color=3
+  curve(4)%line%color='3'
   curve(4)%line%width=2
-  curve(4)%line%pattern= 2 !Dashed
+  curve(4)%line%pattern= '2' !Dashed
  /
 
 
@@ -2772,13 +2772,13 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_type   = 'norm_emit.x'
   curve(1)%legend_text = '\ge\dN\u X'	
   curve(1)%y_axis_scale_factor = 1e6
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(2)%data_source = 'beam_tracking'
   curve(2)%data_type   = 'norm_emit.y'
   curve(2)%legend_text = '\ge\dN\u Y'	
   curve(2)%y_axis_scale_factor = 1e6
-  curve(2)%line%color=3
+  curve(2)%line%color='3'
   curve(2)%line%width=2
  /
 
@@ -2847,14 +2847,14 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_type   = 'sigma.x'
   curve(1)%legend_text = '\gs\dx\u'	
   curve(1)%y_axis_scale_factor = 1e6
-  curve(1)%line%color=2
+  curve(1)%line%color='2'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(2)%data_source = 'beam_tracking'
   curve(2)%data_type   = 'sigma.y'
   curve(2)%legend_text = '\gs\dy\u'	
   curve(2)%y_axis_scale_factor = 1e6
-  curve(2)%line%color=3
+  curve(2)%line%color='3'
   curve(2)%line%width=2
   curve(2)%draw_symbols=.false.
  /
@@ -2884,7 +2884,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%data_type   = 'sigma.z'
   curve(1)%y_axis_scale_factor = 3335.64095
-  curve(1)%line%color=4
+  curve(1)%line%color='4'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
  ! curve(1)%legend_text = '' 
@@ -2920,7 +2920,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%data_type   = 'sigma.pz'
   curve(1)%y_axis_scale_factor = 1e4
-  curve(1)%line%color=4
+  curve(1)%line%color='4'
   curve(1)%line%width=2
   /
 !----------------------------------------------------------------
@@ -2958,14 +2958,14 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%data_type   = 'bunch_max.x'
   curve(1)%y_axis_scale_factor = 1e3
-  curve(1)%line%color=1
+  curve(1)%line%color='1'
   curve(1)%line%width=2
   curve(1)%legend_text = 'x\dmax\u'	
   ! Min
   curve(2)%data_source = 'beam_tracking'
   curve(2)%data_type   = 'bunch_min.x'
   curve(2)%y_axis_scale_factor = 1e3
-  curve(2)%line%color=1
+  curve(2)%line%color='1'
   curve(2)%line%width=2
   curve(2)%legend_text = 'x\dmin\u'	
   
@@ -2973,17 +2973,17 @@ curve(2)%legend_text = 'Y'
   curve(3)%data_source = 'beam_tracking'
   curve(3)%data_type   = 'sigma.x'
   curve(3)%y_axis_scale_factor = 1e3
-  curve(3)%line%color=2
+  curve(3)%line%color='2'
   curve(3)%line%width=2
-  curve(3)%line%pattern=2
+  curve(3)%line%pattern='2'
   curve(3)%legend_text = '+\gs\dx\u'	
   ! - sigma
   curve(4)%data_source = 'beam_tracking'
   curve(4)%data_type   = 'sigma.x'
   curve(4)%y_axis_scale_factor = -1e3
-  curve(4)%line%color=2
+  curve(4)%line%color='2'
   curve(4)%line%width=2
-  curve(4)%line%pattern=2
+  curve(4)%line%pattern='2'
   curve(4)%legend_text = '-\gs\dx\u'	
 
   /
@@ -3020,14 +3020,14 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%data_type   = 'bunch_max.y'
   curve(1)%y_axis_scale_factor = 1e3
-  curve(1)%line%color=1
+  curve(1)%line%color='1'
   curve(1)%line%width=2
   curve(1)%legend_text = 'y\dmax\u'	
   ! Min
   curve(2)%data_source = 'beam_tracking'
   curve(2)%data_type   = 'bunch_min.y'
   curve(2)%y_axis_scale_factor = 1e3
-  curve(2)%line%color=1
+  curve(2)%line%color='1'
   curve(2)%line%width=2
   curve(2)%legend_text = 'y\dmin\u'	
   
@@ -3035,17 +3035,17 @@ curve(2)%legend_text = 'Y'
   curve(3)%data_source = 'beam_tracking'
   curve(3)%data_type   = 'sigma.y'
   curve(3)%y_axis_scale_factor = 1e3
-  curve(3)%line%color=3
+  curve(3)%line%color='3'
   curve(3)%line%width=2
-  curve(3)%line%pattern=2
+  curve(3)%line%pattern='2'
   curve(3)%legend_text = '+\gs\dy\u'	
   ! - sigma
   curve(4)%data_source = 'beam_tracking'
   curve(4)%data_type   = 'sigma.y'
   curve(4)%y_axis_scale_factor = -1e3
-  curve(4)%line%color=3
+  curve(4)%line%color='3'
   curve(4)%line%width=2
-  curve(4)%line%pattern=2
+  curve(4)%line%pattern='2'
   curve(4)%legend_text = '-\gs\dy\u'	
 
   /
@@ -3082,14 +3082,14 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%data_type   = 'bunch_max.z'
   curve(1)%y_axis_scale_factor = 3335.64 ! 10^12 ps/s / c_light
-  curve(1)%line%color=1
+  curve(1)%line%color='1'
   curve(1)%line%width=2
   curve(1)%legend_text = 'z\dmax\u/c'	
   ! Min
   curve(2)%data_source = 'beam_tracking'
   curve(2)%data_type   = 'bunch_min.z'
   curve(2)%y_axis_scale_factor = 3335.64 ! 10^12 ps/s / c_light
-  curve(2)%line%color=1
+  curve(2)%line%color='1'
   curve(2)%line%width=2
   curve(2)%legend_text = 'z\dmin\u/c'	
   
@@ -3097,17 +3097,17 @@ curve(2)%legend_text = 'Y'
   curve(3)%data_source = 'beam_tracking'
   curve(3)%data_type   = 'sigma.z'
   curve(3)%y_axis_scale_factor = 3335.64 ! 10^12 ps/s / c_light
-  curve(3)%line%color=4
+  curve(3)%line%color='4'
   curve(3)%line%width=2
-  curve(3)%line%pattern=2
+  curve(3)%line%pattern='2'
   curve(3)%legend_text = '+\gs\dz\u/c'	
   ! - sigma
   curve(4)%data_source = 'beam_tracking'
   curve(4)%data_type   = 'sigma.z'
   curve(4)%y_axis_scale_factor = -3335.64 ! 10^12 ps/s / c_light
-  curve(4)%line%color=4
+  curve(4)%line%color='4'
   curve(4)%line%width=2
-  curve(4)%line%pattern=2
+  curve(4)%line%pattern='2'
   curve(4)%legend_text = '-\gs\dz\u/c'	
 
   /
@@ -3145,14 +3145,14 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%data_type   = 'bunch_max.pz'
   curve(1)%y_axis_scale_factor = 1e3
-  curve(1)%line%color=1
+  curve(1)%line%color='1'
   curve(1)%line%width=2
   curve(1)%legend_text = '\gd\dmax\u'	
   ! Min
   curve(2)%data_source = 'beam_tracking'
   curve(2)%data_type   = 'bunch_min.pz'
   curve(2)%y_axis_scale_factor = 1e3
-  curve(2)%line%color=1
+  curve(2)%line%color='1'
   curve(2)%line%width=2
   curve(2)%legend_text = '\gd\dmin\u'	
   
@@ -3160,17 +3160,17 @@ curve(2)%legend_text = 'Y'
   curve(3)%data_source = 'beam_tracking'
   curve(3)%data_type   = 'sigma.pz'
   curve(3)%y_axis_scale_factor = 1e3
-  curve(3)%line%color=4
+  curve(3)%line%color='4'
   curve(3)%line%width=2
-  curve(3)%line%pattern=2
+  curve(3)%line%pattern='2'
   curve(3)%legend_text = '+\gs\d\gd\u'	
   ! - sigma
   curve(4)%data_source = 'beam_tracking'
   curve(4)%data_type   = 'sigma.pz'
   curve(4)%y_axis_scale_factor = -1e3
-  curve(4)%line%color=4
+  curve(4)%line%color='4'
   curve(4)%line%width=2
-  curve(4)%line%pattern=2
+  curve(4)%line%pattern='2'
   curve(4)%legend_text = '-\gs\d\gd\u'	
 
   /  
@@ -3207,7 +3207,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%data_type   = 'bunch_max.x'
   curve(1)%y_axis_scale_factor = 1e4
-  curve(1)%line%color=4
+  curve(1)%line%color='4'
   curve(1)%line%width=2
   /
 
@@ -3247,7 +3247,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'beam_tracking'
   curve(1)%data_type   = 'n_particle_loss'
   curve(1)%y_axis_scale_factor =1
-  curve(1)%line%color=4
+  curve(1)%line%color='4'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
 /
@@ -3290,11 +3290,11 @@ curve(2)%legend_text = 'Y'
   curve(5)%line%width = 5
   !curve(1)%data_type = 'dynamic_aperture_centered'
   
-  curve(1)%line%color=2
-  curve(2)%line%color=8
-  curve(3)%line%color=4
-  curve(4)%line%color=12
-  curve(5)%line%color=1
+  curve(1)%line%color='2'
+  curve(2)%line%color='8'
+  curve(3)%line%color='4'
+  curve(4)%line%color='12'
+  curve(5)%line%color='1'
 /
 
 
@@ -3412,7 +3412,7 @@ curve(2)%legend_text = 'Y'
  ! curve(2)%data_type = 'patch_offset'
  ! curve(2)%y_axis_scale_factor = 1000
  ! curve(2)%draw_symbols = T
- ! curve(2)%line%color = 2
+ ! curve(2)%line%color = '2'
 /
 
 
@@ -3449,7 +3449,7 @@ curve(2)%legend_text = 'Y'
   curve(2)%data_type = 'ycor'
   curve(2)%y_axis_scale_factor = 10  ! kGauss*m
   curve(2)%draw_symbols = T
-  curve(2)%line%color = 2
+  curve(2)%line%color = '2'
   
 
 /
@@ -3549,8 +3549,8 @@ curve(2)%legend_text = 'Y'
   curve(1)%smooth_line_calc = F
   curve(1)%draw_symbols = T
   curve(1)%draw_line = F
-  curve(1)%symbol%color = 4
-  curve(1)%symbol%type = 16
+  curve(1)%symbol%color = '4'
+  curve(1)%symbol%type = '16'
 /
 
 
@@ -3586,8 +3586,8 @@ curve(2)%legend_text = 'Y'
   curve(1)%smooth_line_calc = F
   curve(1)%draw_symbols = T
   curve(1)%draw_line = F
-  curve(1)%symbol%color = 4
-  curve(1)%symbol%type = 16
+  curve(1)%symbol%color = '4'
+  curve(1)%symbol%type = '16'
 /
 
 
@@ -3626,21 +3626,21 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_type   = 'b_field.x'
   curve(1)%y_axis_scale_factor = 1
   curve(1)%legend_text = 'B\dx\y'
-  curve(1)%line%color = 2
+  curve(1)%line%color = '2'
   
   curve(2)%ix_universe = -1
   curve(2)%data_source = 'lattice'
   curve(2)%data_type   = 'b_field.y'
   curve(2)%y_axis_scale_factor = 1
   curve(2)%legend_text = 'B\dy\u'
-  curve(2)%line%color = 4
+  curve(2)%line%color = '4'
   
   curve(3)%ix_universe = -1
   curve(3)%data_source = 'lattice'
   curve(3)%data_type   = 'b_field.z'
   curve(3)%y_axis_scale_factor = 1
   curve(3)%legend_text = 'B\dz\u'
-  curve(3)%line%color = 6
+  curve(3)%line%color = '6'
 /  
 
 
@@ -3675,28 +3675,28 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_type   = 'b_div'
   curve(1)%y_axis_scale_factor = 1
   curve(1)%legend_text = 'divergence'
-  curve(1)%line%color = 1
+  curve(1)%line%color = '1'
   
   curve(2)%ix_universe = -1
   curve(2)%data_source = 'lattice'
   curve(2)%data_type   = 'b_curl.x'
   curve(2)%y_axis_scale_factor = 1
   curve(2)%legend_text = 'curl x'
-  curve(2)%line%color = 2
+  curve(2)%line%color = '2'
   
   curve(3)%ix_universe = -1
   curve(3)%data_source = 'lattice'
   curve(3)%data_type   = 'b_curl.y'
   curve(3)%y_axis_scale_factor = 1
   curve(3)%legend_text = 'curl y'
-  curve(3)%line%color = 3
+  curve(3)%line%color = '3'
   
   curve(4)%ix_universe = -1
   curve(4)%data_source = 'lattice'
   curve(4)%data_type   = 'b_curl.z'
   curve(4)%y_axis_scale_factor = 1
   curve(4)%legend_text = 'curl z'
-  curve(4)%line%color = 4
+  curve(4)%line%color = '4'
 /
 
 !!------------  diff_beam_orbit x y ------------
@@ -3726,7 +3726,7 @@ curve(2)%legend_text = 'Y'
   curve(1)%data_source = 'lattice'
   curve(1)%data_type   = 'expression: sqrt((eta.x)^2 + (eta.y)^2)'
   curve(1)%y_axis_scale_factor = 1
-  curve(1)%line%color = 1
+  curve(1)%line%color = '1'
   curve(1)%line%width=2
   curve(1)%draw_symbols=.false.
   curve(1)%legend_text = 'eta'

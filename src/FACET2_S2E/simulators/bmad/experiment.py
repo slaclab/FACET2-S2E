@@ -16,11 +16,12 @@ from pmd_beamphysics import ParticleGroup
 
 from ...beam.generation import make_simple_bunch_standalone
 from ...beam.manipulation import edit_bunch_parameters
-from .lattice.linac import setLinacPhase, setLinacGradientAuto
-from .lattice.set_lattice import setQuadkG, setSextkG
-from .core import initializeTao
+import re
+from .lattice.linac import setLinacPhase, setLinacGradientAuto, matchStringWrapper, getEnergyChangeFromElements
+from .lattice.set_lattice import setQuadkG, setSextkG, fixMagnetFields
+from .core import initializeTao, trackBeam
 from .energy import save_dipoles, treat_dipoles
-from .runs import set_beam, edit_energy_based_on_beam_all, run_initialized_sim_edit_bunch_energy, run_initialized_sim_edit_lattice_energy_for_dipoles, run_initialized_sim
+from .runs import set_beam, tune_bc20_sextupole_offsets, twiss_match_beam, set_lattice_twiss, golden_twiss_targets, GOLDEN_TWISS_PR10571, l2_virtual_match, edit_energy_based_on_beam_all, run_initialized_sim_edit_bunch_energy, run_initialized_sim_edit_lattice_energy_for_dipoles, run_initialized_sim
 
 
 ## Initialize and run a simulation
@@ -45,7 +46,9 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
                             correctors_coef=0, correctors_from_beg=False, run=True, gaussFromExternal=False, edit_only_energy_from_exp=False, energy_edit_on_beam=False, verbose=False,
                             lattice='setLattice_configs/2024-12-09_oneBunch_CSR-on_optimized.yml', moments=[None,None,None,None,None,None], means=[0,0,0,0,None], charge=1.6e-9, sr_wakes_on=False, lr_wakes_on=False,
                             desired_beam_energies_for_the_feedback=None, desired_P0Cs_MeV=[None,None,None,None], grid_size=[32,32,32], lsc_method="slice", csr_method="1_dim", n_bin=32,
-                            edited_bunch_energy_at_checkpoints_MeV=[None, None, None, None], beam_edits=True):
+                            edited_bunch_energy_at_checkpoints_MeV=[None, None, None, None], beam_edits=True, twiss_match="auto", l0a_energy_MeV="quads", l2_match="auto",
+                            daq_sextupole_offsets=True, keep_magnet_fields=True, bc20_sextupole_tune="auto", twiss_match_lattice=True,
+                            n_rf_steps=100):
     '''
     experiment: "BEAMPHYS" is an example.
     scan_number: DAQ scan number. "14438" is an example.
@@ -89,6 +92,7 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
     For example, setting it to [124, None, None, None], will adjust the injector and L1 cavities to have [124, 335, 4500, 10000] MeV. This will result in a non-zero <x> inside of the dogleg.
 
     energy_edit_on_beam: The beam feedback. If collective effects slow the bunch down, the cavity voltages will be adjusted to match the desired_beam_energies_for_the_feedback.
+    In the injector only L0B is scaled, and the beam keeps its energy at "start" (set by "energy"; energy=-1 keeps the energy of the beam file).
     desired_beam_energies_for_the_feedback: <pz> in eV that you would like to see before the dogleg, bc11, bc14, and bc20 (see the energy_edit_on_beam function).
 
     correctors_coef: what corrector strength to use from the DAQ database. -1/10 for the experimental values; 0 to turn them off.
@@ -100,6 +104,56 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
     Will tune to the DAQ values (it saves energy) if experiment and scan_number are provided, and to the default [125, 335, 4500, 10000] otherwise.
     tune_dipoles_to_125_335_4500_10000_MeV: if True, the dipole magnetic fields are set to [125, 335, 4500, 10000] even if the DAQ is provided.
     If False, the dipole fields are not adjusted and follow the lattice energy, as with initializeTao() and trackBeam().
+
+    twiss_match: match the transverse Twiss parameters of the bunch at "start" (see twiss_match_beam).
+    "auto" (default): "golden" if the DAQ settings are loaded, the beam is from a file (file_ext) and "start" is upstream
+    of PR10571; False otherwise (a generated Gaussian bunch keeps its "moments").
+    False: no matching. True: match to the lattice Twiss at "start" (computed after the DAQ settings are loaded).
+    A dict {"beta_x", "alpha_x", "beta_y", "alpha_y"} (m, rad): match to these values.
+    "golden": match to the Twiss at "start" that the loaded optics map onto the golden injector match at PR10571
+    (golden_twiss_targets). This is the operational match point: the DAQ magnets are kept, and only the input beam
+    is changed. External beams are not matched to the machine: the 2024-12-11 IMPACT bunch has beta ~63 m,
+    alpha ~-16 at L0AFEND (BMAG ~10 vs the golden targets), and without matching its emittance grows ~100x along the linac.
+    twiss_match_lattice: if True (default), a beam match also sets the lattice's Twiss to the same targets at "start"
+    (set_lattice_twiss, through the BEGINNING element), so that tao.ele_twiss and the Twiss plots follow the matched
+    beam. Otherwise they are the lattice's own: facet2-lattice pins the Twiss at MRK0F (fixer_mrk0f, the golden
+    match) and Bmad propagates them from there both downstream and back to BEGINNING through the loaded optics, so they
+    equal those of a golden-matched beam everywhere; only other targets (a dict, True) need twiss_match_lattice.
+    (The 2024 lattice had no fixer and started from the cathode Twiss: E320_17418 beta_y 317 m at ENDL1F against the
+    beam's 24 m.) Tracking does not use the lattice Twiss.
+    n_rf_steps: RF steps per structure for all cavities (see initializeTao), 100 by default (converged for E320_17418
+    up to BEGBC20); None keeps the lattice's 1000/5000, which makes a DAQ load with the feedback ~8x slower.
+
+    l0a_energy_MeV: energy at the end of L0A (L0AFEND), used only with the DAQ settings. L0B is then set to keep
+    125 MeV at the dogleg (before the DAQ quads are set).
+    "quads" (default): implied by the DAQ fields of QA10361/71, assuming design K1 (get_l0a_energy_from_quads);
+    65-70 MeV for BEAMPHYS 14438. A number: this energy. "beam": the mean energy of the beam file (file_ext).
+    None: the L0A/L0B split of the KLYS ADES values (87.5 MeV at L0AFEND for BEAMPHYS 14438): the beam is then
+    rescaled to that energy and the injector quads focus it as if it had 87.5 MeV.
+
+    daq_sextupole_offsets: apply the W-chicane sextupole mover readbacks (SIOC:SYS1:ML00:AO5x2) as sextupole offsets.
+    False: sextupoles centred (strengths still from the DAQ).
+
+    l2_match: "auto" (default): True if the DAQ magnets are loaded (experiment and scan_number given, and not
+    edit_only_energy_from_exp), False otherwise.
+    If True, run l2_virtual_match after the DAQ settings are loaded: the quads that the DAQ does not record
+    (Q11401-Q12401) are refit so that the golden injector Twiss arrive in L2 (LI13BEG) with the design Twiss.
+    The DAQ L2 matching quads (QM11358/62/93) alone leave BMAG ~4.6/5.4 in L2 for BEAMPHYS 14438. A dict is passed
+    to l2_virtual_match as keyword arguments. The result is stored in tao.l2_match_result.
+
+    bc20_sextupole_tune: "auto" (default): True if the DAQ magnets are loaded and energy_edit_on_beam is True (the
+    feedback gives a tracked beam), and "start" is upstream of BEGBC20; False otherwise.
+    If True, the beam is tracked from "start" to BEGBC20 with the settings of this call (e.g. wakes), and the x offsets
+    of the W-chicane sextupoles are fitted within +-2 mm to minimize the projected emittances after BC20
+    (tune_bc20_sextupole_offsets), as the operators tune the dispersion with the movers. The fitted offsets replace
+    the DAQ mover readbacks (daq_sextupole_offsets). A dict is passed to tune_bc20_sextupole_offsets as keyword
+    arguments (e.g. {"max_offset": 4e-3}). The result is stored in tao.bc20_tune_result.
+
+    keep_magnet_fields: if True (default), the fields of the quads, sextupoles and correctors are fixed (Bmad
+    field_master = T, see fixMagnetFields) once they are set (DAQ readbacks or lattice config, then l2_match), so that the
+    later energy edits (save_dipoles, the feedback on beam) do not change them. With False, Bmad keeps K1/K2 instead,
+    and the fields scale with the change of P0C: after the feedback with wakes P0C is ~1% above the beam energy at BC14
+    and BC20 (the reference particle feels no wakes), so every magnet there acts ~1% too strong on the beam.
     '''
     if filepath is None:
         # src/FACET2_S2E/simulators/bmad/experiment.py -> repository root (same rule as initializeTao)
@@ -108,21 +162,37 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
         raise FileNotFoundError(f'No FACET2-S2E lattice found in "{filepath}". Pass filepath="/path/to/FACET2-S2E", '
                                 'or install the package with "pip install -e ." so that the repository can be found automatically.')
 
-    tao = initializeTao(filePath = filepath, loadCustomLatticeTF=True, csrTF=csrTF, lscTF=lscTF, latticeFile=lattice, bmad_grid_size=grid_size, verbose=verbose, sr_wakes_on=sr_wakes_on, lr_wakes_on=lr_wakes_on, lsc_method=lsc_method, csr_method=csr_method, n_bin=n_bin, autoLoadActiveFile=False)
+    tao = initializeTao(filePath = filepath, loadCustomLatticeTF=True, csrTF=csrTF, lscTF=lscTF, latticeFile=lattice, bmad_grid_size=grid_size, verbose=verbose, sr_wakes_on=sr_wakes_on, lr_wakes_on=lr_wakes_on, lsc_method=lsc_method, csr_method=csr_method, n_bin=n_bin, autoLoadActiveFile=False,
+                        n_rf_steps=n_rf_steps)
     
+    if isinstance(l0a_energy_MeV, str) and l0a_energy_MeV == "beam":
+        if file_ext == "":
+            raise ValueError('l0a_energy_MeV="beam" needs a beam file (file_ext)')
+        l0a_energy_MeV = float(np.mean(ParticleGroup(file_ext + ".h5").energy))*1e-6
+
     dipoleEnergies_MeV = [125, 335, 4500, 10000]
     # copy the experiment data
     if experiment!="" and scan_number!="":
         ds = DATASET("", experiment, scan_number, pathfull = daq_scan_path(experiment, date, daq_root))
         # check if magnets data is not needed. Dogleg energy is always 125 MeV (maybe need to change to the mean of 'BEND_IN10_661_BDES' and 'BEND_IN10_751_BDES' (they are in GeV), so that the magnet strengths are actually correct)
         if edit_only_energy_from_exp:
-            tao = edit_energy_tao_based_on_experiment_database(tao, ds)
+            tao = edit_energy_tao_based_on_experiment_database(tao, ds, l0a_energy_MeV=l0a_energy_MeV)
         else:
-            tao = edit_tao_based_on_experiment_database(tao, ds, correctors_coef=correctors_coef, correctors_from_beg=correctors_from_beg)
+            tao = edit_tao_based_on_experiment_database(tao, ds, correctors_coef=correctors_coef, correctors_from_beg=correctors_from_beg,
+                                                        l0a_energy_MeV=l0a_energy_MeV, sextupole_offsets=daq_sextupole_offsets)
             dipoleEnergies_MeV = save_dipole_energies_from_the_DAQ_database(ds)
 
     if tune_dipoles_to_125_335_4500_10000_MeV:
         dipoleEnergies_MeV = [125, 335, 4500, 10000]
+
+    daq_magnets_loaded = experiment != "" and scan_number != "" and not edit_only_energy_from_exp
+    if isinstance(l2_match, str) and l2_match == "auto":
+        l2_match = daq_magnets_loaded
+    if l2_match:
+        tao.l2_match_result = l2_virtual_match(tao, verbose=verbose, **(l2_match if isinstance(l2_match, dict) else {}))
+
+    if keep_magnet_fields:
+        fixMagnetFields(tao)
 
     fields = save_dipoles(tao, dipoleEnergies_MeV)
 
@@ -143,14 +213,36 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
                 moments = [np.std(P.x),np.std(P.xp),np.std(P.y),np.std(P.yp),np.std(P.t)*3e8,np.std(P.pz)]
                 make_simple_bunch_standalone(N = N_in_simple_bunch, meanPzMeV = current_e_start, moments=moments, save_path = file)
                 edit_bunch_parameters(file, pzMeV=current_e_start, moments=moments, means=means, charge=charge, path_to_write=file)
+    if isinstance(twiss_match, str) and twiss_match == "auto":
+        twiss_match = "golden" if (experiment != "" and scan_number != "" and file_ext != ""
+                                   and _is_upstream(tao, start, GOLDEN_TWISS_PR10571["location"])) else False
+    if twiss_match:
+        # after the energy edit: rescaling pz changes the divergence, and with it the Twiss parameters
+        if isinstance(twiss_match, str) and twiss_match == "golden":
+            targets = golden_twiss_targets(tao, start)
+        else:
+            targets = twiss_match if isinstance(twiss_match, dict) else None
+        targets = twiss_match_beam(tao, file, start, targets=targets, verbose=verbose)
+        if twiss_match_lattice:
+            set_lattice_twiss(tao, start, targets, verbose=verbose)
     set_beam(tao, file, numMacroParticles=None if (gaussFromExternal or file_ext=='') else N_to_use_from_file)
 
     # energy feedback on beam
     if energy_edit_on_beam:
-        tao = edit_energy_based_on_beam_all(tao, start, file, verbose=verbose, desired_beam_energies=desired_beam_energies_for_the_feedback, finalnumMacroParticles=N_to_use_from_file, tune_dipoles=tune_dipoles, dipole_fields=fields)
+        # L0B only, and the beam keeps the energy chosen with "energy" (e.g. energy=-1: the energy of the beam file)
+        tao = edit_energy_based_on_beam_all(tao, start, file, verbose=verbose, desired_beam_energies=desired_beam_energies_for_the_feedback,
+                                            change_only_L0B=True, change_file_pz=False,
+                                            finalnumMacroParticles=N_to_use_from_file, tune_dipoles=tune_dipoles, dipole_fields=fields)
 
     if tune_dipoles:
         tao = treat_dipoles(tao, fields)
+
+    if isinstance(bc20_sextupole_tune, str) and bc20_sextupole_tune == "auto":
+        bc20_sextupole_tune = daq_magnets_loaded and energy_edit_on_beam and _is_upstream(tao, start, "BEGBC20")
+    if bc20_sextupole_tune:
+        trackBeam(tao, filepath=filepath, trackStart=start, trackEnd="BEGBC20", autoLoadActiveFile=False)
+        tao.bc20_tune_result = tune_bc20_sextupole_offsets(
+            tao, verbose=verbose, **(bc20_sextupole_tune if isinstance(bc20_sextupole_tune, dict) else {}))
 
     # run the sim and save the bunch
     if run:
@@ -165,6 +257,10 @@ def get_tao_from_experiment(experiment="", scan_number="", date="", start='L0AFE
         else:
             tao = run_initialized_sim(tao, locationsToSave[0], locationsToSave[-1], pre, suf, locationsToSave)
     return tao
+
+
+def _is_upstream(tao, ele, other):
+    return tao.ele_head(ele)["ix_ele"] < tao.ele_head(other)["ix_ele"]
 
 
 ## Edit lattice according to experiment
@@ -185,19 +281,19 @@ bmad_quad_to_pv_map = {
     'QB10731': ["nonBSA_List_S10", 'QUAD_IN10_731_BDES'],
     'QM10771': ["nonBSA_List_S10", 'QUAD_IN10_771_BDES'],
     'QM10781': ["nonBSA_List_S10", 'QUAD_IN10_781_BDES'],
-    
-    # s11
-    'QA11132': ["nonBSA_List_S11", 'QUAD_LI11_132_BCON'],
-    'Q11201': ["nonBSA_List_S11", 'QUAD_LI11_201_BCON'],
-    'QA11265': ["nonBSA_List_S11", 'QUAD_LI11_265_BCON'],
-    'Q11301': ["nonBSA_List_S11", 'QUAD_LI11_301_BCON'],
-    'QM11312': ["nonBSA_List_S11", 'QUAD_LI11_312_BCON'],
-    'CQ11317': ["nonBSA_List_S11", 'QUAD_LI11_317_BCON'],
-    'SQ11340': ["nonBSA_List_S11", 'QUAD_LI11_340_BCON'],
-    'CQ11352': ["nonBSA_List_S11", 'QUAD_LI11_352_BCON'],
-    'QM11358': ["nonBSA_List_S11", 'QUAD_LI11_358_BCON'],
-    'QM11362': ["nonBSA_List_S11", 'QUAD_LI11_362_BCON'],
-    'QM11393': ["nonBSA_List_S11", 'QUAD_LI11_393_BCON'],
+
+    # s11: readbacks (BACT). BCON is the saved configuration and can differ from the machine by 10-20% (BEAMPHYS 14438: QM11358/62/93)
+    'QA11132': ["nonBSA_List_S11", 'QUAD_LI11_132_BACT'],
+    'Q11201': ["nonBSA_List_S11", 'QUAD_LI11_201_BACT'],
+    'QA11265': ["nonBSA_List_S11", 'QUAD_LI11_265_BACT'],
+    'Q11301': ["nonBSA_List_S11", 'QUAD_LI11_301_BACT'],
+    'QM11312': ["nonBSA_List_S11", 'QUAD_LI11_312_BACT'],
+    'CQ11317': ["nonBSA_List_S11", 'QUAD_LI11_317_BACT'],
+    'SQ11340': ["nonBSA_List_S11", 'QUAD_LI11_340_BACT'],
+    'CQ11352': ["nonBSA_List_S11", 'QUAD_LI11_352_BACT'],
+    'QM11358': ["nonBSA_List_S11", 'QUAD_LI11_358_BACT'],
+    'QM11362': ["nonBSA_List_S11", 'QUAD_LI11_362_BACT'],
+    'QM11393': ["nonBSA_List_S11", 'QUAD_LI11_393_BACT'],
 
     # s12 - s18
     # NOT SAVED IN DAQ?
@@ -312,10 +408,46 @@ def get_l0b_ampl(database):
     return np.mean(database._data["scalars"]["nonBSA_List_S10RF"]['KLYS_LI10_41_ADES'])*2.864664e6
 
 
-def get_l1_phase(database):
-    """Read the L1 cavity phase from the database.
+L0A_ENERGY_QUADS = ['QA10361', 'QA10371']  # between L0A and L0B, no acceleration: they see the L0AFEND energy
+
+
+def get_l0a_energy_from_quads(tao, database, quads=L0A_ENERGY_QUADS, verbose=False):
+    """L0AFEND energy (MeV) implied by the DAQ fields of the quads between L0A and L0B, assuming that they are set
+    to the design K1 (the fields scale with energy): p = c*(BDES/10/L)/K1_design. The dogleg quads QM10771/81 give
+    125.1 MeV this way for BEAMPHYS 14438, and QA10361/71 give 65.1/69.5 MeV (the design lattice has 64 MeV).
+    Returns None if the quads are off or the DAQ has no field for them.
     """
-    return np.mean(database._data["scalars"]["nonBSA_List_LINAC_KLYS"]['KLYS_LI11_11_SSSB_PDES'])
+    energies = []
+    for k in quads:
+        v = bmad_quad_to_pv_map[k]
+        ele = tao.ele_gen_attribs(k, which="design")
+        bdes = np.mean(database._data["scalars"][v[0]][v[1]])
+        if ele["K1"] != 0 and bdes != 0:
+            energies.append(299792458.0*(bdes/10/ele["L"])/ele["K1"]*1e-6)
+    energies = [e for e in energies if np.isfinite(e) and e > 0]
+    if verbose:
+        print(f"L0AFEND energy implied by {quads}: {np.round(energies, 2)} MeV")
+    if not energies:
+        return None
+    if max(energies)/min(energies) > 1.15:
+        print(f"Warning: L0AFEND energies implied by {quads} differ by more than 15%: {np.round(energies, 2)} MeV")
+    return float(np.mean(energies))
+
+
+def _daq_value(database, key, lists):
+    """Mean of PV `key` from the first of `lists` that has it (None if none does)."""
+    for lst in lists:
+        d = database._data["scalars"].get(lst)
+        if d is not None and key in d:
+            return float(np.nanmean(d[key]))
+    return None
+
+
+def get_l1_phase(database):
+    """Read the L1 cavity phase (KLYS:LI11:11:SSSB_PDES) from the database: nonBSA_List_LINAC_SBST (DAQs from
+    about June 2026) or the deprecated nonBSA_List_LINAC_KLYS.
+    """
+    return _daq_value(database, 'KLYS_LI11_11_SSSB_PDES', ["nonBSA_List_LINAC_SBST", "nonBSA_List_LINAC_KLYS"])
 
 
 def get_l2_phase(database):
@@ -328,6 +460,55 @@ def get_l3_phase(database):
     """Read the L3 cavity phase from the database.
     """
     return np.mean(database._data["scalars"]["nonBSA_List_LINAC_KLYS"]['LI19_SBST_1_PHAS'])
+
+
+# Per-klystron L2/L3 RF (DAQs with nonBSA_List_LINAC_SBST + nonBSA_List_LINAC_L2KLYS/L3KLYS, from about June 2026)
+KLYS_LISTS = {"L2": "nonBSA_List_LINAC_L2KLYS", "L3": "nonBSA_List_LINAC_L3KLYS"}
+
+
+def has_per_klystron_rf(database):
+    sc = database._data["scalars"]
+    return "nonBSA_List_LINAC_SBST" in sc and all(l in sc for l in KLYS_LISTS.values())
+
+
+def set_linac_rf_per_klystron(tao, database, linac, energy_gain):
+    """Set the L2 or L3 cavities klystron by klystron, as the FACET-II live model does (F2_live_model/bmad.py):
+    phase = LI<s>:SBST:1:PDES + LI<s>:KLYS:<n>1:PDES (set values: the SBST PHAS readbacks are not usable),
+    voltage proportional to LI<s>:KLYS:<n>1:AMPL, 0 if the klystron is off (AMPL <= 0 or PHAS = -10000) or has
+    no DAQ entry. The voltages are then scaled together to give `energy_gain` [eV] (the per-linac fudge factor).
+    Returns {"effective_phase_deg", "off": [...], "missing": [...]}.
+    """
+    klys = {}
+    for n in map(str, matchStringWrapper(tao, linac)):
+        m = re.match(r"K(\d\d)_(\d)", n)
+        klys.setdefault((int(m.group(1)), int(m.group(2))), []).append(n)
+    lst = KLYS_LISTS[linac]
+    off, missing = [], []
+    for (sec, k), cavs in sorted(klys.items()):
+        sbst = _daq_value(database, f"LI{sec}_SBST_1_PDES", ["nonBSA_List_LINAC_SBST"])
+        pdes = _daq_value(database, f"LI{sec}_KLYS_{k}1_PDES", [lst])
+        ampl = _daq_value(database, f"LI{sec}_KLYS_{k}1_AMPL", [lst])
+        phas = _daq_value(database, f"LI{sec}_KLYS_{k}1_PHAS", [lst])
+        if None in (sbst, pdes, ampl):
+            missing.append(f"{sec}-{k}"); on = False
+        else:
+            on = ampl > 0 and (phas is None or phas > -9999)
+            if not on: off.append(f"{sec}-{k}")
+        phase = (sbst + pdes) if on else 0.0
+        length = sum(tao.ele_gen_attribs(c)["L"] for c in cavs)
+        for c in cavs:
+            tao.cmd(f"set ele {c} PHI0 = {phase/360.}")
+            tao.cmd(f"set ele {c} GRADIENT = {ampl*1e6/length if on else 0.0}")
+    names = list(map(str, matchStringWrapper(tao, linac)))
+    scale = energy_gain/getEnergyChangeFromElements(tao, names)
+    z = 0
+    for c in names:
+        g = tao.ele_gen_attribs(c)["GRADIENT"]*scale
+        tao.cmd(f"set ele {c} GRADIENT = {g}")
+        z += g*tao.ele_gen_attribs(c)["L"]*np.exp(2j*np.pi*tao.ele_gen_attribs(c)["PHI0"])
+    if missing:
+        print(f"Warning: no DAQ RF data for {linac} klystrons {missing}; they are set off")
+    return {"effective_phase_deg": float(np.rad2deg(np.angle(z))), "off": off, "missing": missing}
 
 
 # L3
@@ -369,20 +550,20 @@ bmad_corrector_to_pv_map = {
     'YC10762': ["nonBSA_List_S10", 'YCOR_IN10_762_BDES'],
     
     # correctors in sector 11
-    'YC11105': ["nonBSA_List_S11", 'YCOR_LI11_105_BCON'],
-    'XC11104': ["nonBSA_List_S11", 'XCOR_LI11_104_BCON'],
-    'YC11141': ["nonBSA_List_S11", 'YCOR_LI11_141_BCON'],
-    'XC11140': ["nonBSA_List_S11", 'XCOR_LI11_140_BCON'],
-    'XC11202': ["nonBSA_List_S11", 'XCOR_LI11_202_BCON'],
-    'YC11203': ["nonBSA_List_S11", 'YCOR_LI11_203_BCON'],
-    'YC11273': ["nonBSA_List_S11", 'YCOR_LI11_273_BCON'],
-    'XC11272': ["nonBSA_List_S11", 'XCOR_LI11_272_BCON'],
-    'YC11305': ["nonBSA_List_S11", 'YCOR_LI11_305_BCON'],
-    'XC11304': ["nonBSA_List_S11", 'XCOR_LI11_304_BCON'],
-    'YC11321': ["nonBSA_List_S11", 'YCOR_LI11_321_BCON'],
-    'YC11365': ["nonBSA_List_S11", 'YCOR_LI11_365_BCON'],
-    'XC11398': ["nonBSA_List_S11", 'XCOR_LI11_398_BCON'],
-    'YC11399': ["nonBSA_List_S11", 'YCOR_LI11_399_BCON'],
+    'YC11105': ["nonBSA_List_S11", 'YCOR_LI11_105_BACT'],
+    'XC11104': ["nonBSA_List_S11", 'XCOR_LI11_104_BACT'],
+    'YC11141': ["nonBSA_List_S11", 'YCOR_LI11_141_BACT'],
+    'XC11140': ["nonBSA_List_S11", 'XCOR_LI11_140_BACT'],
+    'XC11202': ["nonBSA_List_S11", 'XCOR_LI11_202_BACT'],
+    'YC11203': ["nonBSA_List_S11", 'YCOR_LI11_203_BACT'],
+    'YC11273': ["nonBSA_List_S11", 'YCOR_LI11_273_BACT'],
+    'XC11272': ["nonBSA_List_S11", 'XCOR_LI11_272_BACT'],
+    'YC11305': ["nonBSA_List_S11", 'YCOR_LI11_305_BACT'],
+    'XC11304': ["nonBSA_List_S11", 'XCOR_LI11_304_BACT'],
+    'YC11321': ["nonBSA_List_S11", 'YCOR_LI11_321_BACT'],
+    'YC11365': ["nonBSA_List_S11", 'YCOR_LI11_365_BACT'],
+    'XC11398': ["nonBSA_List_S11", 'XCOR_LI11_398_BACT'],
+    'YC11399': ["nonBSA_List_S11", 'YCOR_LI11_399_BACT'],
     
     # Sector 19 correctors
     'XC19202': ["nonBSA_List_S19", 'LI19_XCOR_202_BACT'],
@@ -430,13 +611,15 @@ bmad_corrector_to_pv_map = {
     'YC1FF':  ["nonBSA_List_S20Magnets", 'LI20_YCOR_3017_BACT'],
     'YC2FF':  ["nonBSA_List_S20Magnets", 'LI20_YCOR_3057_BACT'],
     'XC3FF':  ["nonBSA_List_S20Magnets", 'LI20_XCOR_3086_BACT'],
-    'XC1EX':  ["nonBSA_List_S20Magnets", 'LI20_XCOR_3276_BACT'],  # by elimination
+    # XC1EX (LI20:XCOR:3276, LI20_XCOR_3276_BACT) is only in the PAX bypass line of facet2-lattice since the
+    # 2026 optics, and f2_elec uses the PAX line (f2_elec_pax), so it is not in the model.
 }
 
 
 ### Lattice edit functions
 
-def edit_tao_based_on_experiment_database(tao, dataset, correctors_coef=-1/10, correctors_from_beg=False):
+def edit_tao_based_on_experiment_database(tao, dataset, correctors_coef=-1/10, correctors_from_beg=False, l0a_energy_MeV="quads",
+                                          sextupole_offsets=True):
     '''
     - Bend settings are disabled because setting B_FIELD in BMAD changes the positions of all downstream elements.
     - Correctors may be either all enabled (with correctors_coef != 0), enabled only from the dogleg beginning (correctors_from_beg=False), or turned off (correctors_coef=0).
@@ -451,7 +634,8 @@ def edit_tao_based_on_experiment_database(tao, dataset, correctors_coef=-1/10, c
     # tao.cmd(f'set ele L0BF PHI0 = {l0bphase / 360.}')
     # tao.cmd(f'set ele L0BF VOLTAGE = {(61.0e6 + (mean_energy_MeV_lattice-125)*1e6) / math.cos(2*math.pi*l0bphase/360)}')
 
-    tao = edit_energy_tao_based_on_experiment_database(tao, dataset)
+    # energies first: the quad fields below are converted to K1 at the lattice energy
+    tao = edit_energy_tao_based_on_experiment_database(tao, dataset, l0a_energy_MeV=l0a_energy_MeV)
 
     for k, v in bmad_quad_to_pv_map.items():
         #print(f'{k} base {np.mean(dataset._data["scalars"][v[0]][v[1]])}')
@@ -477,10 +661,10 @@ def edit_tao_based_on_experiment_database(tao, dataset, correctors_coef=-1/10, c
     # Float arrays: an integer array would truncate the mm-scale offsets to 0.
     sextXOffsets = np.zeros(6)
     sextYOffsets = np.zeros(6)
-    for i in range(2):
+    for i in range(2 if sextupole_offsets else 0):
         sextXOffsets[i] = np.mean(dataset._data["scalars"][sextupole_offsets_x_from_daq[i][0]][sextupole_offsets_x_from_daq[i][1]])*1e-3
         sextYOffsets[i] = np.mean(dataset._data["scalars"][sextupole_offsets_y_from_daq[i][0]][sextupole_offsets_y_from_daq[i][1]])*1e-3
-    for i in range(1, 3):
+    for i in (range(1, 3) if sextupole_offsets else ()):
         # i=1 -> S1ER (s1r), i=2 -> S2ER (s2r)
         sextXOffsets[-i] = np.mean(dataset._data["scalars"][sextupole_offsets_x_from_daq[-i][0]][sextupole_offsets_x_from_daq[-i][1]])*1e-3
         sextYOffsets[-i] = np.mean(dataset._data["scalars"][sextupole_offsets_y_from_daq[-i][0]][sextupole_offsets_y_from_daq[-i][1]])*1e-3
@@ -507,10 +691,10 @@ bmad_bend_to_pv_map = {
     'BX10661': ["nonBSA_List_S10", 'BEND_IN10_661_BDES'],
     'BX10751': ["nonBSA_List_S10", 'BEND_IN10_751_BDES'],
     # s11
-    'BCX11314': ["nonBSA_List_S11", 'BEND_LI11_314_BCON'],
-    'BCX11331': ["nonBSA_List_S11", 'BEND_LI11_331_BCON'],
-    'BCX11338': ["nonBSA_List_S11", 'BEND_LI11_338_BCON'],
-    'BCX11355': ["nonBSA_List_S11", 'BEND_LI11_355_BCON'],
+    'BCX11314': ["nonBSA_List_S11", 'BEND_LI11_314_BACT'],
+    'BCX11331': ["nonBSA_List_S11", 'BEND_LI11_331_BACT'],
+    'BCX11338': ["nonBSA_List_S11", 'BEND_LI11_338_BACT'],
+    'BCX11355': ["nonBSA_List_S11", 'BEND_LI11_355_BACT'],
     # s14
     # NOT SAVED IN DAQ?
     # 'BCX14720': ["", ''],
@@ -543,12 +727,22 @@ def save_dipole_energies_from_the_DAQ_database(dataset):
     return bendEnergiesMeV
 
 
-def edit_energy_tao_based_on_experiment_database(tao, dataset):
+def edit_energy_tao_based_on_experiment_database(tao, dataset, l0a_energy_MeV="quads"):
     '''
     Cavities:
-    - The phase set to all klystrons is the same (for a given cavity). But the EPICS databases suggest that in experiment there are two klystrons with +- large phase offset. It is disregarded here.
-    - The voltage is also the same, and is tuned to match the default 125, 335, 4500, 10000 MeV.
+    - L2, L3: with the per-klystron DAQ lists (has_per_klystron_rf), every klystron gets its own phase (SBST PDES +
+      KLYS PDES) and relative voltage (AMPL), see set_linac_rf_per_klystron; the result is in tao.daq_rf.
+      Older DAQs (nonBSA_List_LINAC_KLYS): one phase for the whole linac (LI14 / LI19 SBST PHAS), equal gradients.
+    - The voltages are scaled to give the default 125, 335, 4500, 10000 MeV.
+    l0a_energy_MeV: energy at L0AFEND. "quads" (default): implied by the DAQ fields of QA10361/71
+    (get_l0a_energy_from_quads). A number: this energy. None: the L0A/L0B split of the KLYS ADES values
+    (87.5 MeV at L0AFEND for BEAMPHYS 14438, which the injector quads do not support).
+    L0B is then set to keep 125 MeV at the dogleg.
     '''
+    if isinstance(l0a_energy_MeV, str) and l0a_energy_MeV == "quads":
+        l0a_energy_MeV = get_l0a_energy_from_quads(tao, dataset)
+        if l0a_energy_MeV is None:
+            print("Warning: no DAQ fields for the L0A quads, the L0A energy is taken from the KLYS ADES split")
     l0a_phase = get_l0a_phase(dataset)
     l0a_ampl = get_l0a_ampl(dataset)
     
@@ -570,14 +764,24 @@ def edit_energy_tao_based_on_experiment_database(tao, dataset):
     tao.cmd(f'set ele L0AF VOLTAGE = {l0a_ampl*coef_e}')
     tao.cmd(f'set ele L0BF VOLTAGE = {l0b_ampl*coef_e}')
 
-    l1_phase = get_l1_phase(dataset)
-    l2_phase = get_l2_phase(dataset)
-    l3_phase = get_l3_phase(dataset)
-    setLinacPhase(tao, "L1", l1_phase)
+    if l0a_energy_MeV is not None:
+        # L0A to give l0a_energy_MeV at L0AFEND, then L0B to keep the dogleg energy
+        e0 = tao.ele_gen_attribs('BEGINNING')["P0C"]
+        ea = tao.ele_gen_attribs('L0AFEND')["P0C"]
+        tao.cmd(f'set ele L0AF VOLTAGE = {tao.ele_gen_attribs("L0AF")["VOLTAGE"]*(l0a_energy_MeV*1e6 - e0)/(ea - e0)}')
+        ea = tao.ele_gen_attribs('L0AFEND')["P0C"]
+        eb = tao.ele_gen_attribs('BX10661')["P0C"]
+        tao.cmd(f'set ele L0BF VOLTAGE = {tao.ele_gen_attribs("L0BF")["VOLTAGE"]*(edited_energy_dogleg_MeV*1e6 - ea)/(eb - ea)}')
+
+    setLinacPhase(tao, "L1", get_l1_phase(dataset))
     setLinacGradientAuto(tao, "L1", (335-125)*1e6)
-    setLinacPhase(tao, "L2", l2_phase)
-    setLinacGradientAuto(tao, "L2", (4500-335)*1e6)
-    setLinacPhase(tao, "L3", l3_phase)
-    setLinacGradientAuto(tao, "L3", (10000-4500)*1e6)
+    gains = {"L2": (4500-335)*1e6, "L3": (10000-4500)*1e6}
+    if has_per_klystron_rf(dataset):
+        tao.daq_rf = {L: set_linac_rf_per_klystron(tao, dataset, L, gains[L]) for L in ("L2", "L3")}
+    else:
+        tao.daq_rf = None
+        for L, get_phase in (("L2", get_l2_phase), ("L3", get_l3_phase)):
+            setLinacPhase(tao, L, get_phase(dataset))
+            setLinacGradientAuto(tao, L, gains[L])
     
     return tao

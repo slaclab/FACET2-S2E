@@ -5,7 +5,7 @@ Moved from simulationFunctions.py.
 
 import numpy as np
 
-from .lattice.linac import setLinacGradientAuto, matchStringWrapper
+from .lattice.linac import setLinacGradientAuto, scaleLinacGradientAuto, matchStringWrapper
 from .lattice.optics import get_element_array
 from .core import getBeamAtElement
 
@@ -36,9 +36,10 @@ def tune_to_P0Cs(tao, desired_P0Cs_MeV=[125, 335, 4500, 10000], change_only_L0B=
         tao.cmd(f'set ele L0AF VOLTAGE = {l0aVoltage*coef_e}')
         tao.cmd(f'set ele L0BF VOLTAGE = {l0bVoltage*coef_e}')
 
-    setLinacGradientAuto(tao, "L1", (desired_P0Cs_MeV[1]-desired_P0Cs_MeV[0])*1e6)
-    setLinacGradientAuto(tao, "L2", (desired_P0Cs_MeV[2]-desired_P0Cs_MeV[1])*1e6)
-    setLinacGradientAuto(tao, "L3", (desired_P0Cs_MeV[3]-desired_P0Cs_MeV[2])*1e6)
+    # scale the present gradients (keeps per-klystron amplitudes, e.g. from the DAQ; equal gradients stay equal)
+    scaleLinacGradientAuto(tao, "L1", (desired_P0Cs_MeV[1]-desired_P0Cs_MeV[0])*1e6)
+    scaleLinacGradientAuto(tao, "L2", (desired_P0Cs_MeV[2]-desired_P0Cs_MeV[1])*1e6)
+    scaleLinacGradientAuto(tao, "L3", (desired_P0Cs_MeV[3]-desired_P0Cs_MeV[2])*1e6)
 
     return tao
 

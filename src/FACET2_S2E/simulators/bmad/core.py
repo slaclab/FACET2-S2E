@@ -53,6 +53,7 @@ def initializeTao(
     lsc_method="slice",
     csr_method="1_dim",
     n_bin=32,
+    n_rf_steps=100,
 
     verbose = True,
     
@@ -111,6 +112,13 @@ def initializeTao(
     transverseWakes : bool
         Enable or disable transverse wakefields within linac sections. Impacts the SR wakes in L0, L1, and K
 
+    n_rf_steps : int or None, optional
+        RF steps per accelerating structure for all lcavities (Bmad n_rf_steps), 100 by default. None keeps the
+        lattice's values: 1000, and 5000 in L0 and LI11 (facet2-lattice 2026). Every lattice recalculation tracks
+        through these steps, so with the lattice's values a DAQ load with the energy feedback takes ~25 min instead of
+        ~3-5 min. For E320_17418, 100 steps gave the same beam up to BEGBC20 as 1000/5000; Bmad's default of 10 gave a
+        2% shorter bunch after BC14.
+
     IMPACT is disabled in this function! Run it separately if needed.
     
     # All:
@@ -155,6 +163,9 @@ def initializeTao(
             print('-init {:s}/bmad/models/f2_elec/tao.init -noplot'.format(environ['FACET2_LATTICE']))
 
     tao.filePathGlobal = filePathGlobal #Put this into the tao object immediately. Needed early in the initialization
+
+    if n_rf_steps is not None:
+        tao.cmd(f"set ele lcavity::* n_rf_steps = {int(n_rf_steps)}")
     
     tao.cmd("set beam add_saved_at = DTOTR, XTCAVF, M2EX, PR10571, PR10711, CN2069, YCWIGE") #The beam is saved at all MARKER elements already; this list just supplements
 

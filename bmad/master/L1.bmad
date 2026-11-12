@@ -1,5 +1,5 @@
 
-! *** OPTICS=FACET2-16FEB24 ***
+! *** OPTICS=FACET2-28JAN2026 ***
 
 ! ==============================================================================
 ! Modification History
@@ -30,37 +30,50 @@ phil1 = -20.5/360            !rad/2pi
 klossl1 = 0                  !V/C/m
 
 k11_1b1: lcavity, rf_frequency = sbandf * 1e6, type = "9.4ft", l = 0.453432, voltage = p50*gradl1*0.453432 * 1e6,
-          phi0 = phil1
+          phi0 = phil1, cavity_type = traveling_wave
 k11_1b2: lcavity, rf_frequency = sbandf * 1e6, type = "9.4ft", l = 2.415768, voltage = p50*gradl1*2.415768 * 1e6,
-          phi0 = phil1
-k11_1c1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.6689, voltage = p25*gradl1*0.6689 * 1e6, phi0 = phil1
-k11_1c2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3752, voltage = p25*gradl1*2.3752 * 1e6, phi0 = phil1
-k11_1d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*gradl1*dlwl10 * 1e6, phi0 = phil1
+          phi0 = phil1, cavity_type = traveling_wave
+k11_1c1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.6689, voltage = p25*gradl1*0.6689 * 1e6,
+          phi0 = phil1, cavity_type = traveling_wave
+k11_1c2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.3752, voltage = p25*gradl1*2.3752 * 1e6,
+          phi0 = phil1, cavity_type = traveling_wave
+k11_1d: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*gradl1*dlwl10 * 1e6,
+          phi0 = phil1, cavity_type = traveling_wave
 
-k11_2a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3256, voltage = p25*gradl1*0.3256 * 1e6, phi0 = phil1
-k11_2a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2870, voltage = p25*gradl1*0.2870 * 1e6, phi0 = phil1
-k11_2a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4315, voltage = p25*gradl1*2.4315 * 1e6, phi0 = phil1
-k11_2b: lcavity, rf_frequency = sbandf * 1e6, type = "9.4ft", l = dlwl9, voltage = p25*gradl1*dlwl9 * 1e6, phi0 = phil1
-k11_2c1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.5000, voltage = p50*gradl1*0.5000 * 1e6, phi0 = phil1
-k11_2c2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.5441, voltage = p50*gradl1*2.5441 * 1e6, phi0 = phil1
+k11_2a1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.3256, voltage = p25*gradl1*0.3256 * 1e6,
+          phi0 = phil1, cavity_type = traveling_wave
+k11_2a2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.2870, voltage = p25*gradl1*0.2870 * 1e6,
+          phi0 = phil1, cavity_type = traveling_wave
+k11_2a3: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.4315, voltage = p25*gradl1*2.4315 * 1e6,
+          phi0 = phil1, cavity_type = traveling_wave
+k11_2b: lcavity, rf_frequency = sbandf * 1e6, type = "9.4ft", l = dlwl9, voltage = p25*gradl1*dlwl9 * 1e6, phi0 = phil1,
+          cavity_type = traveling_wave
+k11_2c1: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 0.5000, voltage = p50*gradl1*0.5000 * 1e6,
+          phi0 = phil1, cavity_type = traveling_wave
+k11_2c2: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = 2.5441, voltage = p50*gradl1*2.5441 * 1e6,
+          phi0 = phil1, cavity_type = traveling_wave
 
 ! define unsplit lcavitys for BMAD ... not used by MAD
 
-k11_1b: lcavity, rf_frequency = sbandf * 1e6, type = "9.4ft", l = dlwl9, voltage = p50*gradl1*dlwl9 * 1e6, phi0 = phil1
-k11_1c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*gradl1*dlwl10 * 1e6, phi0 = phil1
-k11_2a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*gradl1*dlwl10 * 1e6, phi0 = phil1
-k11_2c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p50*gradl1*dlwl10 * 1e6, phi0 = phil1
+k11_1b: lcavity, rf_frequency = sbandf * 1e6, type = "9.4ft", l = dlwl9, voltage = p50*gradl1*dlwl9 * 1e6, phi0 = phil1,
+          cavity_type = traveling_wave
+k11_1c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*gradl1*dlwl10 * 1e6,
+          phi0 = phil1, cavity_type = traveling_wave
+k11_2a: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p25*gradl1*dlwl10 * 1e6,
+          phi0 = phil1, cavity_type = traveling_wave
+k11_2c: lcavity, rf_frequency = sbandf * 1e6, type = "10ft", l = dlwl10, voltage = p50*gradl1*dlwl10 * 1e6,
+          phi0 = phil1, cavity_type = traveling_wave
 
 ! ------------------------------------------------------------------------------
 ! L1 X-band
 ! ------------------------------------------------------------------------------
 
-l1xf__1: lcavity, rf_frequency = xbandf * 1e6, type = "@0,linearizer", l = dlwlx/2
-l1xf__2: lcavity, rf_frequency = xbandf * 1e6, type = "@0,linearizer", l = dlwlx/2
+l1xf__1: lcavity, rf_frequency = xbandf * 1e6, type = "@0,linearizer", l = dlwlx/2, cavity_type = traveling_wave
+l1xf__2: lcavity, rf_frequency = xbandf * 1e6, type = "@0,linearizer", l = dlwlx/2, cavity_type = traveling_wave
 
 ! define unsplit lcavitys for BMAD ... not used by MAD
 
-l1xf: lcavity, rf_frequency = xbandf * 1e6, type = "@0,linearizer", l = dlwlx
+l1xf: lcavity, rf_frequency = xbandf * 1e6, type = "@0,linearizer", l = dlwlx, cavity_type = traveling_wave
 
 ! ==============================================================================
 ! QUADs
@@ -162,7 +175,19 @@ yc11141[ref] = k11_1c
   K11_1d_full : LINE=(K11_1d)
 !---------------------
 ! K11_2A LCAVITY
+!---------------------
+! K11_2A LCAVITY
 K11_2A_full: line = (K11_2A)
+! contains zero length elements:
+    XC11202[superimpose] = T
+    XC11202[ref] = K11_2A
+    XC11202[ref_origin] = beginning
+    XC11202[offset] = 0.3256
+    YC11203[superimpose] = T
+    YC11203[ref] = K11_2A
+    YC11203[ref_origin] = beginning
+    YC11203[offset] = 0.6126
+!old: K11_2A_full: line = (K11_2A)
 ! contains zero length elements:
     XC11202[superimpose] = T
     XC11202[ref] = K11_2A
@@ -185,7 +210,23 @@ yc11273[superimpose] = T
 yc11273[ref] = k11_2c
 !---------------------
 ! L1XF LCAVITY
+!---------------------
+! L1XF LCAVITY
 L1XF_full: line = (L1XF)
+! contains zero length elements:
+    XC11304[superimpose] = T
+    XC11304[ref] = L1XF
+    XC11304[ref_origin] = beginning
+    XC11304[offset] = 0.2974
+    YC11305[superimpose] = T
+    YC11305[ref] = L1XF
+    YC11305[ref_origin] = beginning
+    YC11305[offset] = 0.2974
+    L1XFEND[superimpose] = T
+    L1XFEND[ref] = L1XF
+    L1XFEND[ref_origin] = beginning
+    L1XFEND[offset] = 0.5948
+!old: L1XF_full: line = (L1XF)
 ! contains zero length elements:
     XC11304[superimpose] = T
     XC11304[ref] = L1XF

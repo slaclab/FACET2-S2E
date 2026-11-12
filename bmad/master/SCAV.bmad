@@ -1,8 +1,11 @@
 
-! *** OPTICS=FACET2-16FEB24 ***
+! *** OPTICS=FACET2-28JAN2026 ***
 
 ! ==============================================================================
 ! Modification History
+! ------------------------------------------------------------------------------
+! 28-JAN-2026, M. Woodley
+!  * add "x" to names of BPMs in off-axis quadrupoles to avoid Bmad problems
 ! ------------------------------------------------------------------------------
 ! 31-DEC-2018, M. Woodley
 !  * use original SCAVX19 kicker strength
@@ -50,9 +53,9 @@ lk19_5x = 4*dlwl10
 lk19_6x = 4*dlwl10+1.0e-6 !kicked beam
 
 k19_5x: lcavity, rf_frequency = sbandf * 1e6, type = "40ft", l = lk19_5x, voltage = p25*g19_5*lk19_5x * 1e6,
-          phi0 = +phifb3
+          phi0 = +phifb3, cavity_type = traveling_wave
 k19_6x: lcavity, rf_frequency = sbandf * 1e6, type = "40ft", l = lk19_6x, voltage = p25*g19_6*lk19_6x * 1e6,
-          phi0 = +phifb3
+          phi0 = +phifb3, cavity_type = traveling_wave
 
 ! ==============================================================================
 ! SBEN
@@ -274,6 +277,12 @@ yc57282: vkicker
 ! diagnostics
 ! ------------------------------------------------------------------------------
 
+! add "x" to names of BPMs in off-axis quadrupoles to avoid Bmad problems
+
+bpm19501x: monitor
+bpm19601x: monitor
+bpm19701x: monitor
+
 ! BPMs (LCLS-II type designations)
 
 bpm57170: monitor
@@ -333,28 +342,28 @@ endscav: marker
 bky170_full: line = (bky170)
 
 
-!Old split line:  Q19501x_full : LINE=(Q19501x,BPM19501,Q19501x)
+!Old split line:  Q19501x_full : LINE=(Q19501x,BPM19501x,Q19501x)
 
 q19501x_full: line = (q19501x)
 q19501x[L] = 2*q19501x[L]
-bpm19501[superimpose] = T
-bpm19501[ref] = q19501x
+bpm19501x[superimpose] = T
+bpm19501x[ref] = q19501x
 
 
-!Old split line:  Q19601x_full : LINE=(Q19601x,BPM19601,Q19601x)
+!Old split line:  Q19601x_full : LINE=(Q19601x,BPM19601x,Q19601x)
 
 q19601x_full: line = (q19601x)
 q19601x[L] = 2*q19601x[L]
-bpm19601[superimpose] = T
-bpm19601[ref] = q19601x
+bpm19601x[superimpose] = T
+bpm19601x[ref] = q19601x
 
 
-!Old split line:  Q19701x_full : LINE=(Q19701x,BPM19701,Q19701x)
+!Old split line:  Q19701x_full : LINE=(Q19701x,BPM19701x,Q19701x)
 
 q19701x_full: line = (q19701x)
 q19701x[L] = 2*q19701x[L]
-bpm19701[superimpose] = T
-bpm19701[ref] = q19701x
+bpm19701x[superimpose] = T
+bpm19701x[ref] = q19701x
 
   SCAV19X : LINE=(BEGSCAV,BKY170_full,DAA7m,DAQ1,Q19501x_full,DAQ2,K19_5x,DAQ1,Q19601x_full,DAQ2,K19_6x,DAQ1,
          Q19701x_full,MSCAV)

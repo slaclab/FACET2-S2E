@@ -26,6 +26,12 @@
    conda env create -f bmadQPADCondaEnv.yml
    conda activate bmad-qpad
    ```
+   The yml files pin Bmad 20260828, which has 3D CSR (`csr_method = steady_state_3d`), and keep `libgfortran` at 15.x. An environment created before this change has Bmad 20250811; to update it in place:
+   ```bash
+   conda install -n bmad-qpad -c conda-forge "bmad=20260828.0=nompi_*" libgfortran=15.3 libgfortran5=15.3 libgfortran-ng=15.3
+   ```
+   Check the result with `conda list -n bmad-qpad "bmad|libgfortran"`.
+
    The `prefix:` line in the yml files points to another user's directory. If conda tries to use it, give the location explicitly:
    ```bash
    conda env create -f bmadQPADCondaEnv.yml -p /path/to/envs/bmad-qpad

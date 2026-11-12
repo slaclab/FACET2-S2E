@@ -112,6 +112,20 @@ def setLinacGradientAuto(tao, activeMatchStrings, targetVoltage):
     
     #print(voltageSum/1e6)
 
+def scaleLinacGradientAuto(tao, activeMatchStrings, targetVoltage):
+    """
+    Scale the present gradients of the elements together to achieve the target voltage change, keeping their
+    ratios (e.g. per-klystron amplitudes from the DAQ). Falls back to setLinacGradientAuto (equal gradients)
+    if the elements give no energy change.
+    """
+    activeMatchStrings = matchStringWrapper(tao, activeMatchStrings)
+    voltageSum = getEnergyChangeFromElements(tao, activeMatchStrings)
+    if voltageSum == 0:
+        return setLinacGradientAuto(tao, activeMatchStrings, targetVoltage)
+    gradients = {i: tao.ele_gen_attribs(i)["GRADIENT"] for i in activeMatchStrings}
+    for i, g in gradients.items(): tao.cmd(f'set ele {i} GRADIENT = {g*targetVoltage/voltageSum}')
+
+
 def setLinacPhase(tao, activeMatchStrings, phi0Deg):
     """Set all elements to a phase
 

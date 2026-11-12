@@ -1,14 +1,20 @@
+! BXi
+!  BEGINNING[BETA_A]  =  0.137761791898
+!  BEGINNING[ALPHA_A] =  0.620280308601
+!  BEGINNING[BETA_B]  =  7.063979455311
+!  BEGINNING[ALPHA_B] = -5.750562653636
 
- ! Matches at MRK0F
- BEGINNING[BETA_A] =  1.39449126865854395E-001
- BEGINNING[ALPHA_A] =  9.51137732365840982E-001
- BEGINNING[BETA_B] =  3.65359641740668428E-001
- BEGINNING[ALPHA_B] =  1.99621756285904550E+000
- !from mad8s
- !BEGINNING[BETA_A] =  0.132923615689
- !BEGINNING[ALPHA_A] = 0.896770130014
- !BEGINNING[BETA_B] =  0.365931285843
- !BEGINNING[ALPHA_B] = 1.863967282833
+! BX0 (cathode)
+!  BEGINNING[BETA_A] =  1.39449126865854395E-001
+!  BEGINNING[ALPHA_A] =  9.51137732365840982E-001
+!  BEGINNING[BETA_B] =  3.65359641740668428E-001
+!  BEGINNING[ALPHA_B] =  1.99621756285904550E+000
+!  !BEGINNING[BETA_A]  =  0.132923615689
+!  !BEGINNING[ALPHA_A] =  0.896770130014
+!  !BEGINNING[BETA_B]  =  0.365931285843
+!  !BEGINNING[ALPHA_B] =  1.863967282833
+
+! Starting twiss are set using fixer element defined later in file.
 
 parameter[geometry] = open
 parameter[particle] = electron
@@ -34,7 +40,6 @@ patch_bc20: patch, superimpose, ref=begbc20
 ! QE10511[K1] =  9.75666674536063816E+000
 ! QE10525[K1] = -1.30898989258770122E+001
 ! 
-! 
 ! ! BC11C
 ! QM10631[K1] =  1.42358555120514101E+001
 ! QM10651[K1] = -1.14085107672723147E+001
@@ -59,22 +64,79 @@ patch_bc20: patch, superimpose, ref=begbc20
 !expand_lattice
 !quad::*[field_master] = T
 
-
-
 ! Cavity wakefields, traveling wave, full sbend
-! NMM 2025-04-14; now with transverse wakes too
-! lcavity::L0*[sr_wake]   = call::$FACET2_LATTICE/bmad/wakefields/longitudinal_wakes_sband.bmad
-! lcavity::K*[sr_wake]    = call::$FACET2_LATTICE/bmad/wakefields/longitudinal_wakes_sband.bmad
+! FACET2-S2E: longitudinal + transverse short-range wakes (this file is f2_elec.lat.bmad with these two lines changed)
 lcavity::L0*[sr_wake]   = call::$FACET2_LATTICE/bmad/wakefields/combined_wakes_sband.bmad
 lcavity::K*[sr_wake]    = call::$FACET2_LATTICE/bmad/wakefields/combined_wakes_sband.bmad
 lcavity::L1X*[sr_wake]  = call::$FACET2_LATTICE/bmad/wakefields/longitudinal_wakes_xband.bmad
 lcavity::*[cavity_type] = traveling_wave
 sbend::*[fringe_type] = full
+lcavity::*[n_rf_steps]=1000
+l0af[n_rf_steps]=5000
+l0bf[n_rf_steps]=5000
+lcavity::k11_*[n_rf_steps]=5000
+!lcavity::*[n_cell] = 0
 
-! 
-beginning[e_tot] = 6e6
+fixer_inj: fixer, superimpose, ref=beginning, ref_origin=beginning,
+  beta_a_stored=1.3945E-01, alpha_a_stored=9.5114E-01,
+  beta_b_stored=3.6536E-01, alpha_b_stored=1.9962E+00,
+  is_on=F
+
+fixer_mrk0f: fixer, superimpose, ref=mrk0f, ref_origin=beginning,
+  beta_a_stored=5.286, alpha_a_stored=-2.039,
+  beta_b_stored=2.582, alpha_b_stored=0.052,
+  phi_a_stored=2.80064764, phi_b_stored=2.02441779,
+  is_on=T
+
+fixer_pr10571: fixer, superimpose, ref=pr10571, ref_origin=beginning,
+  beta_a_stored=5.737, alpha_a_stored=-2.144,
+  beta_b_stored=2.575, alpha_b_stored=0.010,
+  is_on=F
+
+fixer_ws11444: fixer, superimpose, ref=ws11444, ref_origin=beginning,
+  beta_a_stored=7.89, alpha_a_stored=0.78,
+  beta_b_stored=33.41, alpha_b_stored=-3.80,
+  is_on=F
+
+fixer_ws11614: fixer, superimpose, ref=ws11614, ref_origin=beginning,
+  beta_a_stored=34.50, alpha_a_stored=1.18,
+  beta_b_stored=16.88, alpha_b_stored=-1.02,
+  is_on=F
+
+fixer_ws12214: fixer, superimpose, ref=ws12214, ref_origin=beginning,
+  beta_a_stored=70.58, alpha_a_stored=2.15,
+  beta_b_stored=26.23, alpha_b_stored=-0.56,
+  is_on=F
+
+fixer_ws19144: fixer, superimpose, ref=ws19144, ref_origin=beginning,
+  beta_a_stored=44.61, alpha_a_stored=-1.92,
+  beta_b_stored=8.26, alpha_b_stored=0.33,
+  is_on=F
+
+fixer_begff20: fixer, superimpose, ref=begff20, ref_origin=beginning,
+  beta_a_stored=11.081, alpha_a_stored=-0.594,
+  beta_b_stored=24.017, alpha_b_stored=-1.516,
+  is_on=F
+
+fixer_ipotr1: fixer, superimpose, ref=ipotr1, ref_origin=beginning,
+  beta_a_stored=0.502769, alpha_a_stored=0.0795287,
+  beta_b_stored=0.502781, alpha_b_stored=0.0793426,
+  is_on=F
+
+fixer_ipws1: fixer, superimpose, ref=ipws1, ref_origin=beginning,
+  beta_a_stored=0.50, alpha_a_stored=0.0,
+  beta_b_stored=0.50, alpha_b_stored=0.0,
+  is_on=F
 
 ! test to compare with LCLS
 !beginning[s] = 0.426796 + .015 - (4.908185 - 4.908934)
 
-lcavity::*[num_steps] = 50
+!  use, f2_eleci
+!  use, f2_eleci_pax
+!  BEGINNING[e_tot] = 125e6
+
+!  !Starting at BEGDL10  (BX0 ...)
+!  use, f2_elec
+  use, f2_elec_pax
+  BEGINNING[e_tot] = 6e6
+

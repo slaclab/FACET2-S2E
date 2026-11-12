@@ -1,5 +1,5 @@
 
-! *** OPTICS=FACET2-16FEB24 ***
+! *** OPTICS=FACET2-28JAN2026 ***
 
 ! ------------------------------------------------------------------------------
 ! constants and global parameters
@@ -114,17 +114,21 @@ call, file = L2.bmad
 call, file = BC14.bmad
 call, file = L3.bmad
 call, file = LI20.bmad
+!=!  CALL, FILENAME="F2p_FDN.xsif"
 
-  BC14    : LINE=(BC14_1,BC14P,BC14_2)          !positron side
-  FACET2p : LINE=(BC11_2,L2F,BC14,L3F,SECTOR20) !BC11 exit to LI20 dump
+  BC14        : LINE=(BC14_1,BC14P,BC14_2) !positron side
+  FACET2p     : LINE=(BC11_2,L2F,BC14,L3F,SECTOR20)
+  FACET2p_PAX : LINE=(BC11_2,L2F,BC14,L3F,SECTOR20_PAX)
 
-! beam paths
+! beam path definitions
 
- !F2_PRTN : e+ target to PDR injection
- !F2_PDR  : e+ PDR
- !F2_POSI : e+ PDR extraction to LI20 dump
+ !F2_PRTN     : e+ target to PDR injection
+ !F2_PDR      : e+ PDR
+ !F2_POSI     : e+ PDR extraction to LI20 dump (PAX chicane bypassed)
+ !F2_POSI_PAX : e+ PDR extraction to LI20 dump
 
-  F2_POSI : LINE=(FACET2p)
+  F2_POSI     : LINE=(FACET2p)
+  F2_POSI_PAX : LINE=(FACET2p_PAX)
 
 ! ------------------------------------------------------------------------------
 ! SURVEY coordinates

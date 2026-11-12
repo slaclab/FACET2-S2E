@@ -54,7 +54,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'floor'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 
@@ -74,7 +74,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'ENDBC11'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 
@@ -94,7 +94,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'MRK0F'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 
@@ -112,7 +112,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'LI22'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 &tao_d1_data
@@ -131,7 +131,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'BC11C'
-        universe = 1
+        universe = '1'
         n_d1_data = 4
 /
 &tao_d1_data
@@ -169,7 +169,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'BC14E'
-        universe = 1
+        universe = '1'
         n_d1_data = 3
 /
 &tao_d1_data
@@ -203,7 +203,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
         d2_data%name = 'L3'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 &tao_d1_data
@@ -220,7 +220,7 @@ beam_init%center(6) = 0.0
 
 !&tao_d2_data
         d2_data%name = 'r56'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /    
 !&tao_d1_data
@@ -240,7 +240,7 @@ beam_init%center(6) = 0.0
 
 &tao_d2_data
     d2_data%name = "orbit"
-    universe = 1
+    universe = '1'
     n_d1_data = 5
 /
 
@@ -295,7 +295,7 @@ beam_init%center(6) = 0.0
 ! Two L3 Energies LTHU beta match
 &tao_d2_data
         d2_data%name = 'LTUH_M'
-        universe = 1
+        universe = '1'
         n_d1_data = 1
 /
 &tao_d1_data

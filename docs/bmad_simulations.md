@@ -54,6 +54,7 @@ The function does the following, in order:
 | `moments`, `means`, `charge` | — | Rescale or re-center the beam (see the docstring). |
 | `csrTF`, `lscTF` | `False` | CSR and space charge. When on, they are applied to **all** elements. |
 | `csr_method`, `lsc_method`, `n_bin`, `grid_size` | `1_dim`, `slice`, 32, `[32,32,32]` | Collective-effect calculation settings. |
+| `n_rf_steps` | `100` | RF steps per accelerating structure. `None` keeps the lattice's 1000 (5000 in L0 and LI11): the same beam, but ~8x slower. |
 | `sr_wakes_on`, `lr_wakes_on` | **`False`** | Short- and long-range wakes. **Off by default.** |
 | `edit_only_energy_from_exp` | `False` | Load only the RF settings from the DAQ, not the magnets. |
 | `correctors_coef` | **`0`** | Scale factor for the DAQ corrector values. `0` turns them off; `-1/10` uses the experimental values. |
@@ -79,4 +80,4 @@ With `run=False`, you can modify `tao` first and then track with:
 
 - **Scratch files are overwritten.** To save disk space, intermediate beams are written to `<repo>/temp_beam/` under fixed names (`temp.h5`, `temp_e.h5`, `<ELEMENT>temp.h5`) and overwritten on every run. Copy any result you want to keep, and don't run several simulations from the same repository at the same time.
 - **Repository path.** With an editable install (`pip install -e .`), `filepath` can be omitted; in a notebook, `str(Path(qs.__file__).resolve().parents[2])` gives the same path. With a regular `pip install .`, always pass it.
-- **CSR and space charge apply to every element**, not only the bunch compressors. 3D methods (`steady_state_3d`, `fft_3d`) are slow: test with few particles first and run long simulations through Slurm, not on a login node.
+- **CSR and space charge apply to every element**, not only the bunch compressors. 3D methods (`steady_state_3d`, `fft_3d`) are slow: test with few particles first and run long simulations through Slurm, not on a login node. `steady_state_3d` needs Bmad 20260828 or newer (see [installation.md](installation.md)).
